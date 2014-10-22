@@ -1,0 +1,32 @@
+{
+  "name": "mintwebsite",
+  "version": "0.0.1",
+  "description": "Mint Design Studio website",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mintdesignstudio/mintwebsite.git"
+  },
+  "author": "Thomas Viktil (https://github.com/mandarinx)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mintdesignstudio/mintwebsite/issues"
+  },
+  "homepage": "https://github.com/mintdesignstudio/mintwebsite",
+  "dependencies": {
+    "compression": "^1.2.0",
+    "express": "^4.9.8",
+    "express-handlebars": "^1.1.0",
+    "logfmt": "^1.2.0",
+    "morgan": "^1.4.0",
+    "serve-favicon": "^2.1.6",
+    "serve-static": "^1.7.0",
+    "view-helpers": "^0.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.2.1"
+  }
+}
