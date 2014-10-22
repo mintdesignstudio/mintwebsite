@@ -2,10 +2,10 @@ var path = require('path');
 
 module.exports = {
 
-    apiEndpoint:    '',
-    accessToken:    '',
-    clientId:       '',
-    clientSecret:   '',
+    apiEndpoint:    process.env.API_ENDPOINT,
+    accessToken:    process.env.ACCESS_TOKEN,
+    clientId:       process.env.CLIENT_ID,
+    clientSecret:   process.env.CLIENT_SECRET,
 
     port:           int(process.env.PORT),
     verbose:        bool(process.env.VERBOSE),
