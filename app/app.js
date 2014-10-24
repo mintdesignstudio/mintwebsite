@@ -1,146 +1,120 @@
 var logger          = require('logfmt');
-// var Promise         = require('promise');
-// var uuid            = require('node-uuid');
-// var EventEmitter    = require('events').EventEmitter;
+var Prismic         = require('prismic.io').Prismic;
+var config          = require('../config');
 
-// var connections     = require('./connector');
-// var ArticleModel    = require('./article-model');
+module.exports.home = function(req, res, next) {
+    var html = '';
+    var got_blog = false;
+    var got_proj = false;
 
-// var SCRAPE_QUEUE = 'jobs.scrape';
-// var VOTE_QUEUE = 'jobs.vote';
+    res.locals.ctx.api.form('everything')
+        .ref(res.locals.ctx.ref)
+        .query(Prismic.Predicates.at('document.type', 'blog'))
+        .submit(function(err, response) {
+            got_blog = true;
+            if (err) {
+                return res.send(err);
+            }
+            // res.json(response.results);
+            response.results.forEach(function(blog_post) {
+                html += blog_post.get('blog.body').asHtml();
+            });
+            if (got_proj) {
+                res.send(html);
+            }
+        });
 
-function App(config) {
-    // EventEmitter.call(this);
-
-    // this.connections = connections(config.mongo_url, config.rabbit_url);
-    // this.connections.once('ready', this.onConnected.bind(this));
-    // this.connections.once('lost', this.onLost.bind(this));
-}
-
-module.exports = function createApp(config) {
-    return new App(config);
+    res.locals.ctx.api.form('everything')
+        .ref(res.locals.ctx.ref)
+        .query(Prismic.Predicates.at('document.type', 'project'))
+        .submit(function(err, response) {
+            got_proj = true;
+            if (err) {
+                return res.send(err);
+            }
+            // res.json(response.results);
+            // var html = '';
+            response.results.forEach(function(post) {
+                html += post.get('project.name').asHtml();
+                html += post.get('project.description').asHtml();
+            });
+            // res.send(html);
+            if (got_blog) {
+                res.send(html);
+            }
+        });
 };
 
-App.prototype = Object.create(Object.prototype);
+module.exports.page = function(req, res, next) {};
 
-App.prototype.home = function(req, res, next) {};
-App.prototype.page = function(req, res, next) {};
-App.prototype.project = function(req, res, next) {};
+module.exports.project = function(req, res, next) {
+    res.locals.ctx.api.form('everything')
+        .ref(res.locals.ctx.ref)
+        .query(Prismic.Predicates.at('my.project.slug', req.params.name))
+        .submit(function(err, response) {
+            if (err) {
+                return res.send(err);
+            }
 
-// App.prototype.onConnected = function() {
-//     var queues = 0;
-//     // this.Article = ArticleModel(this.connections.db);
-//     this.connections.queue.create(SCRAPE_QUEUE, { prefetch: 5 }, onCreate.bind(this));
-//     // this.connections.queue.create(VOTE_QUEUE, { prefetch: 5 }, onCreate.bind(this));
+            // res.json(response.results);
+            var html = '';
+            response.results.forEach(function(post) {
+                html += post.get('project.name').asHtml();
+            });
+            res.send(html);
+        });
+};
 
-//     function onCreate() {
-//         if (++queues === 1) this.onReady();
-//     }
-// };
+module.exports.projects = function(req, res, next) {
+    res.locals.ctx.api.form('everything')
+        .ref(res.locals.ctx.ref)
+        .query(Prismic.Predicates.at('document.type', 'project'))
+        .submit(function(err, response) {
+            if (err) {
+                return res.send(err);
+            }
+            res.json(response.results);
+            // var html = '';
+            // response.results.forEach(function(post) {
+            //     html += post.get('project.name').asHtml();
+            //     html += post.get('project.description').asHtml();
+            // });
+            // res.send(html);
+        });
+};
 
-// App.prototype.onReady = function() {
-//     logger.log({ type: 'info', msg: 'app.ready' });
-//     this.emit('ready');
-// };
 
-// App.prototype.onLost = function() {
-//     logger.log({ type: 'info', msg: 'app.lost' });
-//     this.emit('lost');
-// };
+// Router middleware that adds a Prismic context to the res object
+module.exports.prismic = function(req, res, next) {
+    Prismic.Api(config.apiEndpoint, function(err, Api) {
+        if (err) {
+            return res.send(500, 'Error 500: ' + err.message);
+        }
 
-// // Called by the client. Starts the worker
-// // Accepts a string buffer? Byte array? Form encoded object?
-// App.prototype.doSomeWork = function(whatever) {
-//     var id = uuid.v1();
-//     this.connections.queue.publish(SCRAPE_QUEUE, {
-//         id: id,
-//         url: Math.random()+''
-//     });
-//     return Promise.resolve(id);
-// };
+        var ref = req.query['ref'] || Api.master();
+        var ctx = {
+            api:        Api,
+            ref:        ref,
+            maybeRef:   ref == Api.master() ? undefined : ref,
 
-// // Called by the client. Checks the status of the job
-// // Accepts a job ID
-// App.prototype.checkStatus = function(job_id) {
-//     var id = uuid.v1();
-//     this.connections.queue.publish(SCRAPE_QUEUE, {
-//         id: id,
-//         url: Math.random()+''
-//     });
-//     return Promise.resolve(id);
-// };
+            oauth: function() {
+                var token = accessToken;
+                return {
+                    accessToken:            token,
+                    hasPrivilegedAccess:    !!token
+                }
+            },
 
-// // App.prototype.addArticle = function(userId, url) {
-// //     var id = uuid.v1();
-// //     this.connections.queue.publish(SCRAPE_QUEUE, { id: id, url: url, userId: userId });
-// //     return Promise.resolve(id);
-// // };
+            linkResolver: function(ctx, doc) {
+                if (doc.isBroken) {
+                    return false;
+                }
+                return '/documents/' + doc.id + '/' + doc.slug +
+                       (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');
+            }
+        };
+        res.locals.ctx = ctx;
+        next();
 
-// App.prototype.scrapeArticle = function(userId, id, url) {
-
-//     // Return a setTimeout wrapped in a promise
-
-//     // return this.Article.scrape(userId, id, url);
-//     return new Promise(function(resolve, reject) {
-//         var timer = setTimeout(onTime, 3000);
-//         // this.connections.queue.purge(SCRAPE_QUEUE, onPurge);
-
-//         function onTime() {
-//             // if (err) return reject(err);
-//             clearTimeout(timer);
-//             resolve(true);
-//         }
-//     }.bind(this));
-// };
-
-// App.prototype.purgePendingArticles = function() {
-//     logger.log({ type: 'info', msg: 'app.purgePendingArticles' });
-
-//     return new Promise(function(resolve, reject) {
-//         this.connections.queue.purge(SCRAPE_QUEUE, onPurge);
-
-//         function onPurge(err, count) {
-//             if (err) return reject(err);
-//             resolve(count);
-//         }
-//     }.bind(this));
-// };
-
-// App.prototype.startScraping = function() {
-//     this.connections.queue.handle(SCRAPE_QUEUE, this.handleScrapeJob.bind(this));
-//     // this.connections.queue.handle(VOTE_QUEUE, this.handleVoteJob.bind(this));
-//     return this;
-// };
-
-// App.prototype.handleScrapeJob = function(job, ack) {
-//     if (!job.url) {
-//         return ack();
-//     }
-
-//     logger.log({ type: 'info', msg: 'handling job', queue: SCRAPE_QUEUE, url: job.url });
-
-//     this
-//         .scrapeArticle(job.userId, job.id, job.url)
-//         .then(onSuccess, onError);
-
-//     function onSuccess() {
-//         logger.log({ type: 'info', msg: 'job complete', status: 'success', url: job.url });
-//         ack();
-//     }
-
-//     function onError() {
-//         logger.log({ type: 'info', msg: 'job complete', status: 'failure', url: job.url });
-//         ack();
-//     }
-// };
-
-// App.prototype.stopScraping = function() {
-//     this.connections.queue.ignore(SCRAPE_QUEUE);
-//     // this.connections.queue.ignore(VOTE_QUEUE);
-//     return this;
-// };
-
-// App.prototype.deleteAllArticles = function() {
-//     logger.log({ type: 'info', msg: 'app.deleteAllArticles' });
-//     // return this.Article.deleteAll();
-// };
+    }, config.accessToken);
+};

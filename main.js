@@ -2,7 +2,6 @@ var logger    = require('logfmt');
 var http      = require('http');
 
 var config    = require('./config');
-var app       = require('./app/app');
 var web       = require('./app/web');
 
 process.on('SIGTERM', onShutdown);
@@ -12,9 +11,7 @@ logger.log({
     msg:            'starting server'
 });
 
-var app_instance = app(config);
-var server = http.createServer(web(app_instance, config));
-
+var server = http.createServer(web());
 server.listen(config.port, onListen);
 
 function onListen() {

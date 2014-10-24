@@ -8,6 +8,7 @@ var favicon         = require('serve-favicon');
 var router          = require('./router');
 var errors          = require('./errors');
 var logs            = require('./logs');
+var config          = require('../config');
 
 var web;
 var errs;
@@ -22,7 +23,7 @@ var hbs = exphbs.create({
     partialsDir:    __dirname + '/views/partials/'
 });
 
-module.exports = function(app, config) {
+module.exports = function() {
 
     errs = errors(config.verbose);
     web = express();
@@ -45,7 +46,7 @@ module.exports = function(app, config) {
             level: 9
         }))
         .use(favicon(config.public_dir + '/favicon.ico'))
-        .use(router(app, config))
+        .use(router())
         .use(errs.notFound)
         .use(errs.log)
         // .use(errs.json)
