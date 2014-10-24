@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"blo",
+				"blog_post"
+			],
+			[
+				"a",
+				"accessToken"
+			],
+			[
 				"cd",
 				"cd_step"
 			],
@@ -506,14 +514,6 @@
 			[
 				"border-",
 				"border-bottom"
-			],
-			[
-				"pla",
-				"player"
-			],
-			[
-				"compan",
-				"company"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "main.js",
 			"settings":
 			{
-				"buffer_size": 738,
+				"buffer_size": 647,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "app/web.js",
 			"settings":
 			{
-				"buffer_size": 1583,
+				"buffer_size": 1573,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,15 @@
 			"file": "app/router.js",
 			"settings":
 			{
-				"buffer_size": 736,
+				"buffer_size": 935,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/app.js",
+			"settings":
+			{
+				"buffer_size": 2938,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,9 +555,8 @@
 			"file": "config.js",
 			"settings":
 			{
-				"buffer_size": 1305,
-				"line_ending": "Unix",
-				"name": "module.exports = {"
+				"buffer_size": 811,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -611,14 +618,24 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com"
+	],
 	"file_history":
 	[
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/dev.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/package.json",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/config.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/README.md",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/.env",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile_dev",
+		"/Users/mandarin/Projects/Mimura/app/server/app/index.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/mintwebsite.sublime-project",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/logs.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
 		"/Users/mandarin/Projects/Mimura/app/server/config.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/dev.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile",
 		"/Users/mandarin/Clients/DDB/McDonalds Premium Chicken/premiumchicken.github.com/views/partials/form.ejs",
 		"/Users/mandarin/Clients/DDB/McDonalds Premium Chicken/premiumchicken.github.com/public/js/main.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/common/api.js",
@@ -734,13 +751,7 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/highscorerow.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/checkbox.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/file_input.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/help.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/piece.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/textinput.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/controller/admin.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/admin_signup.hbs",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/admin_login.hbs",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/shoulder.jsx"
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/help.jsx"
 	],
 	"find":
 	{
@@ -791,6 +802,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"blog_post",
+			"ctx",
 			"logs",
 			"ERR_MAP",
 			"instance",
@@ -916,9 +929,7 @@
 			"css",
 			"channels",
 			"rect",
-			"bt",
-			"w",
-			"600px"
+			"bt"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -947,7 +958,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -956,15 +967,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 738,
+						"buffer_size": 647,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								181,
-								181
+								304,
+								304
 							]
 						],
 						"settings":
@@ -977,7 +988,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -986,15 +997,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1583,
+						"buffer_size": 1573,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1040,
-								1020
+								1573,
+								1573
 							]
 						],
 						"settings":
@@ -1004,7 +1015,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1016,15 +1027,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 736,
+						"buffer_size": 935,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								712,
-								712
+								458,
+								458
 							]
 						],
 						"settings":
@@ -1037,29 +1048,58 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "config.js",
+					"file": "app/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1305,
+						"buffer_size": 2938,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								453,
-								453
+								1583,
+								1851
 							]
 						],
 						"settings":
 						{
-							"auto_name": "module.exports = {",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "config.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 811,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								546,
+								546
+							]
+						],
+						"settings":
+						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
@@ -1068,7 +1108,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1124,6 +1164,34 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"de",
+				"dev.js"
+			],
+			[
+				"con",
+				"config.js"
+			],
+			[
+				"re",
+				"README.md"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"en",
+				".env"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"dev",
+				"dev.js"
+			],
 			[
 				"animat",
 				"app/game/animator.js"
@@ -1607,34 +1675,6 @@
 			[
 				"event",
 				"app/game/eventhandler.js"
-			],
-			[
-				"kpmgs",
-				"app/game/view/kpmgsidebar.hbs"
-			],
-			[
-				"kpmsj",
-				"app/game/page/kpmgsidebar.js"
-			],
-			[
-				"too",
-				"app/admin/tool/list_games.jsx"
-			],
-			[
-				"add",
-				"app/admin/form/add_games.jsx"
-			],
-			[
-				"edi",
-				"app/admin/form/edit_game.jsx"
-			],
-			[
-				"medi",
-				"app/game/style/mediaqueries.styl"
-			],
-			[
-				"route",
-				"app/game/router.js"
 			]
 		],
 		"width": 0.0
