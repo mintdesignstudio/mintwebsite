@@ -8,11 +8,6 @@ var app             = require('./app');
 module.exports = function() {
     var router = express.Router();
 
-    // / > home
-    // /projects > all projects (pagination?)
-    // /project/:name > single project (use slug?)
-    // /about > about, employees, awards and contact
-
     router
         .get('/',               app.prismic, app.home)
         .get('/about',          app.prismic, app.about)
