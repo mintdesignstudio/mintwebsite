@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta property="og:url" content="http://mintdesign.no" />
+    <meta property="og:title" content="Mint Design Studio" />
+    <meta property="og:description" content="We are designers!" />
+    <meta property="og:image" content="http://mintdesign.no/public/images/share.jpg" />
+
+    <title>Mint Design Studio</title>
+
+    <link rel="stylesheet" type="text/css" href="/public/reset.css">
+    <link rel="stylesheet" type="text/css" href="/public/style.css">
+
+    <script>
+        document.createElement('picture');
+    </script>
+    <script src="/public/picturefill.min.js" async></script>
+
+    {{> ie8style}}
+</head>
+<body>
+    {{> ie8message}}
+    {{{body}}}
+</body>
+</html>

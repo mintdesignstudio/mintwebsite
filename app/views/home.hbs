@@ -1,0 +1,42 @@
+{{> menu}}
+
+<div class="head">
+    <div class="content">
+        <div>
+            <img class="logo" src="/public/images/logo.png" width="100">
+            <span>{{content.companyname}}</span>
+            <span>{{content.tagline}}</span>
+        </div>
+        <picture>
+            <source srcset="{{content.head.image.main}}" media="(min-width: 960px)">
+            <source srcset="{{content.head.image.wide}}" media="(min-width: 700px) and (max-width: 960px)">
+            <source srcset="{{content.head.image.medium}}" media="(min-width: 400px) and (max-width: 700px)">
+            <img class="latest" srcset="{{content.head.image.small}}" alt="{{image.alt}}">
+        </picture>
+    </div>
+</div>
+
+<div class="work">
+    <h2>Work</h2>
+
+    {{#each content.projects}}
+    <div class="wrap">
+        <div class="thumb">
+            <a href="#">
+                <div>
+                    {{name}}
+                    <span>{{description}}</span>
+                </div>
+            </a>
+            <picture>
+                <source srcset="{{image.medium}}" media="(min-width: 960px)">
+                <img srcset="{{image.small}}" alt="{{image.alt}}">
+            </picture>
+        </div>
+    </div>
+    {{/each}}
+
+    <a href="/works">Full work list</a>
+</div>
+
+{{> footer}}
