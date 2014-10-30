@@ -2,6 +2,38 @@ var logger          = require('logfmt');
 var Promise         = require('promise');
 var Prismic         = require('prismic.io').Prismic;
 var config          = require('../config');
+var util            = require('util');
+
+var valids = {
+    'æ':'',
+    'ø':'',
+    'å':'a',
+    'á':'a',
+    'à':'a',
+    'ä':'a',
+    'â':'a',
+    'ã':'a',
+    'é':'e',
+    'è':'e',
+    'ë':'e',
+    'ê':'e',
+    'í':'i',
+    'ì':'i',
+    'ï':'i',
+    'î':'i',
+    'ó':'o',
+    'ò':'o',
+    'ö':'o',
+    'ô':'o',
+    'õ':'o',
+    'ú':'u',
+    'ù':'u',
+    'ü':'u',
+    'û':'u',
+    'ÿ':'y',
+    'ñ':'n',
+    'ç':'c'
+};
 
 module.exports.home = function(req, res, next) {
     var content = {
@@ -38,6 +70,35 @@ module.exports.about = function(req, res, next) {
 };
 
 module.exports.project = function(req, res, next) {
+    var name = clean(req.params.name);
+    var content = {};
+
+    Promise.all([
+        getProjects(res.locals.ctx, undefined, 'published desc'),
+        getCommon(res.locals.ctx, content)
+    ])
+    .then(function (results) {
+
+        var projects = results[0];
+        var project = [];
+        projects.forEach(function(proj) {
+            if (proj.slug === name) {
+                project.push(proj);
+            }
+        });
+
+        if (project.length === 0) {
+            return res.redirect(301, '/works');
+        }
+
+        content.project = project[0];
+
+        render(res, 'project', content);
+
+    }, function() {
+        res.send('Error');
+    });
+
 };
 
 module.exports.projects = function(req, res, next) {
@@ -55,6 +116,14 @@ module.exports.projects = function(req, res, next) {
 
 };
 
+function clean(name) {
+    var chars = [];
+    name.toLowerCase().split('').forEach(function(ch) {
+        chars.push(valids[ch] ? valids[ch] : ch);
+    });
+    return chars.join('');
+}
+
 function render(res, template, content) {
     var options = {
         layout: 'main'
@@ -63,8 +132,9 @@ function render(res, template, content) {
     Object.keys(content).forEach(function(key) {
         if (key === 'layout') {
             logger.log({
-                type: 'error',
-                msg:  'Render: Content object cannot contain a property called layout'
+                type:   'error',
+                msg:    'Render: Content object cannot contain a '+
+                        'property called layout'
             });
         }
         options[key] = content[key];
@@ -96,29 +166,49 @@ function getProjects(ctx, limit, sort, content) {
 
         .then(function(projects) {
 
-            projects.results.forEach(function(project) {
-                var image = project.get('project.image');
-                results.push({
-                    name:           project.getText('project.name'),
-                    description:    project.getText('project.description'),
-                    body:           project.getText('project.body'),
-                    image: {
-                        small:      image.views.small.url,
-                        medium:     image.views.medium.url,
-                        wide:       image.views.wide.url,
-                        main:       image.main.url,
-                        alt:        image.main.alt
-                    }
-                });
+            var _gallery;
+            var _result;
 
-                resolve(results);
+            projects.results.forEach(function(project) {
+
+                _result = {};
+
+                _result.image = getImage(project.get('project.image'));
+
+                _result.gallery = [];
+                _gallery = project.getGroup('project.gallery');
+                if (_gallery) {
+                    _gallery.value.forEach(function(obj) {
+                        _result.gallery.push(getImage(obj.image));
+                    });
+                }
+
+                _result.name =          project.getText('project.name');
+                _result.description =   project.getText('project.description');
+                _result.body =          project.getText('project.body');
+                _result.slug =          project.slug;
+                _result.slugs =         project.slugs;
+
+                results.push(_result);
             });
+
+            resolve(results);
 
         }, function(reason) {
             reject(reason);
         });
 
     });
+}
+
+function getImage(img) {
+    return {
+        small:     img ? img.views.small.url : '',
+        medium:    img ? img.views.medium.url : '',
+        wide:      img ? img.views.wide.url : '',
+        main:      img ? img.main.url : '',
+        alt:       img ? img.main.alt : ''
+    };
 }
 
 function getCommon(ctx, content) {

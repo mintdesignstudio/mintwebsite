@@ -166,6 +166,10 @@ body {
     margin-left: 12px;
 }
 
+.gallery img {
+    width: 100%;
+}
+
 @media screen and (max-width: 400px) {
 
     .work .wrap {
