@@ -122,7 +122,8 @@ body {
 .menu {
     width: 100%;
     overflow: auto;
-    padding: 6px 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .contact, .menu {
@@ -162,12 +163,23 @@ body {
 
 .menu .logo {
     float: left;
+    margin-left: 12px;
 }
 
 @media screen and (max-width: 400px) {
 
     .work .wrap {
         width: 100%;
+    }
+
+    .menu li {
+        float: none;
+        text-align: right;
+    }
+
+    .menu ul {
+        position: relative;
+        float: right;
     }
 
 }
