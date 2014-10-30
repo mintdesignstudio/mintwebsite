@@ -16,8 +16,8 @@ module.exports = function() {
     router
         .get('/',               app.prismic, app.home)
         .get('/about',          app.prismic, app.about)
-        .get('/projects',       app.prismic, app.projects)
-        .get('/project/:name',  app.prismic, app.project)
+        .get('/works',          app.prismic, app.projects)
+        .get('/work/:name',     app.prismic, app.project)
 
         .use('/public',         express.static(config.public_dir));
 

@@ -14,10 +14,73 @@ module.exports.home = function(req, res, next) {
         contact: {}
     };
 
+    Promise.all([
+        query(res.locals.ctx, {
+            type:  'project',
+            limit: 12
+        }),
+        getBookmarks(res.locals.ctx)
+    ])
+    .then(function (results) {
+
+        var projects = results[0];
+        projects.results.forEach(function(project, num) {
+            var image = project.get('project.image');
+
+            if (num === 0) {
+                content.head.image.small =  image.views.small.url;
+                content.head.image.medium = image.views.medium.url;
+                content.head.image.wide =   image.views.wide.url;
+                content.head.image.main =   image.main.url;
+            }
+
+            content.projects.push({
+                name:           project.getText('project.name'),
+                description:    project.getText('project.description'),
+                body:           project.getText('project.body'),
+                image: {
+                    small:      image.views.small.url,
+                    medium:     image.views.medium.url,
+                    wide:       image.views.wide.url,
+                    main:       image.main.url,
+                    alt:        image.main.alt
+                }
+            });
+        });
+
+        var bookmarks = results[1];
+        var a = bookmarks.about;
+        if (a) {
+            content.companyname =           a.getText('about.companyname');
+            content.tagline =               a.getText('about.tagline');
+        }
+
+        var c = bookmarks.contact;
+        if (c) {
+            content.contact.email =         c.getText('contact.email');
+            content.contact.telephone =     c.getText('contact.telephone');
+            content.contact.address =       c.getText('contact.address');
+            content.contact.location =      c.getText('contact.location');
+        }
+
+    })
+
+    .done(function() {
+        res.render('home', {
+            layout: 'main',
+            content: content
+        });
+    }, function(reason) {
+        res.send(reason);
+    });
+
+/*
     query(res.locals.ctx, {
         type:  'project',
-        limit: 12})
+        limit: 12
+    })
     .then(function(posts) {
+
         posts.results.forEach(function(post, num) {
             var image = post.get('project.image');
 
@@ -68,7 +131,9 @@ module.exports.home = function(req, res, next) {
         });
     }, function(reason) {
         res.send(reason);
-    })
+    });
+*/
+
 };
 
 module.exports.about = function(req, res, next) {
@@ -116,24 +181,79 @@ module.exports.project = function(req, res, next) {
 };
 
 module.exports.projects = function(req, res, next) {
-};
+    var content = {
+        companyname: '',
+        tagline: '',
+        projects: [],
+        contact: {}
+    };
 
-function renderBlog(posts) {
-    var html = '';
-    posts.forEach(function(post) {
-        html += post.get('blog.body').asHtml();
-    });
-    return html;
-};
+    // getCommon()
+    // .then(function(common) {
+    //     content.common = common;
+    //     return getProjects(12, 'published desc')
+    // })
+    // .then(function(projects) {
+    //     content.projects = projects;
+    // })
+    // .done(function() {
+    //     render('projects', content);
+    // }, function() {
+    //     renderError('message');
+    // });
 
-function renderProject(posts) {
-    var html = '';
-    posts.forEach(function(post) {
-        html += post.get('project.name').asHtml();
-        html += post.get('project.description').asHtml();
+    query(res.locals.ctx, {
+        type:  'project',
+        sort: '[my.project.published desc]'})
+    .then(function(projects) {
+
+        projects.results.forEach(function(project, num) {
+            var image = project.get('project.image');
+            content.projects.push({
+                name:           project.getText('project.name'),
+                description:    project.getText('project.description'),
+                body:           project.getText('project.body'),
+                image: {
+                    small:      image.views.small.url,
+                    medium:     image.views.medium.url,
+                    wide:       image.views.wide.url,
+                    main:       image.main.url,
+                    alt:        image.main.alt
+                }
+            });
+        });
+
+        console.log(content.projects.length);
+
+        return getBookmarks(res.locals.ctx);
+
+    })
+
+    .then(function(bookmarks) {
+        var a = bookmarks.about;
+        if (a) {
+            content.companyname =           a.getText('about.companyname');
+            content.tagline =               a.getText('about.tagline');
+        }
+
+        var c = bookmarks.contact;
+        if (c) {
+            content.contact.email =         c.getText('contact.email');
+            content.contact.telephone =     c.getText('contact.telephone');
+            content.contact.address =       c.getText('contact.address');
+            content.contact.location =      c.getText('contact.location');
+        }
+    })
+
+    .done(function() {
+        res.render('projects', {
+            layout: 'main',
+            content: content
+        });
+    }, function(reason) {
+        res.send(reason);
     });
-    return html;
-}
+};
 
 function getBookmarks(ctx) {
     var bookmarks = ctx.api.data.bookmarks;
@@ -158,6 +278,7 @@ function getBookmarks(ctx) {
 
             resolve(bm);
         }, function(err) {
+            console.log('error: '+err);
             reject(err);
         });
     });
@@ -172,8 +293,8 @@ function query(ctx, params) {
         return false;
     }
 
-    limit = params.limit || 20;
-    sort = params.sort || false;
+    var limit = params.limit || 20;
+    var sort = params.sort || false;
 
     var predicate = null;
 
@@ -210,7 +331,7 @@ function query(ctx, params) {
             .pageSize(limit);
 
         if (sort) {
-            request.orderings('['+sort+']');
+            request.orderings(sort);
         }
 
         request.submit(function(err, response) {
