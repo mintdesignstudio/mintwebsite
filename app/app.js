@@ -5,175 +5,35 @@ var config          = require('../config');
 
 module.exports.home = function(req, res, next) {
     var content = {
-        companyname: '',
-        tagline: '',
-        head: {
-            image: {}
-        },
-        projects: [],
-        contact: {}
+        head: {}
     };
 
     Promise.all([
-        query(res.locals.ctx, {
-            type:  'project',
-            limit: 12
-        }),
-        getBookmarks(res.locals.ctx)
+        getProjects(res.locals.ctx, 12, 'published desc', content),
+        getCommon(res.locals.ctx, content)
     ])
     .then(function (results) {
 
         var projects = results[0];
-        projects.results.forEach(function(project, num) {
-            var image = project.get('project.image');
-
-            if (num === 0) {
-                content.head.image.small =  image.views.small.url;
-                content.head.image.medium = image.views.medium.url;
-                content.head.image.wide =   image.views.wide.url;
-                content.head.image.main =   image.main.url;
-            }
-
-            content.projects.push({
-                name:           project.getText('project.name'),
-                description:    project.getText('project.description'),
-                body:           project.getText('project.body'),
-                image: {
-                    small:      image.views.small.url,
-                    medium:     image.views.medium.url,
-                    wide:       image.views.wide.url,
-                    main:       image.main.url,
-                    alt:        image.main.alt
-                }
-            });
-        });
-
-        var bookmarks = results[1];
-        var a = bookmarks.about;
-        if (a) {
-            content.companyname =           a.getText('about.companyname');
-            content.tagline =               a.getText('about.tagline');
+        if (projects.length > 0) {
+            content.head.image = projects[0].image;
         }
+        render(res, 'home', content);
 
-        var c = bookmarks.contact;
-        if (c) {
-            content.contact.email =         c.getText('contact.email');
-            content.contact.telephone =     c.getText('contact.telephone');
-            content.contact.address =       c.getText('contact.address');
-            content.contact.location =      c.getText('contact.location');
-        }
-
-    })
-
-    .done(function() {
-        res.render('home', {
-            layout: 'main',
-            content: content
-        });
-    }, function(reason) {
-        res.send(reason);
+    }, function() {
+        res.send('Error');
     });
-
-/*
-    query(res.locals.ctx, {
-        type:  'project',
-        limit: 12
-    })
-    .then(function(posts) {
-
-        posts.results.forEach(function(post, num) {
-            var image = post.get('project.image');
-
-            if (num === 0) {
-                content.head.image.small =  image.views.small.url;
-                content.head.image.medium = image.views.medium.url;
-                content.head.image.wide =   image.views.wide.url;
-                content.head.image.main =   image.main.url;
-            }
-
-            content.projects.push({
-                name:           post.getText('project.name'),
-                description:    post.getText('project.description'),
-                body:           post.getText('project.body'),
-                image: {
-                    small:  image.views.small.url,
-                    medium: image.views.medium.url,
-                    wide:   image.views.wide.url,
-                    main:   image.main.url,
-                    alt:    image.main.alt
-                }
-            });
-        });
-
-        return getBookmarks(res.locals.ctx);
-    })
-
-    .then(function(bookmarks) {
-        var a = bookmarks.about;
-        if (a) {
-            content.companyname =           a.getText('about.companyname');
-            content.tagline =               a.getText('about.tagline');
-        }
-
-        var c = bookmarks.contact;
-        if (c) {
-            content.contact.email =         c.getText('contact.email');
-            content.contact.telephone =     c.getText('contact.telephone');
-            content.contact.address =       c.getText('contact.address');
-            content.contact.location =      c.getText('contact.location');
-        }
-    })
-
-    .done(function() {
-        res.render('home', {
-            layout: 'main',
-            content: content
-        });
-    }, function(reason) {
-        res.send(reason);
-    });
-*/
 
 };
 
 module.exports.about = function(req, res, next) {
-    var content = {
-        companyname: '',
-        tagline: '',
-        contact: {}
-    };
+    var content = {};
 
-    getBookmarks(res.locals.ctx)
-    .then(function(bookmarks) {
-        var a = bookmarks.about;
-        if (a) {
-            var about_image = a.get('about.image');
-            content.companyname =           a.getText('about.companyname');
-            content.tagline =               a.getText('about.tagline');
-            content.image = {
-                small:                      about_image.views.small.url,
-                medium:                     about_image.views.medium.url,
-                wide:                       about_image.views.wide.url,
-                main:                       about_image.main.url,
-                alt:                        about_image.main.alt
-            };
-        }
-
-        var c = bookmarks.contact;
-        if (c) {
-            content.contact.email =         c.getText('contact.email');
-            content.contact.telephone =     c.getText('contact.telephone');
-            content.contact.address =       c.getText('contact.address');
-            content.contact.location =      c.getText('contact.location');
-        }
-
-        res.render('about', {
-            layout: 'main',
-            content: content
-        });
-
-    }, function(reason) {
-        res.send(reason);
+    getCommon(res.locals.ctx, content)
+    .then(function (common) {
+        render(res, 'about', content);
+    }, function() {
+        res.send('Error');
     });
 };
 
@@ -181,79 +41,125 @@ module.exports.project = function(req, res, next) {
 };
 
 module.exports.projects = function(req, res, next) {
-    var content = {
-        companyname: '',
-        tagline: '',
-        projects: [],
-        contact: {}
+    var content = {};
+
+    Promise.all([
+        getProjects(res.locals.ctx, undefined, 'published desc', content),
+        getCommon(res.locals.ctx, content)
+    ])
+    .then(function (results) {
+        render(res, 'projects', content);
+    }, function() {
+        res.send('Error');
+    });
+
+};
+
+function render(res, template, content) {
+    var options = {
+        layout: 'main'
     };
 
-    // getCommon()
-    // .then(function(common) {
-    //     content.common = common;
-    //     return getProjects(12, 'published desc')
-    // })
-    // .then(function(projects) {
-    //     content.projects = projects;
-    // })
-    // .done(function() {
-    //     render('projects', content);
-    // }, function() {
-    //     renderError('message');
-    // });
-
-    query(res.locals.ctx, {
-        type:  'project',
-        sort: '[my.project.published desc]'})
-    .then(function(projects) {
-
-        projects.results.forEach(function(project, num) {
-            var image = project.get('project.image');
-            content.projects.push({
-                name:           project.getText('project.name'),
-                description:    project.getText('project.description'),
-                body:           project.getText('project.body'),
-                image: {
-                    small:      image.views.small.url,
-                    medium:     image.views.medium.url,
-                    wide:       image.views.wide.url,
-                    main:       image.main.url,
-                    alt:        image.main.alt
-                }
+    Object.keys(content).forEach(function(key) {
+        if (key === 'layout') {
+            logger.log({
+                type: 'error',
+                msg:  'Render: Content object cannot contain a property called layout'
             });
-        });
-
-        console.log(content.projects.length);
-
-        return getBookmarks(res.locals.ctx);
-
-    })
-
-    .then(function(bookmarks) {
-        var a = bookmarks.about;
-        if (a) {
-            content.companyname =           a.getText('about.companyname');
-            content.tagline =               a.getText('about.tagline');
         }
-
-        var c = bookmarks.contact;
-        if (c) {
-            content.contact.email =         c.getText('contact.email');
-            content.contact.telephone =     c.getText('contact.telephone');
-            content.contact.address =       c.getText('contact.address');
-            content.contact.location =      c.getText('contact.location');
-        }
-    })
-
-    .done(function() {
-        res.render('projects', {
-            layout: 'main',
-            content: content
-        });
-    }, function(reason) {
-        res.send(reason);
+        options[key] = content[key];
     });
-};
+
+    res.render(template, options);
+}
+
+function getProjects(ctx, limit, sort, content) {
+    content = content || {};
+    content.projects = [];
+    var results = content.projects;
+
+    limit = limit || undefined;
+
+    if (sort) {
+        sort = '[my.project.'+sort+']';
+    } else {
+        sort = undefined;
+    }
+
+    return new Promise(function (resolve, reject) {
+
+        query(ctx, {
+            type:  'project',
+            limit: limit,
+            sort:  sort
+        })
+
+        .then(function(projects) {
+
+            projects.results.forEach(function(project) {
+                var image = project.get('project.image');
+                results.push({
+                    name:           project.getText('project.name'),
+                    description:    project.getText('project.description'),
+                    body:           project.getText('project.body'),
+                    image: {
+                        small:      image.views.small.url,
+                        medium:     image.views.medium.url,
+                        wide:       image.views.wide.url,
+                        main:       image.main.url,
+                        alt:        image.main.alt
+                    }
+                });
+
+                resolve(results);
+            });
+
+        }, function(reason) {
+            reject(reason);
+        });
+
+    });
+}
+
+function getCommon(ctx, content) {
+    content = content || {};
+    content.common = {};
+    var results = content.common;
+
+    return new Promise(function (resolve, reject) {
+        getBookmarks(ctx)
+        .then(function(bookmarks) {
+
+            var a = bookmarks.about;
+            if (a) {
+                var about_image = a.get('about.image');
+                results.companyname =           a.getText('about.companyname');
+                results.tagline =               a.getText('about.tagline');
+                results.image = {
+                    small:                      about_image.views.small.url,
+                    medium:                     about_image.views.medium.url,
+                    wide:                       about_image.views.wide.url,
+                    main:                       about_image.main.url,
+                    alt:                        about_image.main.alt
+                };
+            }
+
+            var c = bookmarks.contact;
+            if (c) {
+                results.contact = {};
+                results.contact.email =         c.getText('contact.email');
+                results.contact.telephone =     c.getText('contact.telephone');
+                results.contact.address =       c.getText('contact.address');
+                results.contact.location =      c.getText('contact.location');
+            }
+
+            resolve(results);
+
+        }, function() {
+            reject('Could not get common');
+        });
+    });
+}
 
 function getBookmarks(ctx) {
     var bookmarks = ctx.api.data.bookmarks;
