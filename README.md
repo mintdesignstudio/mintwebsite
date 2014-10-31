@@ -7,6 +7,7 @@ Mint Design Studio website
 ```
 npm install
 ```
+Add necessary credentials for authenticating with Prismic in .env file. **DO NOT** commit the credentials!
 
 #Development
 ```
