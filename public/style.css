@@ -9,7 +9,7 @@ body {
     width: 100%;
 }
 
-.work, .contact {
+.work, .contactfooter {
     overflow: auto;
     float: left;
     width: 100%;
@@ -29,17 +29,13 @@ body {
     color: white;
 }
 
-.head .content > div, .about h1 {
+.head .content > div {
     z-index: 1;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
     text-align: center;
-}
-
-.about h1 {
-    width: 100%;
 }
 
 .head .content {
@@ -126,18 +122,18 @@ body {
     padding-bottom: 6px;
 }
 
-.contact, .menu {
+.contactfooter, .menu {
     background-color: black;
     color: white;
 }
 
-.contact {
+.contactfooter {
     text-align: center;
     padding-top: 30px;
     padding-bottom: 30px;
 }
 
-.contact li {
+.contactfooter li {
     list-style: none;
 }
 
@@ -168,6 +164,38 @@ body {
 
 .gallery img {
     width: 100%;
+}
+
+.employee {
+    width: 50%;
+    display: inline-block;
+    overflow: auto;
+}
+
+.employee img {
+    width: 50%;
+    float: left;
+}
+
+.employee ul {
+    margin: 0;
+    padding: 0;
+}
+
+.employee li {
+    list-style: none;
+}
+
+.awards dt {
+
+}
+
+.awards dd {
+    margin-left: 10%;
+}
+
+.contact #map {
+    height: 400px;
 }
 
 @media screen and (max-width: 400px) {

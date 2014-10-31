@@ -196,7 +196,9 @@ function getProjects(ctx, limit, sort, content) {
 
                 _result.name =          project.getText('project.name');
                 _result.description =   project.getText('project.description');
-                _result.body =          project.getText('project.body');
+                _result.body =          project
+                                        .getStructuredText('project.body')
+                                        .asHtml();
                 _result.slug =          project.slug;
                 _result.slugs =         project.slugs;
 
@@ -216,45 +218,86 @@ function getImage(img) {
     return {
         small:     img ? img.views.small.url : '',
         medium:    img ? img.views.medium.url : '',
-        wide:      img ? img.views.wide.url : '',
+        large:      img ? img.views.large.url : '',
         main:      img ? img.main.url : '',
         alt:       img ? img.main.alt : ''
     };
 }
 
+function email(value) {
+    return '<a href="mailto:'+value+'">'+value+'</a>';
+}
+
+function link(value) {
+    return value ? '<a href="'+value+'">'+value+'</a>' : '';
+}
+
 function getCommon(ctx, content) {
     content = content || {};
     content.common = {};
-    var results = content.common;
+    var result = content.common;
+    var a, ra, c, rc, e, aws, aw;
 
     return new Promise(function (resolve, reject) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            var a = bookmarks.about;
+            a = bookmarks.about;
             if (a) {
-                var about_image = a.get('about.image');
-                results.companyname =           a.getText('about.companyname');
-                results.tagline =               a.getText('about.tagline');
-                results.image = {
-                    small:                      about_image.views.small.url,
-                    medium:                     about_image.views.medium.url,
-                    wide:                       about_image.views.wide.url,
-                    main:                       about_image.main.url,
-                    alt:                        about_image.main.alt
-                };
+                ra = result.about = {};
+                ra.headline =       a.getText('about.headline');
+                ra.companyname =    a.getText('about.companyname');
+                ra.tagline =        a.getText('about.tagline');
+                ra.content =        a.getStructuredText('about.content')
+                                     .asHtml();
+                ra.image =          getImage(a.get('about.image'));
+
+                e = a.getGroup('about.employees');
+                if (e) {
+                    ra.employees = [];
+                    e.value.forEach(function(employee) {
+                        ra.employees.push({
+                            image:      getImage(employee.image),
+                            name:       employee.fullname.value,
+                            about:      employee.about.asHtml(),
+                            telephone:  employee.telephone.value,
+                            email:      email(employee.email.value)
+                        });
+                    });
+                }
+
+                aws = a.getGroup('about.awards');
+                if (aws) {
+                    ra.awards = [];
+                    aws.value.forEach(function(award) {
+
+                        aw = {
+                            title:              award.title.value,
+                            nomination:         award.nomination.value,
+                            year:               award.year.value,
+                            link:               link(award.link.value)
+                        };
+
+                        if (award.related_article) {
+                            aw.related_article = award.related_article.document;
+                        }
+
+                        ra.awards.push(aw);
+                    });
+                }
+
             }
 
-            var c = bookmarks.contact;
+            c = bookmarks.contact;
             if (c) {
-                results.contact = {};
-                results.contact.email =         c.getText('contact.email');
-                results.contact.telephone =     c.getText('contact.telephone');
-                results.contact.address =       c.getText('contact.address');
-                results.contact.location =      c.getText('contact.location');
+                rc = result.contact = {};
+                rc.email =      email(c.getText('contact.email'));
+                rc.telephone =  c.getText('contact.telephone');
+                rc.address =    c.getText('contact.address');
+                rc.location =   c.getGeoPoint('contact.location');
             }
 
-            resolve(results);
+            resolve(result);
 
         }, function() {
             reject('Could not get common');

@@ -2,16 +2,49 @@
 
 <div class="about">
     <div class="content">
-        <h1>About {{common.companyname}}</h1>
         <picture>
-            <source srcset="{{common.image.main}}" media="(min-width: 960px)">
-            <source srcset="{{common.image.wide}}" media="(min-width: 700px) and (max-width: 960px)">
-            <source srcset="{{common.image.medium}}" media="(min-width: 400px) and (max-width: 700px)">
-            <img srcset="{{common.image.small}}" alt="{{image.alt}}">
+            <source srcset="{{common.about.image.main}}" media="(min-width: 960px)">
+            <source srcset="{{common.about.image.large}}" media="(min-width: 700px) and (max-width: 960px)">
+            <source srcset="{{common.about.image.medium}}" media="(min-width: 400px) and (max-width: 700px)">
+            <img srcset="{{common.about.image.small}}" alt="{{image.alt}}">
         </picture>
     </div>
 </div>
 
+<h1>{{common.about.headline}}</h1>
+{{{common.about.content}}}
+
+{{#if common.about.employees}}
+    {{#each common.about.employees}}
+        <div class="employee">
+            <picture>
+                <source srcset="{{image.main}}" media="(min-width: 960px)">
+                <source srcset="{{image.large}}" media="(min-width: 700px) and (max-width: 960px)">
+                <source srcset="{{image.medium}}" media="(min-width: 400px) and (max-width: 700px)">
+                <img srcset="{{image.small}}" alt="{{image.alt}}">
+            </picture>
+            <h3>{{fullname}}</h3>
+            {{{about}}}
+            <ul>
+                <li>{{telephone}}</li>
+                <li>{{{email}}}</li>
+            </ul>
+        </div>
+    {{/each}}
+{{/if}}
+
+{{#if common.about.awards}}
+    <div class="awards">
+        <h2>Awards</h2>
+        <dl>
+        {{#each common.about.awards}}
+            <dt>{{title}}</dt>
+            <dd>{{nomination}}</dd>
+            <dd>{{year}}</dd>
+        {{/each}}
+        </dl>
+    </div>
+{{/if}}
 
 {{> contact}}
 

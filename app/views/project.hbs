@@ -1,10 +1,15 @@
 {{> menu}}
 
+<div class="content">
+    <h1>{{project.name}}</h1>
+    {{{project.body}}}
+</div>
+
 <div class="gallery">
 {{#each project.gallery}}
     <picture>
         <source srcset="{{main}}" media="(min-width: 960px)">
-        <source srcset="{{wide}}" media="(min-width: 700px) and (max-width: 960px)">
+        <source srcset="{{large}}" media="(min-width: 700px) and (max-width: 960px)">
         <source srcset="{{medium}}" media="(min-width: 400px) and (max-width: 700px)">
         <img class="latest" srcset="{{small}}" alt="{{alt}}">
     </picture>
