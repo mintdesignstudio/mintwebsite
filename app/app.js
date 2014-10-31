@@ -69,6 +69,17 @@ module.exports.about = function(req, res, next) {
     });
 };
 
+module.exports.contact = function(req, res, next) {
+    var content = {};
+
+    getCommon(res.locals.ctx, content)
+    .then(function (common) {
+        render(res, 'contact', content);
+    }, function() {
+        res.send('Error');
+    });
+};
+
 module.exports.project = function(req, res, next) {
     var name = clean(req.params.name);
     var content = {};

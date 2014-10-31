@@ -11,6 +11,7 @@ module.exports = function() {
     router
         .get('/',               app.prismic, app.home)
         .get('/about',          app.prismic, app.about)
+        .get('/contact',        app.prismic, app.contact)
         .get('/works',          app.prismic, app.projects)
         .get('/work/:name',     app.prismic, app.project)
 
