@@ -5,10 +5,7 @@
  * 62.5% = 8:5
  */
 
-body {
-    width: 100%;
-}
-
+/*
 .work, .contactfooter {
     overflow: auto;
     float: left;
@@ -16,7 +13,7 @@ body {
 }
 
 .work .wrap, .head, .about {
-    width: 33.3334%;
+    width: 100%;
     display: inline-block;
     position: relative;
     float: left;
@@ -24,7 +21,6 @@ body {
 }
 
 .head, .about {
-    width: 100%;
     max-height: 500px;
     color: white;
 }
@@ -45,11 +41,13 @@ body {
 .work .thumb, .head .content {
     padding-bottom: 56.25%;
 }
+*/
 
 .about .content {
     padding-bottom: 42%;
 }
 
+/*
 .work .wrap a {
     position: absolute;
     left: 0;
@@ -126,6 +124,7 @@ body {
     background-color: black;
     color: white;
 }
+*/
 
 .contactfooter {
     text-align: center;
@@ -137,6 +136,7 @@ body {
     list-style: none;
 }
 
+/*
 .menu ul {
     position: absolute;
     right: 12px;
@@ -161,6 +161,7 @@ body {
     float: left;
     margin-left: 12px;
 }
+*/
 
 .gallery img {
     width: 100%;
