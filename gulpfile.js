@@ -41,6 +41,4 @@ gulp.task('inline', function() {
         .pipe(gulp.dest('app/views/layouts'));
 });
 
-gulp.task('default', ['svgmin', 'inline'], function() {
-
-});
+gulp.task('default', ['svgmin', 'inline'], function() {});

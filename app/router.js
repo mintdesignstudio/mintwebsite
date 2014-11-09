@@ -17,14 +17,12 @@ module.exports = function() {
 
         .use('/public',         express.static(config.public_dir));
 
-        // if (config.production) {
-        //     router.use(function(req, res, next) {
-        //         if (req.headers['x-forwarded-proto'] != 'https') {
-        //             return res.redirect('https://' + req.get('Host') + req.url);
-        //         }
-        //         next();
-        //     });
-        // }
+    if (config.development) {
+        router.get('/app/views/:folder/:file', function(req, res, next) {
+            res.sendFile(path.resolve('./app/views/'+req.params.folder,
+                         req.params.file));
+        });
+    }
 
     return router;
 };

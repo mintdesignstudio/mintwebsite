@@ -11,7 +11,7 @@ Add necessary credentials for authenticating with Prismic in .env file. **DO NOT
 
 #Development
 ```
-nf -j Procfile_dev start
+npm run dev
 ```
 
 #Links
