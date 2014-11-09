@@ -180,10 +180,11 @@ function getProjects(ctx, limit, sort, content) {
             var _gallery;
             var _result;
 
-            projects.results.forEach(function(project) {
+            projects.results.forEach(function(project, i) {
 
                 _result = {};
 
+                _result.i = i;
                 _result.image = getImage(project.get('project.image'));
 
                 _result.gallery = [];
