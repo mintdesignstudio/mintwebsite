@@ -1,6 +1,7 @@
 body {
     font-family: DIN OT, 'Helvetica', 'Arial', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
+    color: black;
 }
 
 .work, .contactfooter {
@@ -59,8 +60,17 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.work span, .head span {
+.work span {
     display: block;
+    font-size: 11px;
+    margin-top: 6px;
+}
+
+.head span {
+    display: block;
+    margin-top: 32px;
+    white-space: nowrap;
+    font-size: 13px;
 }
 
 .work a div {
@@ -69,21 +79,17 @@ body {
     position: absolute;
 }
 
-.work a {
-    display: block;
-    width: 100%;
-    clear: left;
-    text-align: center;
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-
 .head .latest {
     opacity: 0.25;
 }
 
-.head .logo {
-    width: 42%;
+.logo {
+    width: 100%;
+    background-image: url('/public/images/logo_white.svg');
+    background-position: 50% 0px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    height: 180px;
 }
 
 .work img, .head .latest, .about img {
@@ -101,7 +107,9 @@ body {
 
 .work h2 {
     text-align: center;
-    margin: 12px auto;
+    margin: 24px auto;
+    font-size: 20px;
+    color: black;
 }
 
 .menu {
@@ -109,9 +117,6 @@ body {
     overflow: auto;
     padding-top: 6px;
     padding-bottom: 6px;
-}
-
-.contactfooter, .menu {
     background-color: black;
     color: white;
 }
@@ -130,13 +135,26 @@ body {
 .menu a {
     color: white;
     text-decoration: none;
+    font-size: 13px;
+}
+
+.symbol {
+    background-image: url('/public/images/logo_symbol_white.svg');
+    background-position: 0px 0px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.menu .symbol {
+    padding-left: 20px;
+    float: left;
+    margin-left: 12px;
+}
+
+.menu a.symbol:hover {
+    text-decoration: none;
 }
 
 .menu a:hover {
     text-decoration: underline;
-}
-
-.menu .logo {
-    float: left;
-    margin-left: 12px;
 }
