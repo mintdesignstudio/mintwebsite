@@ -27,9 +27,15 @@ body {
     z-index: 1;
     position: absolute;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
     left: 50%;
-    top: 50%;
+    top: 40%;
     text-align: center;
+    height: 50%;
+    width: 100%;
 }
 
 .head .content {
@@ -60,15 +66,9 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.work span {
-    display: block;
-    font-size: 11px;
-    margin-top: 6px;
-}
-
 .head span {
     display: block;
-    margin-top: 32px;
+    margin-top: 6%;
     white-space: nowrap;
     font-size: 13px;
 }
@@ -77,6 +77,12 @@ body {
     bottom: 12px;
     left: 12px;
     position: absolute;
+}
+
+.work a div span {
+    display: block;
+    font-size: 11px;
+    margin-top: 6px;
 }
 
 .head .latest {
@@ -89,7 +95,8 @@ body {
     background-position: 50% 0px;
     background-size: auto 100%;
     background-repeat: no-repeat;
-    height: 180px;
+    height: 95%;
+    display: inline-block;
 }
 
 .work img, .head .latest, .about img {
@@ -106,6 +113,7 @@ body {
 }
 
 .work h2 {
+    -webkit-transform: translate3d(0, 0, 0);
     text-align: center;
     margin: 24px auto;
     font-size: 20px;
@@ -115,8 +123,8 @@ body {
 .menu {
     width: 100%;
     overflow: auto;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 18px;
+    padding-bottom: 18px;
     background-color: black;
     color: white;
 }
@@ -124,12 +132,13 @@ body {
 .menu ul {
     position: absolute;
     right: 12px;
+    margin-top: 2px;
 }
 
 .menu li {
     float: left;
     list-style: none;
-    margin-left: 12px;
+    margin-left: 24px;
 }
 
 .menu a {
@@ -146,9 +155,10 @@ body {
 }
 
 .menu .symbol {
-    padding-left: 20px;
+    padding-left: 28px;
     float: left;
-    margin-left: 12px;
+    margin-left: 18px;
+    font-size: 24px;
 }
 
 .menu a.symbol:hover {
