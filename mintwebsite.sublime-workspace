@@ -4,6 +4,106 @@
 		"selected_items":
 		[
 			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"con",
+				"contact"
+			],
+			[
+				"aw",
+				"awards"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"pro",
+				"projects"
+			],
+			[
+				"get",
+				"getImage"
+			],
+			[
+				"_pro",
+				"_proj_image"
+			],
+			[
+				"proj",
+				"project"
+			],
+			[
+				"getPro",
+				"getProp"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"c",
+				"common"
+			],
+			[
+				"ord",
+				"ordering"
+			],
+			[
+				"about",
+				"about_image"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"boo",
+				"bookmarks"
+			],
+			[
+				"art",
+				"article"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"rg",
+				"rgba()"
+			],
+			[
+				"fun",
+				"fun	Function"
+			],
+			[
+				"got",
+				"got_proj"
+			],
+			[
 				"blo",
 				"blog_post"
 			],
@@ -36,10 +136,6 @@
 				"timer_done"
 			],
 			[
-				"c",
-				"cur_li"
-			],
-			[
 				"dn",
 				"dn-row"
 			],
@@ -62,14 +158,6 @@
 			[
 				"port",
 				"portrait-wide"
-			],
-			[
-				"con",
-				"content_footer"
-			],
-			[
-				"pro",
-				"prop"
 			],
 			[
 				"nex",
@@ -102,10 +190,6 @@
 			[
 				"sour",
 				"source_file"
-			],
-			[
-				"li",
-				"lines"
 			],
 			[
 				"lin",
@@ -162,10 +246,6 @@
 			[
 				"btn",
 				"btn_gotolist"
-			],
-			[
-				"font",
-				"font-weight"
 			],
 			[
 				"hl",
@@ -276,10 +356,6 @@
 				"express_config"
 			],
 			[
-				"text",
-				"text-align"
-			],
-			[
 				"inline",
 				"inline-block"
 			],
@@ -354,14 +430,6 @@
 			[
 				"btn_",
 				"btn_gotolist"
-			],
-			[
-				"marg",
-				"margin"
-			],
-			[
-				"max",
-				"max-width"
 			],
 			[
 				"backgroun",
@@ -446,100 +514,97 @@
 			[
 				"tabl",
 				"table_rendering"
-			],
-			[
-				"loader",
-				"loader_params"
-			],
-			[
-				"chil",
-				"children"
-			],
-			[
-				"prop",
-				"props"
-			],
-			[
-				"for",
-				"forEach"
-			],
-			[
-				"num",
-				"num_scores"
-			],
-			[
-				"sc",
-				"score_data"
-			],
-			[
-				"play",
-				"playresult"
-			],
-			[
-				"fin",
-				"finished"
-			],
-			[
-				"seri",
-				"series"
-			],
-			[
-				"tr",
-				"transform"
-			],
-			[
-				"ser",
-				"serverToGame"
-			],
-			[
-				"hgih",
-				"highlighted"
-			],
-			[
-				"mar",
-				"margin-left"
-			],
-			[
-				"tas",
-				"task"
-			],
-			[
-				"fonts",
-				"fontsize-normal"
-			],
-			[
-				"bac",
-				"background-size"
-			],
-			[
-				"border-",
-				"border-bottom"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "main.js",
+			"file": "app/views/home.hbs",
 			"settings":
 			{
-				"buffer_size": 647,
+				"buffer_size": 1216,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/web.js",
+			"file": "public/images/logo_white.svg",
 			"settings":
 			{
-				"buffer_size": 1573,
+				"buffer_size": 11715,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/partials/menu.hbs",
+			"settings":
+			{
+				"buffer_size": 261,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/projects.hbs",
+			"settings":
+			{
+				"buffer_size": 534,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/project.hbs",
+			"settings":
+			{
+				"buffer_size": 500,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/about.hbs",
+			"settings":
+			{
+				"buffer_size": 1579,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layouts/main.hbs",
+			"settings":
+			{
+				"buffer_size": 1127,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 1263,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/fonts.css",
+			"settings":
+			{
+				"buffer_size": 100986,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/style.css",
+			"settings":
+			{
+				"buffer_size": 3262,
+				"line_ending": "Unix",
+				"name": "div.stretchy-wrapper {"
 			}
 		},
 		{
 			"file": "app/router.js",
 			"settings":
 			{
-				"buffer_size": 935,
+				"buffer_size": 994,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,15 +612,7 @@
 			"file": "app/app.js",
 			"settings":
 			{
-				"buffer_size": 2938,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "config.js",
-			"settings":
-			{
-				"buffer_size": 811,
+				"buffer_size": 11371,
 				"line_ending": "Unix"
 			}
 		}
@@ -624,17 +681,50 @@
 	],
 	"file_history":
 	[
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/dev.js",
+		"/Users/mandarin/Downloads/machinations_source/nl/jorisdormans/phantomGraphics/PhantomFont.as",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/web.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/package.json",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/config.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/js/loadcss.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/css/fold.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/js/loadfont.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/out/main.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/reset.css",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/README.md",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/images/logo_white.svg",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/logo_white.svg",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/gulpfile.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8message.hbs",
+		"/Users/mandarin/Downloads/DINOT_14151285596412/DINOT-Regular.css",
+		"/Users/mandarin/Clients/Mint/Documents/Logo white.svg",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/footer.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/main.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/menu.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contact.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contactscripts.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/contact.hbs",
+		"/Users/mandarin/Tribute Games/MercenaryKings/log.txt",
+		"/Users/mandarin/Desktop/backburner.py",
+		"/Users/mandarin/Projects/Games/Entity System/entitysystem.github.com/gulpfile.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/postinstall.js",
+		"/Users/mandarin/Projects/Games/Entity System/entitysystem.github.com/README.md",
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/game_main.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/.env",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/projects.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/logs.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile_dev",
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/controller/company.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/layouts/main.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/config.js",
+		"/Users/mandarin/Projects/Mimura/app/.env",
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgfooter.hbs",
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgsidebar.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/picturefill.min.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8style.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/dev.js",
 		"/Users/mandarin/Projects/Mimura/app/server/app/index.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/mintwebsite.sublime-project",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/logs.js",
 		"/Users/mandarin/Projects/Mimura/app/server/config.js",
 		"/Users/mandarin/Clients/DDB/McDonalds Premium Chicken/premiumchicken.github.com/views/partials/form.ejs",
 		"/Users/mandarin/Clients/DDB/McDonalds Premium Chicken/premiumchicken.github.com/public/js/main.js",
@@ -643,7 +733,6 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/tool/list_games.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/list.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/public/css/lte-ie8.css",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/game_main.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/page/play.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/play.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/social.js",
@@ -662,7 +751,6 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/dnfooter.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/home.styl",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/mediaqueries.styl",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgfooter.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/companyonhold.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/companybest.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/highscores.js",
@@ -679,7 +767,6 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/autocomplete.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/controller/highscore_response.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/social.hbs",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgsidebar.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/gameloader.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/game.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/common/sentry.js",
@@ -711,7 +798,6 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/admin_main.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/table.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/timer.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/controller/company.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/cheat.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/Documents/Gaffel.pgn",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/server.js",
@@ -722,40 +808,11 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/common/cleaner.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/views.js",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/board.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/gulpfile.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/play.styl",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/pieces.styl",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/other.styl",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/pieces.css",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/other.css",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/map2.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/node_modules/vinyl-map/index.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/svgfix.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/node_modules/gulp-svgmin/index.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/node_modules/gulp-rename/index.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/pieces.styl_tmp",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/resources/other/other.styl",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/plugins/test/test.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/page-templates/testform.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-config.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/style.css",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/page-templates/contributors.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/testform.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/featured-content.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/page.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/index.php",
-		"/Users/mandarin/Sites/wp_plugins/wp-content/themes/test/functions.php",
-		"/Users/mandarin/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/style/highscores.styl",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/smoothscroll.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/highscorerow.hbs",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/checkbox.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/file_input.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/help.jsx"
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/gulpfile.js"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -802,6 +859,45 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"common.ab",
+			"sourceSansPro",
+			"menu",
+			"contact",
+			"aw",
+			"employee",
+			"common",
+			"obj",
+			"common",
+			"result",
+			"_c",
+			"_a",
+			"results",
+			"about",
+			"project",
+			"_proj_gallery",
+			"_proj_image",
+			"_image",
+			"image",
+			"cur_project",
+			"results",
+			"contact",
+			"content",
+			"results",
+			"post",
+			"renderProject",
+			"renderBlog",
+			"post",
+			"image",
+			"menu",
+			"content",
+			"work1",
+			"\n.work .work3 {\n    background-image:url('/public/images/work3.jpg');\n}\n",
+			"post",
+			"project",
+			"blog_post",
+			"post",
+			"blog_post",
+			"logger",
 			"blog_post",
 			"ctx",
 			"logs",
@@ -890,46 +986,7 @@
 			"starttime",
 			"score",
 			"won",
-			"_id",
-			"SENTRY_DSN",
-			"isAI",
-			"capture",
-			"api.update_player",
-			"api.list_players",
-			"log",
-			"api.update_company",
-			"api.list_companies",
-			"api.count_highscores",
-			"api.list_highscores",
-			"api.add_highscore",
-			"api.add_game",
-			"api.update_game",
-			"api.list_games",
-			"raven",
-			"add",
-			"sidebar",
-			"main",
-			"600px",
-			"brect",
-			"max-",
-			"scroll",
-			"overflow",
-			"api.update_player",
-			"api.list_players",
-			"api.update_company",
-			"api.list_companies",
-			"api.add_games",
-			"api.update_game",
-			"api.list_games",
-			"email",
-			"flash",
-			"email",
-			"isLoggedIn",
-			"authenticated",
-			"css",
-			"channels",
-			"rect",
-			"bt"
+			"_id"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -958,31 +1015,237 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "main.js",
+					"file": "app/views/home.hbs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 647,
+						"buffer_size": 1216,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								304,
-								304
+								83,
+								149
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/images/logo_white.svg",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11715,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11685,
+								11685
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 519.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/partials/menu.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30,
+								30
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/projects.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								283,
+								283
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/views/project.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 500,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								250,
+								250
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/about.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1579,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1576,
+								1576
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/views/layouts/main.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1127,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								567,
+								567
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1263,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								301,
+								301
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -992,42 +1255,71 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "app/web.js",
+					"buffer": 8,
+					"file": "public/fonts.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1573,
+						"buffer_size": 100986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1573,
-								1573
+								100898,
+								100898
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "public/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3252,
+								3252
+							]
+						],
+						"settings":
+						{
+							"auto_name": "div.stretchy-wrapper {",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 54.0,
+						"translation.y": 2844.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 10,
 					"file": "app/router.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 935,
+						"buffer_size": 994,
 						"regions":
 						{
 						},
@@ -1044,28 +1336,28 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 11,
 					"file": "app/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2938,
+						"buffer_size": 11371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1583,
-								1851
+								5919,
+								5919
 							]
 						],
 						"settings":
@@ -1075,40 +1367,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 9.0,
+						"translation.y": 3285.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "config.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 811,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								546,
-								546
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1165,6 +1427,74 @@
 		"selected_items":
 		[
 			[
+				"men",
+				"app/views/partials/menu.hbs"
+			],
+			[
+				"we",
+				"app/web.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"gulpf",
+				"gulpfile.js"
+			],
+			[
+				"ie8",
+				"app/views/partials/ie8message.hbs"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"rese",
+				"public/reset.css"
+			],
+			[
+				"ma",
+				"app/views/layouts/main.hbs"
+			],
+			[
+				"post",
+				"postinstall.js"
+			],
+			[
+				"foo",
+				"app/views/partials/footer.hbs"
+			],
+			[
+				"env",
+				".env"
+			],
+			[
+				"re",
+				"README.md"
+			],
+			[
+				"menu",
+				"app/views/partials/menu.hbs"
+			],
+			[
+				"proj",
+				"app/views/projects.hbs"
+			],
+			[
+				"err",
+				"app/errors.js"
+			],
+			[
+				"web",
+				"app/web.js"
+			],
+			[
+				"main",
+				"main.js"
+			],
+			[
 				"de",
 				"dev.js"
 			],
@@ -1173,20 +1503,12 @@
 				"config.js"
 			],
 			[
-				"re",
-				"README.md"
-			],
-			[
 				"read",
 				"README.md"
 			],
 			[
 				"en",
 				".env"
-			],
-			[
-				"pack",
-				"package.json"
 			],
 			[
 				"dev",
@@ -1305,10 +1627,6 @@
 				"app/game/page/playresult.js"
 			],
 			[
-				"main",
-				"app/game/main.js"
-			],
-			[
 				"kpmf",
 				"app/game/view/kpmgfooter.hbs"
 			],
@@ -1331,10 +1649,6 @@
 			[
 				"gamel",
 				"app/game/play/gameloader.js"
-			],
-			[
-				"web",
-				"webpack.config.js"
 			],
 			[
 				"rout",
@@ -1403,10 +1717,6 @@
 			[
 				"admgame",
 				"app/admin/form/edit_game.jsx"
-			],
-			[
-				"ma",
-				"app/server/views/game_main.hbs"
 			],
 			[
 				"tim",
@@ -1483,10 +1793,6 @@
 			[
 				"kpmsi",
 				"app/game/page/kpmgsidebar.js"
-			],
-			[
-				"gulp",
-				"gulpfile.js"
 			],
 			[
 				"todo",
@@ -1631,50 +1937,6 @@
 			[
 				"adsig",
 				"app/server/views/admin_signup.hbs"
-			],
-			[
-				"conadm",
-				"app/server/controller/admin.js"
-			],
-			[
-				"conad",
-				"app/server/controller/admin.js"
-			],
-			[
-				"ser",
-				"server.js"
-			],
-			[
-				"adma",
-				"app/admin/main.jsx"
-			],
-			[
-				"boar",
-				"app/game/play/board.js"
-			],
-			[
-				"playr",
-				"app/game/page/playresult.js"
-			],
-			[
-				"pagecom",
-				"app/game/page/companyonhold.js"
-			],
-			[
-				"page/",
-				"app/game/page/company.js"
-			],
-			[
-				"even",
-				"app/game/eventhandler.js"
-			],
-			[
-				"kpmss",
-				"app/game/style/kpmgsidebar.styl"
-			],
-			[
-				"event",
-				"app/game/eventhandler.js"
 			]
 		],
 		"width": 0.0
