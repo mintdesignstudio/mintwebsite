@@ -12,5 +12,5 @@ var raf = window.requestAnimationFrame ||
 if (raf) {
     raf(cb);
 } else {
-    window.addEventListener('load', cb);
+    window.addEventListener('DOMContentLoaded', cb);
 }
