@@ -25,6 +25,11 @@
     margin-bottom: 32px;
 }
 
+.project {
+    float: left;
+    margin-top: 56px;
+}
+
 .content {
     padding: 64px 40px;
     margin-left: 15%;
@@ -150,7 +155,10 @@ h2 {
 }
 
 .contact {
-    clear: both;
+    /* clear: both; */
+    margin-top: 56px;
+    float: left;
+    width: 100%;
 }
 
 .contact #map {
