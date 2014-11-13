@@ -1,12 +1,18 @@
 <div class="contact">
-    <dl>
-        <dt>Telephone</dt>
-        <dd>{{common.contact.telephone}}</dd>
-        <dt>Email</dt>
-        <dd>{{{common.contact.email}}}</dd>
-    </dl>
-
     <div id="map"
         data-lat="{{common.contact.location.latitude}}"
         data-long="{{common.contact.location.longitude}}"></div>
+
+    <div class="content">
+        <ul>
+            <li>
+                <span id="medium">Telephone</span>
+                <span>{{common.contact.telephone}}</span>
+            </li><!--
+            --><li>
+                <span id="medium">Email</span>
+                <span>{{{common.contact.email}}}</span>
+            </li>
+        </ul>
+    </div>
 </div>

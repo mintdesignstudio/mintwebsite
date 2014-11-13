@@ -1,7 +1,18 @@
 body {
     font-family: DIN OT, 'Helvetica', 'Arial', sans-serif;
     font-weight: 300;
-    color: black;
+    color: white;
+    background-color: #000;
+}
+
+a {
+    color: #BEE3DA;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #BEE3DA;
+    text-decoration: underline;
 }
 
 .work, .contactfooter {
@@ -10,14 +21,18 @@ body {
     width: 100%;
 }
 
-.work .wrap, .head, .about {
+.work .wrap, .head {
     display: inline-block;
     position: relative;
     float: left;
     overflow: hidden;
 }
 
-.head, .about {
+.about {
+    width: 100%;
+}
+
+.head {
     width: 100%;
     max-height: 500px;
     color: white;
@@ -99,7 +114,7 @@ body {
     display: inline-block;
 }
 
-.work img, .head .latest, .about img {
+.work img, .head .latest {
     position: absolute;
     width: 101%;
     left: 50%;
@@ -112,12 +127,32 @@ body {
     z-index: 0;
 }
 
+.about .coverphoto {
+    max-height: 400px;
+    overflow: hidden;
+    padding-bottom: 30%;
+    position: relative;
+}
+
+.about .coverphoto img {
+    width: 100%;
+    left: 50%;
+     top: 50%;
+    transform: translate(-50%, -50%);
+     -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    z-index: 0;
+    position: absolute;
+}
+
 .work h2 {
     -webkit-transform: translate3d(0, 0, 0);
     text-align: center;
-    margin: 24px auto;
-    font-size: 20px;
-    color: black;
+    margin: 48px auto;
+    font-size: 32px;
+    font-weight: 300;
 }
 
 .menu {
@@ -144,7 +179,12 @@ body {
 .menu a {
     color: white;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 16px;
+}
+
+.menu a:hover {
+    color: #BEE3DA;
+    text-decoration: none;
 }
 
 .symbol {
@@ -157,14 +197,10 @@ body {
 .menu .symbol {
     padding-left: 28px;
     float: left;
-    margin-left: 18px;
-    font-size: 24px;
+    margin-left: 12px;
+    font-size: 20px;
 }
 
 .menu a.symbol:hover {
     text-decoration: none;
-}
-
-.menu a:hover {
-    text-decoration: underline;
 }
