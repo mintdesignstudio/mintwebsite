@@ -256,13 +256,14 @@ function getCommon(ctx, content) {
                 e = a.getGroup('about.employees');
                 if (e) {
                     ra.employees = [];
-                    e.value.forEach(function(employee) {
+                    e.value.forEach(function(employee, i) {
                         ra.employees.push({
                             image:      getImage(employee.image),
-                            name:       employee.fullname.value,
+                            fullname:   employee.fullname.value,
                             about:      employee.about.asHtml(),
                             telephone:  employee.telephone.value,
-                            email:      email(employee.email.value)
+                            email:      email(employee.email.value),
+                            i:          i
                         });
                     });
                 }
