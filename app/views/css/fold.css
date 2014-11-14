@@ -63,6 +63,8 @@ a:hover {
 
 .head .content {
     background-color: black;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .work .thumb, .head .content {
