@@ -1,6 +1,8 @@
 var gulp            = require('gulp');
 var imagemin        = require('gulp-imagemin');
 var inlinesource    = require('gulp-inline-source');
+var rev             = require('gulp-rev');
+var revcss          = require('gulp-rev-css-url');
 
 var dev = process.env.NODE_ENV !== 'production';
 
@@ -40,5 +42,26 @@ gulp.task('inline', function() {
         .pipe(inlinesource())
         .pipe(gulp.dest('app/views/layouts'));
 });
+
+gulp.task('fold', function () {
+    return gulp.src('app/views/css/fold.css')
+        .pipe(rev())
+        .pipe(gulp.dest('app/views/css/'));
+});
+
+gulp.task('style', function () {
+    return gulp.src('public/style.css')
+        .pipe(rev())
+        .pipe(gulp.dest('public'));
+});
+
+gulp.task('logos',function(){
+    return gulp.src(['app/views/css/fold.css', 'public/images/*.svg'])
+                .pipe(rev())
+                .pipe(revcss())
+                .pipe(gulp.dest('./build/'));
+});
+
+gulp.task('rev', ['fold', 'style', 'logos']);
 
 gulp.task('default', ['svgmin', 'inline'], function() {});
