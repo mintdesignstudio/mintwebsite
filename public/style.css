@@ -36,19 +36,22 @@
     margin-right: 15%;
 }
 
+.content p {
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
 .content .body a {
     font-weight: 400;
 }
 
 .content .body {
-    /* width: 66%; */
     column-count: 2;
     -webkit-column-count: 2;
     column-gap: 48px;
     -webkit-column-gap: 48px;
     column-width: 260px;
     -webkit-column-width: 260px;
-    /* margin-left: 24px; */
 }
 
 .content .body p {
@@ -68,6 +71,8 @@ h2 {
     margin-bottom: 32px;
     font-size: 28px;
     font-weight: 300;
+    margin-top: 96px;
+    /* clear: both; */
 }
 
 .gallery {
@@ -85,14 +90,14 @@ h2 {
     float: left;
     margin-bottom: 96px;
     margin-top: 32px;
-    /* padding-right: 8%; */
-    padding-left: 24px;
     box-sizing: border-box;
+    padding-left: 24px;
 }
 
 .employee.first {
     padding-left: 0px;
 
+    padding-right: 24px;
 }
 
 .employee svg {
@@ -138,19 +143,20 @@ h2 {
     float: left;
     padding-bottom: 10px;
     font-weight: 400;
+    width: 84%;
 }
 
 .awards li span#nomination {
     float: left;
     clear: left;
-    margin-left: 6%;
+    margin-left: 16%;
     margin-bottom: 16px;
     color: #aaa;
 }
 
 .awards li span#year {
     float: left;
-    width: 6%;
+    width: 16%;
     padding-top: 2px;
 }
 
@@ -190,6 +196,34 @@ h2 {
     padding-bottom: 48px;
 }
 
+.clients {
+    overflow: auto;
+}
+
+.clients ul {
+    width: 100%;
+}
+
+.clients li {
+    list-style: none;
+    width: 17%;
+    float: left;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 96px;
+}
+
+.clients img {
+    width: 100%;
+}
+
+.clients span {
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin-top: 24px;
+}
+
 @media screen and (min-width: 960px) {
 
     .work .wrap {
@@ -206,6 +240,7 @@ h2 {
 
     .content p {
         line-height: 1.6;
+        margin-bottom: 6px;
     }
 
 }
@@ -229,11 +264,13 @@ h2 {
         font-size: 22px;
     }
 
+    .content {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
 }
 
-/*
-@media screen and (min-width: 400px) {
-*/
 @media screen and (max-width: 700px) {
 
     .work .wrap {
@@ -255,6 +292,10 @@ h2 {
         display: inline-block;
     }
 
+    .content {
+        margin: auto;
+    }
+
 }
 
 @media screen and (max-width: 400px) {
@@ -268,6 +309,7 @@ h2 {
         overflow: auto;
         padding-top: 32px;
         padding-bottom: 32px;
+        position: relative;
     }
 
     .menu li a {
@@ -296,4 +338,44 @@ h2 {
         float: none;
     }
 
+    .head {
+        margin-top: auto;
+        display: none;
+    }
+
+    .work {
+        margin-top: auto;
+    }
+
+    .work h2 {
+        margin-top: 12px;
+        margin-bottom: 12px;
+        display: none;
+    }
+
+    .work .wrap a {
+        opacity: 1;
+        background-color: black;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .about {
+        margin-top: auto;
+    }
+
+    .awards {
+        margin-top: 32px;
+        float: left;
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+
+    .employee {
+        width: 100%;
+        margin-bottom: 16px;
+        padding-left: 0px;
+    }
 }

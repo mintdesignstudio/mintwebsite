@@ -4,16 +4,17 @@ var serveStatic     = require('serve-static');
 
 var config          = require('../config');
 var app             = require('./app');
+var middleware      = require('./middleware');
 
 module.exports = function() {
     var router = express.Router();
 
     router
-        .get('/',               app.prismic, app.home)
-        .get('/about',          app.prismic, app.about)
-        .get('/contact',        app.prismic, app.contact)
-        .get('/works',          app.prismic, app.projects)
-        .get('/work/:name',     app.prismic, app.project)
+        .get('/',               middleware.prismic, app.home)
+        .get('/about',          middleware.prismic, app.about)
+        .get('/contact',        middleware.prismic, app.contact)
+        .get('/works',          middleware.prismic, app.projects)
+        .get('/work/:name',     middleware.prismic, app.project)
 
         .use('/public',         express.static(config.public_dir));
 
