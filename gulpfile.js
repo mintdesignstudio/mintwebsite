@@ -1,20 +1,20 @@
 var gulp            = require('gulp');
 var imagemin        = require('gulp-imagemin');
 var inlinesource    = require('gulp-inline-source');
-var rev             = require('gulp-rev');
-var revcss          = require('gulp-rev-css-url');
+var minifyCSS       = require('gulp-minify-css');
+var minifyHTML      = require('gulp-minify-html');
 
-var dev = process.env.NODE_ENV !== 'production';
+// Check the environment vars to make sure the tasks don't run on
+// install locally. Gulp is set to run on postinstall. Heroku changes
+// the environment variable to 'production' when deploying.
 
-// minify png, jpg, gif, svg
-// minify html, css
-// uglify js
+var prod = process.env.NODE_ENV === 'production';
 
 gulp.task('svgmin', function() {
-    if (dev) {
+    if (!prod) {
         return null;
     }
-    return gulp.src('public/images/*.svg')
+    gulp.src('public/images/*.svg')
         .pipe(imagemin({
             svgoPlugins: [
                 {removeViewBox: true},
@@ -35,33 +35,52 @@ gulp.task('svgmin', function() {
 });
 
 gulp.task('inline', function() {
-    if (dev) {
+    if (!prod) {
         return null;
     }
-    return gulp.src('app/views/layouts/*.hbs')
+    gulp.src('app/views/layouts/*.hbs')
         .pipe(inlinesource())
         .pipe(gulp.dest('app/views/layouts'));
 });
 
-gulp.task('fold', function () {
-    return gulp.src('app/views/css/fold.css')
-        .pipe(rev())
-        .pipe(gulp.dest('app/views/css/'));
+gulp.task('minicss-fold', function() {
+    if (!prod) {
+        return null;
+    }
+    gulp.src('./app/views/css/fold.css')
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./app/views/css/'));
 });
 
-gulp.task('style', function () {
-    return gulp.src('public/style.css')
-        .pipe(rev())
-        .pipe(gulp.dest('public'));
+gulp.task('minicss-public', function() {
+    if (!prod) {
+        return null;
+    }
+    gulp.src('./public/*.css')
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('logos',function(){
-    return gulp.src(['app/views/css/fold.css', 'public/images/*.svg'])
-                .pipe(rev())
-                .pipe(revcss())
-                .pipe(gulp.dest('./build/'));
+gulp.task('minify-html', function() {
+    if (!prod) {
+        return null;
+    }
+    var opts = {
+        empty: true,
+        conditionals: true,
+        spare: true,
+        quotes: true
+    };
+
+    gulp.src('./app/views/**/*.hbs')
+        .pipe(minifyHTML(opts))
+        .pipe(gulp.dest('./app/views/'))
 });
 
-gulp.task('rev', ['fold', 'style', 'logos']);
-
-gulp.task('default', ['svgmin', 'inline'], function() {});
+gulp.task('default', [
+    'minicss-fold',
+    'inline',
+    'svgmin',
+    'minicss-public',
+    'minify-html'
+], function() {});
