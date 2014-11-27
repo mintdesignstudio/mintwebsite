@@ -27,6 +27,7 @@
     "gulp-inline-source": "^1.0.0",
     "gulp-rev": "^2.0.1",
     "gulp-rev-css-url": "0.0.9",
+    "helmet": "^0.5.2",
     "logfmt": "^1.2.0",
     "morgan": "^1.4.0",
     "prismic.io": "^1.0.20",
