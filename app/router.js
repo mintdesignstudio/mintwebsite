@@ -6,6 +6,8 @@ var config          = require('../config');
 var app             = require('./app');
 var middleware      = require('./middleware');
 
+var threeMonths = 60 * 60 * 24 * 90;
+
 module.exports = function() {
     var router = express.Router();
 
@@ -16,7 +18,8 @@ module.exports = function() {
         .get('/works',          middleware.prismic, app.projects)
         .get('/work/:name',     middleware.prismic, app.project)
 
-        .use('/public',         express.static(config.public_dir));
+        .use('/public',         express.static(config.public_dir,
+                                    { maxAge: threeMonths }));
 
     if (config.development) {
         router.get('/app/views/:folder/:file', function(req, res, next) {
