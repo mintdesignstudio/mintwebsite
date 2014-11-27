@@ -4,20 +4,88 @@
 		"selected_items":
 		[
 			[
-				"li",
-				"link	Tag"
+				"ar",
+				"article"
+			],
+			[
+				"boo",
+				"bookmarks"
+			],
+			[
+				"book",
+				"bookmarks"
+			],
+			[
+				"bookmark",
+				"bookmark_ids"
+			],
+			[
+				"docu",
+				"documents"
+			],
+			[
+				"art",
+				"articles"
+			],
+			[
+				"employee",
+				"employees"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"backgroun",
+				"background-color"
+			],
+			[
+				"tr",
+				"translate"
 			],
 			[
 				"font",
 				"font-weight"
 			],
 			[
-				"st",
-				"style	Tag"
+				"back",
+				"background-color"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"bac",
+				"background-clip"
+			],
+			[
+				"size",
+				"font-size"
 			],
 			[
 				"con",
-				"contact"
+				"config"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"st",
+				"style	Tag"
 			],
 			[
 				"aw",
@@ -68,28 +136,8 @@
 				"text-decoration"
 			],
 			[
-				"boo",
-				"bookmarks"
-			],
-			[
-				"art",
-				"article"
-			],
-			[
-				"marg",
-				"margin-left"
-			],
-			[
-				"bac",
-				"background-color"
-			],
-			[
 				"max",
 				"max-height"
-			],
-			[
-				"te",
-				"text-align"
 			],
 			[
 				"rg",
@@ -142,10 +190,6 @@
 			[
 				"sugg",
 				"suggestions"
-			],
-			[
-				"margin",
-				"margin-right"
 			],
 			[
 				"land",
@@ -222,10 +266,6 @@
 			[
 				"el_",
 				"el_name"
-			],
-			[
-				"docu",
-				"document"
 			],
 			[
 				"scrol",
@@ -432,10 +472,6 @@
 				"btn_gotolist"
 			],
 			[
-				"backgroun",
-				"background-position"
-			],
-			[
 				"soci",
 				"socialh"
 			],
@@ -478,141 +514,16 @@
 			[
 				"fie",
 				"field_el"
-			],
-			[
-				"back",
-				"background-color"
-			],
-			[
-				"the",
-				"theCut"
-			],
-			[
-				"update",
-				"updatePlayer"
-			],
-			[
-				"onC",
-				"onCompanyUpdate"
-			],
-			[
-				"btn_label_",
-				"btn_label_troll"
-			],
-			[
-				"edit",
-				"edit_props"
-			],
-			[
-				"key",
-				"key_values"
-			],
-			[
-				"m",
-				"mask"
-			],
-			[
-				"tabl",
-				"table_rendering"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "app/views/home.hbs",
-			"settings":
-			{
-				"buffer_size": 1216,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/images/logo_white.svg",
-			"settings":
-			{
-				"buffer_size": 11715,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/partials/menu.hbs",
-			"settings":
-			{
-				"buffer_size": 261,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/projects.hbs",
-			"settings":
-			{
-				"buffer_size": 534,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/project.hbs",
-			"settings":
-			{
-				"buffer_size": 500,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/about.hbs",
-			"settings":
-			{
-				"buffer_size": 1579,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/layouts/main.hbs",
-			"settings":
-			{
-				"buffer_size": 1127,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "gulpfile.js",
 			"settings":
 			{
-				"buffer_size": 1263,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/fonts.css",
-			"settings":
-			{
-				"buffer_size": 100986,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/style.css",
-			"settings":
-			{
-				"buffer_size": 3262,
-				"line_ending": "Unix",
-				"name": "div.stretchy-wrapper {"
-			}
-		},
-		{
-			"file": "app/router.js",
-			"settings":
-			{
-				"buffer_size": 994,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/app.js",
-			"settings":
-			{
-				"buffer_size": 11371,
+				"buffer_size": 1898,
 				"line_ending": "Unix"
 			}
 		}
@@ -681,27 +592,52 @@
 	],
 	"file_history":
 	[
-		"/Users/mandarin/Downloads/machinations_source/nl/jorisdormans/phantomGraphics/PhantomFont.as",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/web.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/package.json",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/js/loadcss.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/test/fold.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/footer.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/home.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/menu.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/projects.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/project.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/about.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/style.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/app.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/common.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/fragments.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/projects.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/clean.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contact.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/layouts/main.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/css/fold.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/package.json",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile_dev",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/web.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/router.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/middleware.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/logs.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/css/reset.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/mintwebsite.sublime-project",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/README.md",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/query.js",
+		"/Users/mandarin/Clients/Mint/Documents/logo_outline.svg",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/contact.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/config.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/js/loadcss.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/mintwebsite.sublime-workspace",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/fonts.css",
+		"/Users/mandarin/Projects/Games/Entity System/entitysystem.github.com/server/router.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/gulpfile.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/images/logo_white.svg",
+		"/Users/mandarin/Downloads/machinations_source/nl/jorisdormans/phantomGraphics/PhantomFont.as",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/js/loadfont.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/out/main.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/reset.css",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/README.md",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/images/logo_white.svg",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/logo_white.svg",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/gulpfile.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8message.hbs",
 		"/Users/mandarin/Downloads/DINOT_14151285596412/DINOT-Regular.css",
 		"/Users/mandarin/Clients/Mint/Documents/Logo white.svg",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/footer.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/main.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/menu.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contact.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contactscripts.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/contact.hbs",
 		"/Users/mandarin/Tribute Games/MercenaryKings/log.txt",
 		"/Users/mandarin/Desktop/backburner.py",
 		"/Users/mandarin/Projects/Games/Entity System/entitysystem.github.com/gulpfile.js",
@@ -710,13 +646,7 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/game_main.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/.env",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/projects.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/logs.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile_dev",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/controller/company.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/layouts/main.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/config.js",
 		"/Users/mandarin/Projects/Mimura/app/.env",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgfooter.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgsidebar.hbs",
@@ -724,7 +654,6 @@
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8style.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/dev.js",
 		"/Users/mandarin/Projects/Mimura/app/server/app/index.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/mintwebsite.sublime-project",
 		"/Users/mandarin/Projects/Mimura/app/server/config.js",
 		"/Users/mandarin/Clients/DDB/McDonalds Premium Chicken/premiumchicken.github.com/views/partials/form.ejs",
 		"/Users/mandarin/Clients/DDB/McDonalds Premium Chicken/premiumchicken.github.com/public/js/main.js",
@@ -790,25 +719,7 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/editplayer.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/README.md",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/model/player.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/radiogroup.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/form/add_games.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/formgroup.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/feedback.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/score.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/admin_main.hbs",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/table.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/timer.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/cheat.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/Documents/Gaffel.pgn",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/server.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/build/game.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/resources/other/icon_play_correct_highlight.svg",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/model/company.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/validationmessage.jsx",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/common/cleaner.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/views.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/play/board.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/gulpfile.js"
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/radiogroup.jsx"
 	],
 	"find":
 	{
@@ -859,6 +770,64 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"compress",
+			"bookmarks",
+			"_result",
+			"_gallery",
+			"project",
+			"projects",
+			"clean",
+			"content",
+			"results",
+			"app",
+			"bookmark",
+			"bm",
+			"arr",
+			"rc",
+			"c",
+			"common",
+			"content",
+			"result",
+			"a",
+			"common",
+			"query",
+			"getCommon",
+			"projects",
+			"logger",
+			"link",
+			"email",
+			"a",
+			"getBookmarks",
+			"getCommon",
+			"getImage",
+			"getIm",
+			"getImage",
+			"getProjects",
+			"_result",
+			"_gallery",
+			"results",
+			"clean",
+			"valids",
+			"ul",
+			"img",
+			"common",
+			"getImage",
+			"employee",
+			"employees",
+			"ra",
+			"getCommon",
+			"content",
+			"content p",
+			"content",
+			"conte",
+			"work",
+			"dd",
+			"dt",
+			"dl",
+			"about",
+			"contac",
+			"app",
+			"trans",
 			"common.ab",
 			"sourceSansPro",
 			"menu",
@@ -928,65 +897,7 @@
 			"total_buffer",
 			"totalScoreBuffer",
 			"suggestions",
-			"div",
-			"li",
-			"content_sidebar",
-			"container",
-			"avledning",
-			"gaffel",
-			"checked",
-			".bind(",
-			"console.log",
-			"cheat",
-			"findAndUpdate",
-			"name",
-			"find",
-			"name",
-			"updateSingle",
-			"findAndUpdate",
-			"insertion",
-			"cannot transcode",
-			"findOrUpdate",
-			"findAndUpdate",
-			"findOrUpdate",
-			"findAndUpdate",
-			"prepareScore",
-			"Object.define",
-			"value",
-			"compare",
-			"createSlug",
-			"slug",
-			"source_file",
-			"source_dir",
-			"code",
-			"file",
-			"gulpRename",
-			"cheat",
-			"margin",
-			"css",
-			"pluginPage",
-			"mandarin_test_options_page",
-			"mandarin_test_settings_init",
-			"mandarin_test_settings_exist",
-			"mandarin_test_settings_init",
-			"loggedin",
-			"wp_plugin_template",
-			"WP_Plugin_Template",
-			"check_requi",
-			"setTimeout",
-			"onBlur",
-			"doc",
-			"buttons",
-			"company",
-			"Player",
-			"player",
-			"Player",
-			"'",
-			"endtime",
-			"starttime",
-			"score",
-			"won",
-			"_id"
+			"div"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1015,319 +926,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/views/home.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								83,
-								149
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/images/logo_white.svg",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11715,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11685,
-								11685
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 519.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/views/partials/menu.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 261,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								30,
-								30
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/views/projects.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 534,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								283,
-								283
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/views/project.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 500,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								250,
-								250
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/views/about.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1579,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1576,
-								1576
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/views/layouts/main.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1127,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								567,
-								567
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
 					"file": "gulpfile.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1263,
+						"buffer_size": 1898,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								301,
-								301
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "public/fonts.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 100986,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								100898,
-								100898
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "public/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3262,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3252,
-								3252
-							]
-						],
-						"settings":
-						{
-							"auto_name": "div.stretchy-wrapper {",
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2844.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/router.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 994,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								458,
-								458
+								1879,
+								1879
 							]
 						],
 						"settings":
@@ -1337,40 +953,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 219.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "app/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11371,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5919,
-								5919
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3285.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1427,6 +1013,62 @@
 		"selected_items":
 		[
 			[
+				"gu",
+				"gulpfile.js"
+			],
+			[
+				"a",
+				"app/web.js"
+			],
+			[
+				"midd",
+				"app/middleware.js"
+			],
+			[
+				"rou",
+				"app/router.js"
+			],
+			[
+				"app",
+				"app/app.js"
+			],
+			[
+				"con",
+				"app/views/contact.hbs"
+			],
+			[
+				"load",
+				"app/views/js/loadcss.js"
+			],
+			[
+				"foo",
+				"app/views/partials/footer.hbs"
+			],
+			[
+				"loadc",
+				"app/views/js/loadcss.js"
+			],
+			[
+				"fol",
+				"app/views/css/fold.css"
+			],
+			[
+				"pro",
+				"Procfile_dev"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
 				"men",
 				"app/views/partials/menu.hbs"
 			],
@@ -1435,20 +1077,12 @@
 				"app/web.js"
 			],
 			[
-				"pack",
-				"package.json"
-			],
-			[
 				"gulpf",
 				"gulpfile.js"
 			],
 			[
 				"ie8",
 				"app/views/partials/ie8message.hbs"
-			],
-			[
-				"gulp",
-				"gulpfile.js"
 			],
 			[
 				"rese",
@@ -1461,10 +1095,6 @@
 			[
 				"post",
 				"postinstall.js"
-			],
-			[
-				"foo",
-				"app/views/partials/footer.hbs"
 			],
 			[
 				"env",
@@ -1497,14 +1127,6 @@
 			[
 				"de",
 				"dev.js"
-			],
-			[
-				"con",
-				"config.js"
-			],
-			[
-				"read",
-				"README.md"
 			],
 			[
 				"en",
@@ -1871,10 +1493,6 @@
 				"app/server/client-config.json"
 			],
 			[
-				"rou",
-				"app/server/routes.js"
-			],
-			[
 				"gae",
 				"app/server/controller/game.js"
 			],
@@ -1905,38 +1523,6 @@
 			[
 				"highb",
 				"app/game/view/highscores.hbs"
-			],
-			[
-				"highhb",
-				"app/game/view/highscorerow.hbs"
-			],
-			[
-				"compsty",
-				"app/game/style/company.styl"
-			],
-			[
-				"plresty",
-				"app/game/style/playresult.styl"
-			],
-			[
-				"typo",
-				"app/game/style/typography.styl"
-			],
-			[
-				"adsty",
-				"app/admin/style.styl"
-			],
-			[
-				"sho",
-				"app/admin/shoulder.jsx"
-			],
-			[
-				"modus",
-				"app/server/model/user.js"
-			],
-			[
-				"adsig",
-				"app/server/views/admin_signup.hbs"
 			]
 		],
 		"width": 0.0
