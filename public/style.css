@@ -161,7 +161,6 @@ h2 {
 }
 
 .contact {
-    /* clear: both; */
     margin-top: 56px;
     float: left;
     width: 100%;
@@ -198,6 +197,8 @@ h2 {
 
 .clients {
     overflow: auto;
+    float: left;
+    clear: both;
 }
 
 .clients ul {
@@ -211,6 +212,8 @@ h2 {
     margin-left: 4%;
     margin-right: 4%;
     margin-bottom: 96px;
+    display: block;
+    position: relative;
 }
 
 .clients img {
@@ -222,6 +225,7 @@ h2 {
     text-align: center;
     display: block;
     margin-top: 24px;
+    position: absolute;
 }
 
 @media screen and (min-width: 960px) {
@@ -296,6 +300,12 @@ h2 {
         margin: auto;
     }
 
+    .clients li {
+        width: 21.33%;
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+
 }
 
 @media screen and (max-width: 400px) {
@@ -368,6 +378,13 @@ h2 {
         float: left;
         width: 100%;
     }
+
+    .clients li {
+        width: 34%;
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+
 }
 
 
@@ -378,4 +395,5 @@ h2 {
         margin-bottom: 16px;
         padding-left: 0px;
     }
+
 }
