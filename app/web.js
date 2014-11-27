@@ -4,6 +4,7 @@ var exphbs          = require('express-handlebars');
 var helpers         = require('view-helpers');
 var compress        = require('compression');
 var favicon         = require('serve-favicon');
+var helmet          = require('helmet');
 
 var router          = require('./router');
 var errors          = require('./errors');
@@ -47,6 +48,7 @@ module.exports = function() {
         }))
         .use(favicon(config.public_dir + '/favicon.ico'))
         .use(router())
+        .use(helmet())
         .use(errs.notFound)
         .use(errs.log)
         // .use(errs.json)
