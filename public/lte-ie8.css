@@ -1,0 +1,38 @@
+.ie8-message-bg {
+  display: show;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  z-index: 10000;
+}
+
+.ie8-message-content {
+  padding: 13px 17px;
+  width: 700px;
+  position: relative;
+  top: 20px;
+  left: 50%;
+  margin: 0 0 0 -350px;
+  cursor: default;
+  z-index: 10001;
+  font-size: 17px;
+  line-height: 23px;
+  font-family: Arial, sans-serif
+}
+
+.ie8-message-content h1{
+  border-bottom: #000 1px dotted;
+  font-size: 23px;
+  padding-bottom: 14px;
+}
+
+.ie8-message-content a, .ie8-message-content a:visited, .ie8-message-content a:hover, .ie8-message-content a:active{
+  color: #0078c8;
+}
