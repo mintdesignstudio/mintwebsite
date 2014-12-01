@@ -43,11 +43,11 @@ gulp.task('inline', function() {
         .pipe(gulp.dest('app/views/layouts'));
 });
 
-gulp.task('minicss-fold', function() {
+gulp.task('minicss-app', function() {
     if (!prod) {
         return null;
     }
-    gulp.src('./app/views/css/fold.css')
+    gulp.src('./app/views/css/*.css')
         .pipe(minifyCSS())
         .pipe(gulp.dest('./app/views/css/'));
 });
@@ -78,7 +78,7 @@ gulp.task('minify-html', function() {
 });
 
 gulp.task('default', [
-    'minicss-fold',
+    'minicss-app',
     'inline',
     'svgmin',
     'minicss-public',

@@ -1,5 +1,10 @@
 var Prismic         = require('prismic.io').Prismic;
+var Promise         = require('promise');
 var config          = require('../config');
+var common          = require('./modules/common');
+var app             = require('./app');
+
+var under_construction = false;
 
 // Router middleware that adds a Prismic context to the res object
 module.exports.prismic = function(req, res, next) {
@@ -26,4 +31,24 @@ module.exports.prismic = function(req, res, next) {
         next();
 
     }, config.accessToken);
+};
+
+module.exports.is_under_construction = function(value) {
+    under_construction = value;
+};
+
+module.exports.construction = function(req, res, next) {
+    if (!under_construction) {
+        return next();
+    }
+
+    var content = {};
+
+    common.get(res.locals.ctx, content)
+    .then(function(results) {
+        app.render(res, 'construction', 'construction', content);
+
+    }, function() {
+        res.send('Home error');
+    });
 };

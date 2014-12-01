@@ -22,7 +22,7 @@ module.exports.home = function(req, res, next) {
         if (projects.length > 0) {
             content.head.image = projects[0].image;
         }
-        render(res, 'home', content);
+        render(res, 'main', 'home', content);
 
         console.log(util.inspect(process.memoryUsage()));
 
@@ -37,7 +37,7 @@ module.exports.about = function(req, res, next) {
 
     common.get(res.locals.ctx, content)
     .then(function (common) {
-        render(res, 'about', content);
+        render(res, 'main', 'about', content);
         console.log(util.inspect(process.memoryUsage()));
     }, function() {
         res.send('Error');
@@ -49,7 +49,7 @@ module.exports.contact = function(req, res, next) {
 
     common.get(res.locals.ctx, content)
     .then(function (common) {
-        render(res, 'contact', content);
+        render(res, 'main', 'contact', content);
         console.log(util.inspect(process.memoryUsage()));
     }, function() {
         res.send('Error');
@@ -81,7 +81,7 @@ module.exports.project = function(req, res, next) {
             return res.redirect(301, '/works');
         }
 
-        render(res, 'project', content);
+        render(res, 'main', 'project', content);
         console.log(util.inspect(process.memoryUsage()));
 
         i = null;
@@ -101,7 +101,7 @@ module.exports.projects = function(req, res, next) {
         common.get(res.locals.ctx, content)
     ])
     .then(function (results) {
-        render(res, 'projects', content);
+        render(res, 'main', 'projects', content);
         console.log(util.inspect(process.memoryUsage()));
     }, function() {
         res.send('Error');
@@ -109,9 +109,9 @@ module.exports.projects = function(req, res, next) {
 
 };
 
-function render(res, template, content) {
+module.exports.render = function(res, layout, template, content) {
     var options = {
-        layout: 'main'
+        layout: layout
     };
 
     Object.keys(content).forEach(function(key) {
