@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"bac",
+				"background-color"
+			],
+			[
 				"ar",
 				"article"
 			],
@@ -66,10 +70,6 @@
 			[
 				"te",
 				"text-decoration"
-			],
-			[
-				"bac",
-				"background-clip"
 			],
 			[
 				"size",
@@ -523,7 +523,71 @@
 			"file": "gulpfile.js",
 			"settings":
 			{
-				"buffer_size": 1898,
+				"buffer_size": 2260,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/style.css",
+			"settings":
+			{
+				"buffer_size": 5767,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/css/fold.css",
+			"settings":
+			{
+				"buffer_size": 3807,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/about.hbs",
+			"settings":
+			{
+				"buffer_size": 3524,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/web.js",
+			"settings":
+			{
+				"buffer_size": 1641,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/router.js",
+			"settings":
+			{
+				"buffer_size": 1090,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 535,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/projects.hbs",
+			"settings":
+			{
+				"buffer_size": 614,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/layouts/main.hbs",
+			"settings":
+			{
+				"buffer_size": 1131,
 				"line_ending": "Unix"
 			}
 		}
@@ -592,32 +656,37 @@
 	],
 	"file_history":
 	[
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/test/fold.css",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/footer.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/css/fold.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/README.md",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/app.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/main.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/layouts/main.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/home.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/lte-ie8.css",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8message.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8style.hbs",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/web.js",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/.env",
+		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/test/fold.css",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/menu.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/projects.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/project.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/about.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/style.css",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/app.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/common.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/fragments.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/projects.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/clean.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contact.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/layouts/main.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/css/fold.css",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/package.json",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile_dev",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/web.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/router.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/middleware.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/logs.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/errors.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/css/reset.css",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/mintwebsite.sublime-project",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/README.md",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/modules/query.js",
 		"/Users/mandarin/Clients/Mint/Documents/logo_outline.svg",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/contact.hbs",
@@ -633,10 +702,8 @@
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/out/main.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/reset.css",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/logo_white.svg",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8message.hbs",
 		"/Users/mandarin/Downloads/DINOT_14151285596412/DINOT-Regular.css",
 		"/Users/mandarin/Clients/Mint/Documents/Logo white.svg",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/main.js",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/contactscripts.hbs",
 		"/Users/mandarin/Tribute Games/MercenaryKings/log.txt",
 		"/Users/mandarin/Desktop/backburner.py",
@@ -644,14 +711,12 @@
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/postinstall.js",
 		"/Users/mandarin/Projects/Games/Entity System/entitysystem.github.com/README.md",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/views/game_main.hbs",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/.env",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/Procfile",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/controller/company.js",
 		"/Users/mandarin/Projects/Mimura/app/.env",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgfooter.hbs",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/game/view/kpmgsidebar.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/public/picturefill.min.js",
-		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/app/views/partials/ie8style.hbs",
 		"/Users/mandarin/Clients/Mint/mintwebsite.github.com/dev.js",
 		"/Users/mandarin/Projects/Mimura/app/server/app/index.js",
 		"/Users/mandarin/Projects/Mimura/app/server/config.js",
@@ -718,8 +783,7 @@
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/form/edit_company.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/editplayer.jsx",
 		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/README.md",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/model/player.js",
-		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/admin/component/radiogroup.jsx"
+		"/Users/mandarin/Clients/Unfold/DNSjakk/dn-sjakk/app/server/model/player.js"
 	],
 	"find":
 	{
@@ -770,6 +834,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"prod",
+			"dev",
+			"threeMonts",
 			"compress",
 			"bookmarks",
 			"_result",
@@ -894,10 +961,7 @@
 			"matt2",
 			"remis",
 			"matt1",
-			"total_buffer",
-			"totalScoreBuffer",
-			"suggestions",
-			"div"
+			"total_buffer"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -926,7 +990,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -935,15 +999,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1898,
+						"buffer_size": 2260,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1879,
-								1879
+								489,
+								489
 							]
 						],
 						"settings":
@@ -953,10 +1017,248 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 219.0,
+						"translation.y": 504.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2361,
+								2361
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/css/fold.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3807,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1795,
+								1795
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1305.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/about.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3524,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2307,
+								2307
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 594.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/web.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1641,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1641,
+								1641
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 84.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/router.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1090,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								827,
+								827
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								535,
+								535
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/projects.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/views/layouts/main.hbs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1131,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1013,6 +1315,38 @@
 		"selected_items":
 		[
 			[
+				"fol",
+				"app/views/css/fold.css"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"rout",
+				"app/router.js"
+			],
+			[
+				"main",
+				"app/views/layouts/main.hbs"
+			],
+			[
+				"web",
+				"app/web.js"
+			],
+			[
+				"ie8",
+				"app/views/partials/ie8style.hbs"
+			],
+			[
+				"abou",
+				"app/views/about.hbs"
+			],
+			[
+				"styl",
+				"public/style.css"
+			],
+			[
 				"gu",
 				"gulpfile.js"
 			],
@@ -1049,10 +1383,6 @@
 				"app/views/js/loadcss.js"
 			],
 			[
-				"fol",
-				"app/views/css/fold.css"
-			],
-			[
 				"pro",
 				"Procfile_dev"
 			],
@@ -1065,10 +1395,6 @@
 				"gulpfile.js"
 			],
 			[
-				"read",
-				"README.md"
-			],
-			[
 				"men",
 				"app/views/partials/menu.hbs"
 			],
@@ -1079,10 +1405,6 @@
 			[
 				"gulpf",
 				"gulpfile.js"
-			],
-			[
-				"ie8",
-				"app/views/partials/ie8message.hbs"
 			],
 			[
 				"rese",
@@ -1115,14 +1437,6 @@
 			[
 				"err",
 				"app/errors.js"
-			],
-			[
-				"web",
-				"app/web.js"
-			],
-			[
-				"main",
-				"main.js"
 			],
 			[
 				"de",
@@ -1271,10 +1585,6 @@
 			[
 				"gamel",
 				"app/game/play/gameloader.js"
-			],
-			[
-				"rout",
-				"app/server/routes.js"
 			],
 			[
 				"soci",
@@ -1515,14 +1825,6 @@
 			[
 				"higst",
 				"app/game/style/highscores.styl"
-			],
-			[
-				"top",
-				"app/game/view/toplist.hbs"
-			],
-			[
-				"highb",
-				"app/game/view/highscores.hbs"
 			]
 		],
 		"width": 0.0
