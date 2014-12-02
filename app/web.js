@@ -5,6 +5,7 @@ var helpers         = require('view-helpers');
 var compress        = require('compression');
 var favicon         = require('serve-favicon');
 var helmet          = require('helmet');
+var cookieParser    = require('cookie-parser');
 
 var router          = require('./router');
 var errors          = require('./errors');
@@ -47,6 +48,9 @@ module.exports = function() {
             level: 9
         }))
         .use(favicon(config.public_dir + '/favicon.ico'))
+        .use(cookieParser({
+            secret: 'mintdesign123martheogchristian'
+        }))
         .use(router())
         .use(helmet())
         .use(errs.notFound)

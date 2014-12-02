@@ -21,4 +21,7 @@ CloudFront endpoint: [http://d1mlyxwjwohusp.cloudfront.net/](http://d1mlyxwjwohu
 CloudFront is setup to cache everything in the public directory for three months, and everything else for 14 days. Express serves all static content with a cache expiration set to three months.
 
 #Enable under construction page
-Change ```middleware.is_under_construction(true);``` to ```middleware.is_under_construction(false);``` in ```app/router.js```.
+Set the ```construction``` property to ```true``` in ```config.js```.
+
+#Bypass the under construction page
+Go to http://webadress.com/?bypass=true to set a cookie called ```in_dev```. This will let you bypass the under construction page for the next 2 hours.
