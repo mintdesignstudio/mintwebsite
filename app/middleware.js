@@ -35,6 +35,10 @@ module.exports.prismic = function(req, res, next) {
 
 module.exports.construction = function(req, res, next) {
 
+    if (!config.construction) {
+        next();
+    }
+
     // Check query param
     if (req.query.bypass === 'true') {
         res.cookie('in_dev', true, {
@@ -51,20 +55,15 @@ module.exports.construction = function(req, res, next) {
         return;
     }
 
-    if (config.construction) {
-        var content = {};
+    var content = {};
 
-        common.get(res.locals.ctx, content)
-        .then(function(results) {
-            app.render(res, 'construction', 'construction', content);
+    common.get(res.locals.ctx, content)
+    .then(function(results) {
+        app.render(res, 'construction', 'construction', content);
 
-        }, function() {
-            res.send('Home error');
-        });
+    }, function() {
+        res.send('Home error');
+    });
 
-        return;
-    }
-
-    // Failover
-    next();
+    return;
 };
