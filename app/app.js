@@ -7,7 +7,6 @@ var clean           = require('./modules/clean');
 var projects        = require('./modules/projects');
 var common          = require('./modules/common');
 
-// module.exports.home = function(req, res, next) {
 var app = {
     home: function(req, res, next) {
         var content = {
@@ -41,7 +40,7 @@ var app = {
             app.render(res, 'main', 'about', content);
             console.log(util.inspect(process.memoryUsage()));
         }, function() {
-            res.send('Error');
+            res.send('About error');
         });
     },
 
@@ -53,7 +52,7 @@ var app = {
             app.render(res, 'main', 'contact', content);
             console.log(util.inspect(process.memoryUsage()));
         }, function() {
-            res.send('Error');
+            res.send('Contact error');
         });
     },
 
@@ -89,7 +88,7 @@ var app = {
             l = null;
 
         }, function() {
-            res.send('Error');
+            res.send('Project error');
         });
 
     },
@@ -105,7 +104,7 @@ var app = {
             app.render(res, 'main', 'projects', content);
             console.log(util.inspect(process.memoryUsage()));
         }, function() {
-            res.send('Error');
+            res.send('Projects error');
         });
 
     },
