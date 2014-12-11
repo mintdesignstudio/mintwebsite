@@ -37,6 +37,7 @@ module.exports.construction = function(req, res, next) {
 
     if (!config.construction) {
         next();
+        return;
     }
 
     // Check query param
