@@ -50,7 +50,11 @@
                 {{#each common.about.awards}}
                     <li>
                         <span id="year">{{year}}</span>
-                        <b>{{title}}</b>
+                        {{#if related_article}}
+                            <a href="work/{{related_article}}"><b>{{title}}</b></a>
+                        {{else}}
+                            <b>{{title}}</b>
+                        {{/if}}
                         <span id="nomination">{{nomination}}</span>
                     </li>
                 {{/each}}

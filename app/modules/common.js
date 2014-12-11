@@ -1,7 +1,8 @@
 var Promise         = require('promise');
 var Prismic         = require('prismic.io').Prismic;
-var fragments       = require('./fragments');
+var utils           = require('./utils');
 var query           = require('./query');
+var values          = require('./values');
 
 module.exports.get = function get(ctx, content) {
     content = content || {};
@@ -11,88 +12,87 @@ module.exports.get = function get(ctx, content) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            var about = bookmarks.about;
-            if (about) {
-                common.about = {
-                    headline:       about.getText('about.headline'),
-                    companyname:    about.getText('about.companyname'),
-                    tagline:        about.getText('about.tagline'),
-                    content:        about
-                                        .getStructuredText('about.content')
-                                        .asHtml(),
-                    image:          fragments
-                                        .getImage(about.get('about.image'))
-                };
-
-                common.about.employees = fragments.iterateGroup({
-                    document:   about,
-                    path:       'about.employees'
-                }, function(employee, i) {
-
-                    return {
-                        image:      fragments.getImage(employee.image),
-                        fullname:   employee.fullname.value,
-                        about:      employee.about.asHtml(),
-                        telephone:  employee.telephone.value,
-                        email:      fragments.email(employee.email.value),
-                        i:          i
-                    };
-
-                });
-
-                common.about.clients = fragments.iterateGroup({
-                    document:   about,
-                    path:       'about.clients'
-                }, function(client, i) {
-
-                    return {
-                        image:      fragments.getImage(client.image),
-                        fullname:   client.fullname.value,
-                        i:          i
-                    };
-
-                });
-
-                common.about.awards = fragments.iterateGroup({
-                    document:   about,
-                    path:       'about.awards'
-                }, function(award, i) {
-
-                    var aw = {
-                        title:              award.title.value,
-                        nomination:         award.nomination.value,
-                        year:               award.year.value,
-                        link:               fragments.link(award.link.value)
-                    };
-
-                    if (award.related_article) {
-                        aw.related_article = award.related_article.document;
-                    }
-
-                    return aw;
-
-                });
-            }
-
-            var contact = bookmarks.contact;
-            if (contact) {
-                content.common.contact = {
-                    email:      fragments.email(contact.getText('contact.email')),
-                    telephone:  contact.getText('contact.telephone'),
-                    address:    contact.getText('contact.address'),
-                    location:   contact.getGeoPoint('contact.location')
-                };
-            }
+            aboutPage(bookmarks.about, common);
+            contactPage(bookmarks.contact, common);
 
             resolve(content.common);
 
-            contact = null;
-            about = null;
             common = null;
 
         }, function() {
             reject('Could not get common');
         });
+    });
+}
+
+function contactPage(contact, common) {
+    if (!contact) {
+        return;
+    }
+
+    common.contact = {
+        email:      utils.email(contact.getText('contact.email')),
+        telephone:  contact.getText('contact.telephone'),
+        address:    contact.getText('contact.address'),
+        location:   contact.getGeoPoint('contact.location')
+    };
+}
+
+function aboutPage(about, common) {
+    if (!about) {
+        return;
+    }
+
+    common.about = {
+        headline:       about.getText('about.headline'),
+        companyname:    about.getText('about.companyname'),
+        tagline:        about.getText('about.tagline'),
+        content:        about.getStructuredText('about.content').asHtml(),
+        image:          utils.getImage(about.get('about.image'))
+    };
+
+    common.about.employees = utils.iterateGroup({
+        document:   about,
+        path:       'about.employees'
+    }, function(employee, i) {
+
+        return values(employee)
+            .image('image')
+            .value('fullname')
+            .asHtml('about')
+            .value('telephone')
+            .email('email')
+            .set('i', i)
+            .toObject();
+
+    });
+
+    common.about.clients = utils.iterateGroup({
+        document:   about,
+        path:       'about.clients'
+    }, function(client, i) {
+
+        return values(client)
+            .image('image')
+            .value('fullname')
+            .set('i', i)
+            .toObject();
+
+    });
+
+    common.about.awards = utils.iterateGroup({
+        document:   about,
+        path:       'about.awards'
+    }, function(award, i) {
+
+        return values(award)
+            .value('title')
+            .value('nomination')
+            .value('year')
+            .link('link')
+            .related('related_article')
+            .toObject();
+
     });
 }
 
@@ -123,3 +123,4 @@ function getBookmarks(ctx) {
         });
     });
 }
+

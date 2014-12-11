@@ -11,7 +11,7 @@ module.exports.getImage = function getImage(img) {
 }
 
 module.exports.email = function email(value) {
-    return '<a href="mailto:'+value+'">'+value+'</a>';
+    return value ? '<a href="mailto:'+value+'">'+value+'</a>' : '';
 }
 
 module.exports.link = function link(value) {
