@@ -81,6 +81,8 @@ h2 {
 
 .gallery img {
     width: 100%;
+    position: relative;
+    float: left;
 }
 
 .employee {
