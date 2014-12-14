@@ -3,37 +3,49 @@ var Prismic         = require('prismic.io').Prismic;
 var utils           = require('./utils');
 var query           = require('./query');
 
-module.exports.get = function get(ctx, limit, sort, content) {
-    content = content || {};
-    content.projects = [];
-    limit = limit || undefined;
-    sort = sort ? '[my.project.'+sort+']' : undefined;
+var projects = {
+    get: function get(ctx, options, content) {
+        content = content || {};
+        content.projects = [];
 
-    return new Promise(function (resolve, reject) {
+        options = options || {};
+        if (!options.id) {
+            options.type = 'project';
+        }
+        options.limit = options.limit || undefined;
+        options.sort = options.sort ?
+                       '[my.project.'+options.sort+']' :
+                       undefined;
 
-        query(ctx, {
-            type:  'project',
-            limit: limit,
-            sort:  sort
-        })
+        return new Promise(function (resolve, reject) {
 
-        .then(function(projects) {
+            query(ctx, options)
+            .then(function(project_list) {
 
-            getProjects(projects.results, content.projects);
-            resolve(content.projects);
+                getProjects(project_list.results, content.projects);
+                resolve(content.projects);
 
-        }, function(reason) {
-            reject(reason);
+            }, function(reason) {
+                reject(reason);
+            });
+
         });
+    },
 
-    });
-}
+    link: function(project) {
+        return '/work/'+project.slug+'/'+project.id;
+    }
+};
+
+module.exports = projects;
 
 function getProjects(project_list, content) {
     project_list.forEach(function(project, i) {
 
         content.push({
             i:              i,
+            id:             project.id,
+            link:           projects.link(project),
             image:          utils.getImage(project.get('project.image')),
             name:           project.getText('project.name'),
             description:    project.getText('project.description'),
@@ -47,7 +59,6 @@ function getProjects(project_list, content) {
             }, function(item, i) {
                 return utils.getImage(item.image);
             })
-
         });
 
     });

@@ -14,7 +14,9 @@ var app = {
         };
 
         Promise.all([
-            projects.get(res.locals.ctx, 12, 'published desc', content),
+            projects.get(res.locals.ctx, {
+                limit: 12,
+                sort: 'published desc'}, content),
             common.get(res.locals.ctx, content)
         ])
         .then(function(results) {
@@ -57,38 +59,34 @@ var app = {
     },
 
     project: function(req, res, next) {
-        var name = clean(req.params.name);
+        var slug = clean(req.params.slug);
         var content = {};
 
         Promise.all([
-            projects.get(res.locals.ctx, undefined, 'published desc'),
+            projects.get(res.locals.ctx, {
+                sort:   'published desc',
+                id:     req.params.id
+            }, content),
             common.get(res.locals.ctx, content)
         ])
         .then(function (results) {
 
-            var i;
-            var l = results[0].length;
-            content.project = null;
-
-            for (i=0; i<l; i+=1) {
-                content.project = results[0][i];
-                if (content.project.slug == name) {
-                    break;
-                }
+            if (content.projects.length === 0) {
+                return res.redirect(301, '/works');
             }
 
-            if (content.project === null) {
-                return res.redirect(301, '/works');
+            content.project = content.projects[0];
+
+            if (content.project.slug != slug &&
+                content.project.slugs.indexOf(slug) >= 0) {
+                return res.redirect(301, projects.link(content.project));
             }
 
             app.render(res, 'main', 'project', content);
             console.log(util.inspect(process.memoryUsage()));
 
-            i = null;
-            l = null;
-
         }, function() {
-            res.send('Project error');
+            return res.redirect(301, '/works');
         });
 
     },
@@ -97,7 +95,7 @@ var app = {
         var content = {};
 
         Promise.all([
-            projects.get(res.locals.ctx, undefined, 'published desc', content),
+            projects.get(res.locals.ctx, {sort: 'published desc'}, content),
             common.get(res.locals.ctx, content)
         ])
         .then(function (results) {

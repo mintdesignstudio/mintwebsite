@@ -32,7 +32,7 @@ module.exports = function() {
              middleware.construction,
              app.projects)
 
-        .get('/work/:name',
+        .get('/work/:slug/:id',
              middleware.prismic,
              middleware.construction,
              app.project)
