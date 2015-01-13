@@ -116,7 +116,7 @@ a:hover {
 
 .logo {
     width: 100%;
-    background-image: url('/public/images/logo_white.svg');
+    background-image: url('/public/images/logo_symbol_white.svg');
     background-position: 50% 0px;
     background-size: auto 100%;
     background-repeat: no-repeat;
@@ -168,8 +168,8 @@ a:hover {
 .menu {
     width: 100%;
     overflow: auto;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     background-color: black;
     color: white;
     position: fixed;
@@ -180,7 +180,7 @@ a:hover {
 .menu ul {
     position: absolute;
     right: 12px;
-    margin-top: 2px;
+    margin-top: 6px;
 }
 
 .menu li {
@@ -207,13 +207,16 @@ a:hover {
     background-repeat: no-repeat;
 }
 
-.menu .symbol {
-    padding-left: 28px;
+.menu .logo {
+    background-image: url('/public/images/logo_white_name.svg');
+    background-position: 0px 0px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
     float: left;
     margin-left: 12px;
-    font-size: 20px;
+    height: 28px;
 }
 
-.menu a.symbol:hover {
+.menu a.logo:hover {
     text-decoration: none;
 }
