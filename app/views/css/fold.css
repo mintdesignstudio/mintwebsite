@@ -215,6 +215,7 @@ a:hover {
     float: left;
     margin-left: 12px;
     height: 28px;
+    width: 50%;
 }
 
 .menu a.logo:hover {
