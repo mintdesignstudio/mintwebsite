@@ -11,7 +11,7 @@ module.exports = {
     verbose:        bool(process.env.VERBOSE),
 
     public_dir:     path.join(__dirname, '/public'),
-    views_dir:      path.join(__dirname, '/views'),
+    prod_dir:       path.join(__dirname, '/production'),
     production:     process.env.NODE_ENV === 'production',
     development:    process.env.NODE_ENV === 'development',
 

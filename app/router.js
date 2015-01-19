@@ -10,6 +10,9 @@ var threeMonths = 60 * 60 * 24 * 90;
 
 module.exports = function() {
     var router = express.Router();
+    var pubdir = config.development ?
+                 config.public_dir :
+                 config.prod_dir + '/public';
 
     router
         .get('/',
@@ -37,15 +40,7 @@ module.exports = function() {
              middleware.construction,
              app.project)
 
-        .use('/public',
-             express.static(config.public_dir, { maxAge: threeMonths }));
-
-    // if (config.development) {
-    //     router.get('/app/views/:folder/:file', function(req, res, next) {
-    //         res.sendFile(path.resolve('./app/views/'+req.params.folder,
-    //                      req.params.file));
-    //     });
-    // }
+        .use('/public', express.static(pubdir, { maxAge: threeMonths }));
 
     return router;
 };
