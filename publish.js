@@ -76,8 +76,6 @@ function htmlmin(dir, ext) {
             return dir + file;
         });
 
-    console.log(files);
-
     files.forEach(function(file) {
         var content = fs.readFileSync(file, 'utf8');
         minimize.parse(content, function (error, data) {
