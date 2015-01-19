@@ -44,7 +44,7 @@ gulp.task('inline', function() {
 });
 
 gulp.task('minicss-app', function() {
-    console.log('Production: '+production);
+    console.log('Production: '+prod);
     if (!prod) {
         return null;
     }
