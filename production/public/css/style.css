@@ -1,0 +1,421 @@
+/* Other aspect ratios to try:
+ * 56.25% = 16:9
+ * 75% = 4:3
+ * 66.66% = 3:2
+ * 62.5% = 8:5
+ */
+
+.contactfooter {
+    -webkit-transform: translate3d(0, 0, 0);
+    text-align: center;
+    padding-top: 48px;
+    padding-bottom: 64px;
+    background: black;
+    color: white;
+}
+
+.contactfooter li {
+    list-style: none;
+    margin-bottom: 13px;
+}
+
+.contactfooter .logo, .contactfooter .symbol {
+    background-position: 50% 0px;
+    height: 80px;
+    margin-bottom: 32px;
+}
+
+.project {
+    float: left;
+    margin-top: 56px;
+}
+
+.content {
+    padding: 64px 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.content p {
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.content .body a {
+    font-weight: 400;
+}
+
+.content .body {
+    column-count: 2;
+    -webkit-column-count: 2;
+    column-gap: 48px;
+    -webkit-column-gap: 48px;
+    column-width: 260px;
+    -webkit-column-width: 260px;
+}
+
+.content .body p {
+    margin-bottom: 13px;
+    color: #aaa;
+    line-height: 1.6;
+    width: 100%;
+}
+
+h1 {
+    margin-bottom: 32px;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+h2 {
+    margin-bottom: 32px;
+    font-size: 28px;
+    font-weight: 300;
+    margin-top: 96px;
+    /* clear: both; */
+}
+
+.gallery {
+    line-height: 0;
+}
+
+.gallery img {
+    width: 100%;
+    position: relative;
+    float: left;
+}
+
+.employee {
+    width: 50%;
+    display: inline-block;
+    overflow: auto;
+    float: left;
+    margin-bottom: 96px;
+    margin-top: 32px;
+    box-sizing: border-box;
+    padding-left: 24px;
+}
+
+.employee.first {
+    padding-left: 0px;
+
+    padding-right: 24px;
+}
+
+.employee svg {
+    left: -20px;
+    position: relative;
+}
+
+.employee span {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+}
+
+.employee ul {
+    margin: 0px 0px 32px 0px;
+    padding: 0;
+}
+
+.employee li {
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+.awards {
+    clear: both;
+}
+
+.awards ul {
+    margin-top: 48px;
+}
+
+.awards li {
+    list-style: none;
+    clear: both;
+    overflow: auto;
+    padding-bottom: 12px;
+}
+
+.awards li b {
+    font-size: 22px;
+    float: left;
+    padding-bottom: 10px;
+    font-weight: 400;
+    width: 84%;
+}
+
+.awards li span#nomination {
+    float: left;
+    clear: left;
+    margin-left: 16%;
+    margin-bottom: 16px;
+    color: #aaa;
+}
+
+.awards li span#year {
+    float: left;
+    width: 16%;
+    padding-top: 2px;
+}
+
+.contact {
+    margin-top: 56px;
+    float: left;
+    width: 100%;
+}
+
+.contact #map {
+    height: 400px;
+}
+
+.contact span#medium {
+    margin-bottom: 12px;
+}
+
+.contact li {
+    width: 50%;
+    list-style: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.contact span {
+    display: block;
+}
+
+.work a {
+    -webkit-transform: translate3d(0, 0, 0);
+    display: block;
+    width: 100%;
+    clear: left;
+    text-align: center;
+    padding-top: 24px;
+    padding-bottom: 48px;
+}
+
+.clients {
+    overflow: auto;
+    float: left;
+    clear: both;
+}
+
+.clients ul {
+    width: 100%;
+}
+
+.clients li {
+    list-style: none;
+    width: 17%;
+    float: left;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 96px;
+    display: block;
+    position: relative;
+}
+
+.clients img {
+    width: 100%;
+}
+
+.clients span {
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin-top: 24px;
+    position: absolute;
+}
+
+@media screen and (min-width: 960px) {
+
+    .work .wrap {
+        width: 25%;
+    }
+
+    .work a div {
+        font-size: 24px;
+    }
+
+    .wrap.current {
+        width: 50%;
+    }
+
+    .content p {
+        line-height: 1.6;
+        margin-bottom: 6px;
+    }
+
+}
+
+@media screen and (max-width: 960px) {
+
+    .work .wrap {
+        width: 33.3334%;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+
+    .head span {
+        font-size: 16px;
+        margin-top: 3%;
+    }
+
+    .work a div {
+        font-size: 22px;
+    }
+
+    .content {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+
+    .work .wrap {
+        width: 50%;
+    }
+
+    .work a div {
+        font-size: 18px;
+    }
+
+    .menu .logo {
+        padding-left: 28px;
+        font-size: 20px;
+    }
+
+    .menu li a {
+        font-size: 16px;
+        width: 100%;
+        display: inline-block;
+    }
+
+    .head span {
+        white-space: normal;
+    }
+
+    .content {
+        margin: auto;
+    }
+
+    .clients li {
+        width: 21.33%;
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .work .wrap {
+        width: 100%;
+    }
+
+    .menu {
+        text-align: center;
+        overflow: auto;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        position: relative;
+    }
+
+    .menu li a {
+        font-size: 16px;
+        line-height: 32px;
+        width: 100%;
+        display: inline-block;
+    }
+
+    .menu li {
+        float: none;
+        text-align: center;
+        margin-left: auto;
+    }
+
+    .menu ul {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        -webkit-transform: translate(-50%, 0);
+        -moz-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        -o-transform: translate(-50%, 0);
+        margin-top: 24px;
+    }
+
+    .menu .logo {
+        padding-left: 0px;
+        font-size: 18px;
+        float: none;
+        background-position: 50% 0px;
+        margin-left: 0px;
+    }
+
+    .head {
+        margin-top: auto;
+        display: none;
+    }
+
+    .head span {
+        white-space: normal;
+    }
+
+    .work {
+        margin-top: auto;
+    }
+
+    .work h2 {
+        margin-top: 12px;
+        margin-bottom: 12px;
+        display: none;
+    }
+
+    .work .wrap a {
+        opacity: 1;
+        background-color: black;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .about {
+        margin-top: auto;
+    }
+
+    .awards {
+        margin-top: 32px;
+        float: left;
+        width: 100%;
+    }
+
+    .clients li {
+        width: 34%;
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+
+}
+
+
+@media screen and (max-width: 550px) {
+
+    .employee {
+        width: 100%;
+        margin-bottom: 16px;
+        padding-left: 0px;
+    }
+
+    .head span {
+        white-space: normal;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+}

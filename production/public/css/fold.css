@@ -1,0 +1,223 @@
+body {
+    font-family: DIN OT, 'Helvetica', 'Arial', sans-serif;
+    font-weight: 300;
+    color: white;
+    background-color: #000;
+}
+
+a {
+    color: #6ae0cb;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #6ae0cb;
+    text-decoration: underline;
+}
+
+.work {
+    margin-top: 56px;
+}
+
+.work, .contactfooter {
+    overflow: auto;
+    float: left;
+    width: 100%;
+}
+
+.work .wrap, .head {
+    display: inline-block;
+    position: relative;
+    float: left;
+    overflow: hidden;
+}
+
+.about {
+    width: 100%;
+    float: left;
+    margin-top: 56px;
+    overflow: auto;
+}
+
+.head {
+    width: 100%;
+    max-height: 500px;
+    color: white;
+    margin-top: 56px;
+}
+
+.head .content > div {
+    z-index: 1;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    left: 50%;
+    top: 40%;
+    text-align: center;
+    height: 50%;
+    width: 100%;
+}
+
+.head .content {
+    background-color: black;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.work .thumb, .head .content {
+    padding-bottom: 56.25%;
+}
+
+.work .wrap a {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    text-decoration: none;
+    color: white;
+    opacity: 0;
+    text-align: left;
+    padding: 0;
+}
+
+.work .wrap a:hover {
+    opacity: 1;
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.head span {
+    display: block;
+    margin-top: 2%;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
+.work a div {
+    bottom: 12px;
+    left: 12px;
+    position: absolute;
+}
+
+.work a div span {
+    display: block;
+    font-size: 11px;
+    margin-top: 6px;
+}
+
+.head .latest {
+    opacity: 0.4;
+}
+
+.logo {
+    width: 100%;
+    background-image: url('/public/images/logo_symbol_white.svg');
+    background-position: 50% 0px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    height: 95%;
+    display: inline-block;
+}
+
+.work img, .head .latest {
+    position: absolute;
+    width: 101%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.about .coverphoto {
+    max-height: 400px;
+    overflow: hidden;
+    padding-bottom: 30%;
+    position: relative;
+}
+
+.about .coverphoto img {
+    width: 100%;
+    left: 50%;
+     top: 50%;
+    transform: translate(-50%, -50%);
+     -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    z-index: 0;
+    position: absolute;
+}
+
+.work h2 {
+    -webkit-transform: translate3d(0, 0, 0);
+    text-align: center;
+    margin: 48px auto;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.menu {
+    width: 100%;
+    overflow: auto;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.menu ul {
+    position: absolute;
+    right: 12px;
+    margin-top: 6px;
+}
+
+.menu li {
+    float: left;
+    list-style: none;
+    margin-left: 24px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.menu a:hover {
+    color: #BEE3DA;
+    text-decoration: none;
+}
+
+.symbol {
+    background-image: url('/public/images/logo_symbol_white.svg');
+    background-position: 0px 0px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.menu .logo {
+    background-image: url('/public/images/logo_white_name.svg');
+    background-position: 0px 0px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    float: left;
+    margin-left: 12px;
+    height: 28px;
+    width: 50%;
+}
+
+.menu a.logo:hover {
+    text-decoration: none;
+}

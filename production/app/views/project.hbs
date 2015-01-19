@@ -1,0 +1,23 @@
+{{> menu}}
+
+<div class="project">
+    <div class="content">
+        <h1>{{project.name}}</h1>
+        <div class="body">
+            {{{project.body}}}
+        </div>
+    </div>
+</div>
+
+<div class="gallery">
+{{#each project.gallery}}
+    <picture>
+        <source srcset="{{main}}" media="(min-width: 960px)">
+        <source srcset="{{large}}" media="(min-width: 700px) and (max-width: 960px)">
+        <source srcset="{{medium}}" media="(min-width: 400px) and (max-width: 700px)">
+        <img srcset="{{small}}" alt="{{alt}}">
+    </picture>
+{{/each}}
+</div>
+
+{{> footer}}
