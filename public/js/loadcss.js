@@ -1,7 +1,7 @@
 var cb = function() {
     var l = document.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/public/style.css';
+    l.href = '/public/css/style.css';
     var h = document.getElementsByTagName('head')[0];
     h.appendChild(l);
 };

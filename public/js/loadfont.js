@@ -11,7 +11,7 @@
             addFont();
         } else {
             var request = new XMLHttpRequest();
-            request.open('GET', '/public/fonts.css', true);
+            request.open('GET', '/public/css/fonts.css', true);
 
             request.onload = function() {
                 if (request.status >= 200 && request.status < 400) {
