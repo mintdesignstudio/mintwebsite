@@ -44,6 +44,7 @@ gulp.task('inline', function() {
 });
 
 gulp.task('minicss-app', function() {
+    console.log('Production: '+production);
     if (!prod) {
         return null;
     }
@@ -77,6 +78,7 @@ gulp.task('minify-html', function() {
         .pipe(gulp.dest('./app/views/'))
 });
 
+// First, minify the CSS. Then inline it. Then, the rest.
 gulp.task('default', [
     'minicss-app',
     'inline',
