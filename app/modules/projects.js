@@ -61,5 +61,6 @@ function getProjects(project_list, content) {
             })
         });
 
+        console.log(content[content.length-1].gallery);
     });
 }
