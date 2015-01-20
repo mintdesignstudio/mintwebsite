@@ -35,6 +35,8 @@ module.exports.prismic = function(req, res, next) {
 
 module.exports.construction = function(req, res, next) {
 
+    console.log('construction', config.construction);
+
     if (!config.construction) {
         next();
         return;

@@ -31,6 +31,11 @@ var viewdir = config.development ?
               __dirname + '/views':
               __dirname + '/../production/app/views';
 
+console.log('pubdir: '+pubdir);
+console.log('layoutdir: '+layoutdir);
+console.log('partialdir: '+partialdir);
+console.log('viewdir: '+viewdir);
+
 var hbs = exphbs.create({
     extname:        hbs_ext,
     defaultLayout:  'main',
