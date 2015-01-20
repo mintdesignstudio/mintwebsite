@@ -9,6 +9,9 @@ var common          = require('./modules/common');
 
 var app = {
     home: function(req, res, next) {
+
+        console.log('home', res.locals.ctx);
+
         var content = {
             head: {}
         };

@@ -32,6 +32,9 @@ module.exports.prismic = function(req, res, next) {
             }
         };
         res.locals.ctx = ctx;
+
+        console.log('res.locals.ctx', res.locals.ctx);
+
         next();
 
     }, config.accessToken);
