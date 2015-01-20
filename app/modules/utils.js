@@ -42,11 +42,11 @@ module.exports.iterateGroup = function iterateGroup(options, cb) {
     }
 
     var group = options.document.getGroup(options.path);
-    if (group) {
-        return group.value.map(function(item, i) {
-            return cb(item, i);
-        });
-    }
+    var docs = group ? group.toArray() : [];
+    return docs.map(function(item, i) {
+        return cb(item, i);
+    });
     group = null;
+    docs = null;
     return [];
 }

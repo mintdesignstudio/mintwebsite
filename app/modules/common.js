@@ -2,7 +2,7 @@ var Promise         = require('promise');
 var Prismic         = require('prismic.io').Prismic;
 var utils           = require('./utils');
 var query           = require('./query');
-var values          = require('./values');
+var projects        = require('./projects');
 
 module.exports.get = function get(ctx, content) {
     content = content || {};
@@ -56,14 +56,14 @@ function aboutPage(about, common) {
         path:       'about.employees'
     }, function(employee, i) {
 
-        return values(employee)
-            .image('image')
-            .value('fullname')
-            .asHtml('about')
-            .value('telephone')
-            .email('email')
-            .set('i', i)
-            .toObject();
+        return {
+            image:      utils.getImage(employee.getImage('image')),
+            fullname:   employee.getText('fullname'),
+            about:      employee.getStructuredText('about').asHtml(),
+            telephone:  employee.getText('telephone'),
+            email:      employee.getText('email'),
+            i:          i
+        };
 
     });
 
@@ -72,11 +72,11 @@ function aboutPage(about, common) {
         path:       'about.clients'
     }, function(client, i) {
 
-        return values(client)
-            .image('image')
-            .value('fullname')
-            .set('i', i)
-            .toObject();
+        return {
+            image:      utils.getImage(client.getImage('image')),
+            fullname:   client.getText('fullname'),
+            i:          i
+        };
 
     });
 
@@ -85,13 +85,13 @@ function aboutPage(about, common) {
         path:       'about.awards'
     }, function(award, i) {
 
-        return values(award)
-            .value('title')
-            .value('nomination')
-            .value('year')
-            .link('link')
-            .related('related_article')
-            .toObject();
+        return {
+            title:              award.getText('title'),
+            nomination:         award.getText('nomination'),
+            year:               award.getNumber('year'),
+            link:               utils.link(award.getText('link')),
+            related_article:    projects.link(award.getLink('related_article'))
+        };
 
     });
 }

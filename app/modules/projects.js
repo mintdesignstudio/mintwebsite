@@ -33,7 +33,10 @@ var projects = {
     },
 
     link: function(project) {
-        return '/work/'+project.slug+'/'+project.id;
+        if (project) {
+            return '/work/'+project.slug+'/'+project.id;
+        }
+        return null;
     }
 };
 
@@ -56,12 +59,9 @@ function getProjects(project_list, content) {
             gallery:        utils.iterateGroup({
                 document:   project,
                 path:       'project.gallery'
-            }, function(item, i) {
-                console.log(item);
-                return utils.getImage(item.image);
+            }, function(doc, i) {
+                return utils.getImage(doc.getImage('image'));
             })
         });
-
-        console.log(content[content.length-1].gallery);
     });
 }
