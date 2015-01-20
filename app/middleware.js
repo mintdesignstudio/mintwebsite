@@ -8,10 +8,14 @@ var threeHours = 60 * 60 * 3 * 1000;
 
 // Router middleware that adds a Prismic context to the res object
 module.exports.prismic = function(req, res, next) {
+    console.log('prismic middleware');
     Prismic.Api(config.apiEndpoint, function(err, Api) {
         if (err) {
+            console.log('prismic middleware ERROR');
             return res.send(500, 'Error 500: ' + err.message);
         }
+
+        console.log('prismic middleware OK');
 
         var ref = req.query['ref'] || Api.master();
         var ctx = {
@@ -42,6 +46,8 @@ module.exports.construction = function(req, res, next) {
         return;
     }
 
+    console.log('bypass', req.query.bypass);
+
     // Check query param
     if (req.query.bypass === 'true') {
         res.cookie('in_dev', true, {
@@ -51,6 +57,8 @@ module.exports.construction = function(req, res, next) {
         next();
         return;
     }
+
+    console.log('in_dev cookie', req.cookies.in_dev);
 
     // Bypass due to cookie
     if (req.cookies.in_dev === 'true') {
@@ -62,6 +70,7 @@ module.exports.construction = function(req, res, next) {
 
     common.get(res.locals.ctx, content)
     .then(function(results) {
+        console.log('got content', content);
         app.render(res, 'construction', 'construction', content);
 
     }, function() {
