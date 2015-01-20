@@ -1,3 +1,5 @@
+var fs              = require('fs');
+
 var path            = require('path');
 var express         = require('express');
 var exphbs          = require('express-handlebars');
@@ -31,10 +33,14 @@ var viewdir = config.development ?
               __dirname + '/views':
               __dirname + '/../production/app/views';
 
-console.log('pubdir: '+pubdir);
-console.log('layoutdir: '+layoutdir);
-console.log('partialdir: '+partialdir);
-console.log('viewdir: '+viewdir);
+function exists(dir) {
+    return ' ('+fs.existsSync(dir)+')';
+}
+
+console.log('pubdir: '+pubdir+exists(pubdir));
+console.log('layoutdir: '+layoutdir+exists(layoutdir));
+console.log('partialdir: '+partialdir+exists(partialdir));
+console.log('viewdir: '+viewdir+exists(viewdir));
 
 var hbs = exphbs.create({
     extname:        hbs_ext,
