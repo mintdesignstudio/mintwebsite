@@ -57,6 +57,7 @@ function getProjects(project_list, content) {
                 document:   project,
                 path:       'project.gallery'
             }, function(item, i) {
+                console.log(item);
                 return utils.getImage(item.image);
             })
         });
