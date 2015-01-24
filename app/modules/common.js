@@ -6,19 +6,16 @@ var projects        = require('./projects');
 
 module.exports.get = function get(ctx, content) {
     content = content || {};
-    var common = content.common = {};
+    content.common = {};
 
     return new Promise(function (resolve, reject) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            // aboutPage(bookmarks.about, common);
-            // contactPage(bookmarks.contact, common);
+            // aboutPage(bookmarks.about, content.common);
+            contactPage(bookmarks.contact, content.common);
 
-            // resolve(content.common);
-            resolve(bookmarks);
-
-            // common = null;
+            resolve(content.common);
 
         }, function() {
             reject('Could not get common');
@@ -115,8 +112,6 @@ function getBookmarks(ctx) {
         lookup[bookmarks[name]] = name;
     });
 
-    // console.log(lookup);
-
     return new Promise(function (resolve, reject) {
         query(ctx, {
             id: Object.keys(bookmarks).map(function(name) {
@@ -124,18 +119,9 @@ function getBookmarks(ctx) {
             })
         })
         .then(function(articles) {
-
-            // console.log(articles.results);
-
             var documents = {};
             articles.results.forEach(function(article) {
                 documents[lookup[article.id]] = article;
-
-                if (lookup[article.id] === 'about') {
-                    console.log(article.getGroup('about.employees'));
-                }
-                // console.log('-------------- article');
-                // console.log(article);
             });
             resolve(documents);
 
