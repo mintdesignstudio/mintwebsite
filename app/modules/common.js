@@ -104,6 +104,8 @@ function getBookmarks(ctx) {
         lookup[bookmarks[name]] = name;
     });
 
+    console.log(lookup);
+
     return new Promise(function (resolve, reject) {
         query(ctx, {
             id: Object.keys(bookmarks).map(function(name) {
@@ -111,6 +113,9 @@ function getBookmarks(ctx) {
             })
         })
         .then(function(articles) {
+
+            console.log(articles);
+
             var documents = {};
             articles.results.forEach(function(article) {
                 documents[lookup[article.id]] = article;

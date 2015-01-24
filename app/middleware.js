@@ -81,5 +81,5 @@ module.exports.construction = function(req, res, next) {
         res.send('Home error');
     });
 
-    return;
+    // return;
 };
