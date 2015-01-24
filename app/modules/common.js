@@ -65,33 +65,33 @@ function aboutPage(about, common) {
 
     });
 
-    // common.about.clients = utils.iterateGroup({
-    //     document:   about,
-    //     path:       'about.clients'
-    // }, function(client, i) {
+    common.about.clients = utils.iterateGroup({
+        document:   about,
+        path:       'about.clients'
+    }, function(client, i) {
 
-    //     return {
-    //         image:      utils.getImage(client.getImage('image')),
-    //         fullname:   client.getText('fullname'),
-    //         i:          i
-    //     };
+        return {
+            image:      utils.getImage(client.getImage('image')),
+            fullname:   client.getText('fullname'),
+            i:          i
+        };
 
-    // });
+    });
 
-    // common.about.awards = utils.iterateGroup({
-    //     document:   about,
-    //     path:       'about.awards'
-    // }, function(award, i) {
+    common.about.awards = utils.iterateGroup({
+        document:   about,
+        path:       'about.awards'
+    }, function(award, i) {
 
-    //     return {
-    //         title:              award.getText('title'),
-    //         nomination:         award.getText('nomination'),
-    //         year:               award.getNumber('year'),
-    //         link:               utils.link(award.getText('link')),
-    //         related_article:    projects.link(award.getLink('related_article'))
-    //     };
+        return {
+            title:              award.getText('title'),
+            nomination:         award.getText('nomination'),
+            year:               award.getNumber('year'),
+            link:               utils.link(award.getText('link')),
+            related_article:    projects.link(award.getLink('related_article'))
+        };
 
-    // });
+    });
 }
 
 function getBookmarks(ctx) {
