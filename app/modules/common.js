@@ -51,17 +51,21 @@ function aboutPage(about, common) {
         image:          utils.getImage(about.get('about.image'))
     };
 
-    common.about.employees = utils.iterateGroup({
-        document:   about,
-        path:       'about.employees'
-    }, function(employee, i) {
+    var emps = about.getGroup('about.employees');
+    var docs = emps ? emps.toArray() : [];
+    for (var i = 0; i < docs.length; i++) {
+        console.log(docs[i]);
+    }
+    // common.about.employees = utils.iterateGroup({
+    //     document:   about,
+    //     path:       'about.employees'
+    // }, function(employee, i) {
 
-        console.log(employee);
         // console.log(employee.getImage('employees.image'));
         // console.log(utils.getImage(employee.getImage('image')));
         // console.log(utils.getImage(employee.getImage('employees.image')));
 
-        return {};
+        // return {};
         // return {
         //     image:      utils.getImage(employee.getImage('image')),
         //     fullname:   employee.getText('fullname'),
@@ -71,7 +75,7 @@ function aboutPage(about, common) {
         //     i:          i
         // };
 
-    });
+    // });
 
     // common.about.clients = utils.iterateGroup({
     //     document:   about,
