@@ -119,6 +119,8 @@ function getBookmarks(ctx) {
             var documents = {};
             articles.results.forEach(function(article) {
                 documents[lookup[article.id]] = article;
+                console.log('-------------- article');
+                console.log(article);
             });
             resolve(documents);
 
