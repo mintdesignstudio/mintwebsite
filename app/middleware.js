@@ -60,26 +60,26 @@ module.exports.construction = function(req, res, next) {
 
     var content = {};
 
-    console.log(res.locals.ctx.api.data.bookmarks);
+    // console.log(res.locals.ctx.api.data.bookmarks);
 
-    res.locals.ctx.api.form('everything')
-        .ref(res.locals.ctx.ref)
-        .query(Prismic.Predicates.at('document.type', 'project'))
-        .pageSize(100)
-        .submit(function(err, response) {
-            if (err) {
-                res.send('Common error '+err);
-            }
-            res.send(response);
-        });
+    // res.locals.ctx.api.form('everything')
+    //     .ref(res.locals.ctx.ref)
+    //     .query(Prismic.Predicates.at('document.type', 'project'))
+    //     .pageSize(100)
+    //     .submit(function(err, response) {
+    //         if (err) {
+    //             res.send('Common error '+err);
+    //         }
+    //         res.send(response);
+    //     });
 
-    // common.get(res.locals.ctx, content)
-    // .then(function(results) {
-    //     app.render(res, 'construction', 'construction', content);
+    common.get(res.locals.ctx, content)
+    .then(function(results) {
+        app.render(res, 'construction', 'construction', content);
 
-    // }, function() {
-    //     res.send('Home error');
-    // });
+    }, function() {
+        res.send('Home error');
+    });
 
     return;
 };
