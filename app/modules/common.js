@@ -56,7 +56,8 @@ function aboutPage(about, common) {
         path:       'about.employees'
     }, function(employee, i) {
 
-        console.log(employee);
+        console.log(utils.getImage(employee.getImage('image')));
+        console.log(utils.getImage(employee.getImage('employees.image')));
 
         return {};
         // return {
