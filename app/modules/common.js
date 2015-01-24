@@ -12,8 +12,8 @@ module.exports.get = function get(ctx, content) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            aboutPage(bookmarks.about, common);
-            contactPage(bookmarks.contact, common);
+            // aboutPage(bookmarks.about, common);
+            // contactPage(bookmarks.contact, common);
 
             resolve(content.common);
 
