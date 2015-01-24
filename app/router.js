@@ -17,7 +17,7 @@ module.exports = function() {
     router
         .get('/',
              middleware.prismic,
-             // middleware.construction,
+             middleware.construction,
              app.home)
 
         .get('/about',
