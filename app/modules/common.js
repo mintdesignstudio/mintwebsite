@@ -50,29 +50,25 @@ function aboutPage(about, common) {
         content:        about.getStructuredText('about.content').asHtml(),
         image:          utils.getImage(about.get('about.image'))
     };
-    // common.about = {
-    //     headline:       about.getText('about.headline'),
-    //     companyname:    about.getText('about.companyname'),
-    //     tagline:        about.getStructuredText('about.tagline').asHtml(),
-    //     content:        about.getStructuredText('about.content').asHtml(),
-    //     image:          utils.getImage(about.get('about.image'))
-    // };
 
-    // common.about.employees = utils.iterateGroup({
-    //     document:   about,
-    //     path:       'about.employees'
-    // }, function(employee, i) {
+    common.about.employees = utils.iterateGroup({
+        document:   about,
+        path:       'about.employees'
+    }, function(employee, i) {
 
-    //     return {
-    //         image:      utils.getImage(employee.getImage('image')),
-    //         fullname:   employee.getText('fullname'),
-    //         about:      employee.getStructuredText('about').asHtml(),
-    //         telephone:  employee.getText('telephone'),
-    //         email:      employee.getText('email'),
-    //         i:          i
-    //     };
+        console.log(employee);
 
-    // });
+        return {};
+        // return {
+        //     image:      utils.getImage(employee.getImage('image')),
+        //     fullname:   employee.getText('fullname'),
+        //     about:      employee.getStructuredText('about').asHtml(),
+        //     telephone:  employee.getText('telephone'),
+        //     email:      employee.getText('email'),
+        //     i:          i
+        // };
+
+    });
 
     // common.about.clients = utils.iterateGroup({
     //     document:   about,
