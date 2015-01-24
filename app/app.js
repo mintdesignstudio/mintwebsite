@@ -10,31 +10,32 @@ var common          = require('./modules/common');
 var app = {
     home: function(req, res, next) {
 
-        console.log('home', res.locals.ctx);
+        res.send('Home');
+        // console.log('home', res.locals.ctx);
 
-        var content = {
-            head: {}
-        };
+        // var content = {
+        //     head: {}
+        // };
 
-        Promise.all([
-            projects.get(res.locals.ctx, {
-                limit: 12,
-                sort: 'published desc'}, content),
-            common.get(res.locals.ctx, content)
-        ])
-        .then(function(results) {
+        // Promise.all([
+        //     projects.get(res.locals.ctx, {
+        //         limit: 12,
+        //         sort: 'published desc'}, content),
+        //     common.get(res.locals.ctx, content)
+        // ])
+        // .then(function(results) {
 
-            var projects = results[0];
-            if (projects.length > 0) {
-                content.head.image = projects[0].image;
-            }
-            app.render(res, 'main', 'home', content);
+        //     var projects = results[0];
+        //     if (projects.length > 0) {
+        //         content.head.image = projects[0].image;
+        //     }
+        //     app.render(res, 'main', 'home', content);
 
-            console.log(util.inspect(process.memoryUsage()));
+        //     console.log(util.inspect(process.memoryUsage()));
 
-        }, function() {
-            res.send('Home error');
-        });
+        // }, function() {
+        //     res.send('Home error');
+        // });
     },
 
     about: function(req, res, next) {
