@@ -12,6 +12,7 @@ module.exports.get = function get(ctx, content) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
+            console.log('about.headline: ', bookmarks.about.getText('about.headline'));
             // aboutPage(bookmarks.about, common);
             // contactPage(bookmarks.contact, common);
 
