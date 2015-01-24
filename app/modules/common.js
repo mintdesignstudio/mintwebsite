@@ -49,6 +49,7 @@ function aboutPage(about, common) {
         image:          utils.getImage(about.get('about.image'))
     };
 
+    common.about.employees = about.getGroup('about.employees');
     var emps = about.getGroup('about.employees');
     var docs = emps ? emps.toArray() : [];
     for (var i = 0; i < docs.length; i++) {
