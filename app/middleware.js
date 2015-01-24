@@ -8,14 +8,11 @@ var threeHours = 60 * 60 * 3 * 1000;
 
 // Router middleware that adds a Prismic context to the res object
 module.exports.prismic = function(req, res, next) {
-    console.log('prismic middleware');
     Prismic.Api(config.apiEndpoint, function(err, Api) {
         if (err) {
             console.log('prismic middleware ERROR');
             return res.send(500, 'Error 500: ' + err.message);
         }
-
-        console.log('prismic middleware OK');
 
         var ref = req.query['ref'] || Api.master();
         var ctx = {
@@ -31,10 +28,8 @@ module.exports.prismic = function(req, res, next) {
                 }
             }
         };
+
         res.locals.ctx = ctx;
-
-        console.log('res.locals.ctx', res.locals.ctx);
-
         next();
 
     }, config.accessToken);
@@ -42,14 +37,10 @@ module.exports.prismic = function(req, res, next) {
 
 module.exports.construction = function(req, res, next) {
 
-    console.log('construction', config.construction);
-
     if (!config.construction) {
         next();
         return;
     }
-
-    console.log('bypass', req.query.bypass);
 
     // Check query param
     if (req.query.bypass === 'true') {
@@ -61,8 +52,6 @@ module.exports.construction = function(req, res, next) {
         return;
     }
 
-    console.log('in_dev cookie', req.cookies.in_dev);
-
     // Bypass due to cookie
     if (req.cookies.in_dev === 'true') {
         next();
@@ -71,14 +60,26 @@ module.exports.construction = function(req, res, next) {
 
     var content = {};
 
-    common.get(res.locals.ctx, content)
-    .then(function(results) {
-        console.log('got content', content);
-        app.render(res, 'construction', 'construction', content);
+    console.log(ctx.api.data.bookmarks);
 
-    }, function() {
-        res.send('Home error');
-    });
+    res.locals.ctx.api.form('everything')
+        .ref(res.locals.ctx.ref)
+        .query(Prismic.Predicates.at('document.type', 'project'))
+        .pageSize(100)
+        .submit(function(err, response) {
+            if (err) {
+                res.send('Common error '+err);
+            }
+            res.send(response);
+        });
+
+    // common.get(res.locals.ctx, content)
+    // .then(function(results) {
+    //     app.render(res, 'construction', 'construction', content);
+
+    // }, function() {
+    //     res.send('Home error');
+    // });
 
     return;
 };
