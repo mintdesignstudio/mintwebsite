@@ -46,54 +46,61 @@ function aboutPage(about, common) {
     common.about = {
         headline:       about.getText('about.headline'),
         companyname:    about.getText('about.companyname'),
-        tagline:        about.getStructuredText('about.tagline').asHtml(),
-        content:        about.getStructuredText('about.content').asHtml(),
-        image:          utils.getImage(about.get('about.image'))
+        tagline:        '',
+        content:        '',
+        image:          ''
     };
+    // common.about = {
+    //     headline:       about.getText('about.headline'),
+    //     companyname:    about.getText('about.companyname'),
+    //     tagline:        about.getStructuredText('about.tagline').asHtml(),
+    //     content:        about.getStructuredText('about.content').asHtml(),
+    //     image:          utils.getImage(about.get('about.image'))
+    // };
 
-    common.about.employees = utils.iterateGroup({
-        document:   about,
-        path:       'about.employees'
-    }, function(employee, i) {
+    // common.about.employees = utils.iterateGroup({
+    //     document:   about,
+    //     path:       'about.employees'
+    // }, function(employee, i) {
 
-        return {
-            image:      utils.getImage(employee.getImage('image')),
-            fullname:   employee.getText('fullname'),
-            about:      employee.getStructuredText('about').asHtml(),
-            telephone:  employee.getText('telephone'),
-            email:      employee.getText('email'),
-            i:          i
-        };
+    //     return {
+    //         image:      utils.getImage(employee.getImage('image')),
+    //         fullname:   employee.getText('fullname'),
+    //         about:      employee.getStructuredText('about').asHtml(),
+    //         telephone:  employee.getText('telephone'),
+    //         email:      employee.getText('email'),
+    //         i:          i
+    //     };
 
-    });
+    // });
 
-    common.about.clients = utils.iterateGroup({
-        document:   about,
-        path:       'about.clients'
-    }, function(client, i) {
+    // common.about.clients = utils.iterateGroup({
+    //     document:   about,
+    //     path:       'about.clients'
+    // }, function(client, i) {
 
-        return {
-            image:      utils.getImage(client.getImage('image')),
-            fullname:   client.getText('fullname'),
-            i:          i
-        };
+    //     return {
+    //         image:      utils.getImage(client.getImage('image')),
+    //         fullname:   client.getText('fullname'),
+    //         i:          i
+    //     };
 
-    });
+    // });
 
-    common.about.awards = utils.iterateGroup({
-        document:   about,
-        path:       'about.awards'
-    }, function(award, i) {
+    // common.about.awards = utils.iterateGroup({
+    //     document:   about,
+    //     path:       'about.awards'
+    // }, function(award, i) {
 
-        return {
-            title:              award.getText('title'),
-            nomination:         award.getText('nomination'),
-            year:               award.getNumber('year'),
-            link:               utils.link(award.getText('link')),
-            related_article:    projects.link(award.getLink('related_article'))
-        };
+    //     return {
+    //         title:              award.getText('title'),
+    //         nomination:         award.getText('nomination'),
+    //         year:               award.getNumber('year'),
+    //         link:               utils.link(award.getText('link')),
+    //         related_article:    projects.link(award.getLink('related_article'))
+    //     };
 
-    });
+    // });
 }
 
 function getBookmarks(ctx) {
