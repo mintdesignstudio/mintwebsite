@@ -114,7 +114,7 @@ function getBookmarks(ctx) {
         })
         .then(function(articles) {
 
-            console.log(articles);
+            console.log(articles.results);
 
             var documents = {};
             articles.results.forEach(function(article) {
