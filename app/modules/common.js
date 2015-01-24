@@ -12,13 +12,12 @@ module.exports.get = function get(ctx, content) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            console.log('about.headline: ', bookmarks.about.getText('about.headline'));
-            // aboutPage(bookmarks.about, common);
+            aboutPage(bookmarks.about, common);
             // contactPage(bookmarks.contact, common);
 
             resolve(content.common);
 
-            common = null;
+            // common = null;
 
         }, function() {
             reject('Could not get common');
