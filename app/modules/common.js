@@ -12,7 +12,7 @@ module.exports.get = function get(ctx, content) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            // aboutPage(bookmarks.about, content.common);
+            aboutPage(bookmarks.about, content.common);
             contactPage(bookmarks.contact, content.common);
 
             resolve(content.common);
