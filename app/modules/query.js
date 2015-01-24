@@ -30,9 +30,6 @@ module.exports = function query(ctx, params) {
             predicate = Prismic.Predicates.at('document.id', params.id);
         }
         if (params.id instanceof Array) {
-
-            console.log('>>>> Get several documents');
-
             predicate = Prismic.Predicates.any('document.id', params.id);
         }
     }

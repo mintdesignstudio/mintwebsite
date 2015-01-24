@@ -46,8 +46,8 @@ function aboutPage(about, common) {
     common.about = {
         headline:       about.getText('about.headline'),
         companyname:    about.getText('about.companyname'),
-        tagline:        '',
-        content:        '',
+        tagline:        about.getStructuredText('about.tagline').asHtml(),
+        content:        about.getStructuredText('about.content').asHtml(),
         image:          ''
     };
     // common.about = {
@@ -111,7 +111,7 @@ function getBookmarks(ctx) {
         lookup[bookmarks[name]] = name;
     });
 
-    console.log(lookup);
+    // console.log(lookup);
 
     return new Promise(function (resolve, reject) {
         query(ctx, {
@@ -121,13 +121,13 @@ function getBookmarks(ctx) {
         })
         .then(function(articles) {
 
-            console.log(articles.results);
+            // console.log(articles.results);
 
             var documents = {};
             articles.results.forEach(function(article) {
                 documents[lookup[article.id]] = article;
-                console.log('-------------- article');
-                console.log(article);
+                // console.log('-------------- article');
+                // console.log(article);
             });
             resolve(documents);
 
