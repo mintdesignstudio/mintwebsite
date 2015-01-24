@@ -12,10 +12,11 @@ module.exports.get = function get(ctx, content) {
         getBookmarks(ctx)
         .then(function(bookmarks) {
 
-            aboutPage(bookmarks.about, common);
+            // aboutPage(bookmarks.about, common);
             // contactPage(bookmarks.contact, common);
 
-            resolve(content.common);
+            // resolve(content.common);
+            resolve(bookmarks);
 
             // common = null;
 
@@ -54,7 +55,7 @@ function aboutPage(about, common) {
     var emps = about.getGroup('about.employees');
     var docs = emps ? emps.toArray() : [];
     for (var i = 0; i < docs.length; i++) {
-        console.log(docs[i]);
+        // console.log(docs[i]);
     }
     // common.about.employees = utils.iterateGroup({
     //     document:   about,

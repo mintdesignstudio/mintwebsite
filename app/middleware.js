@@ -75,7 +75,8 @@ module.exports.construction = function(req, res, next) {
 
     common.get(res.locals.ctx, content)
     .then(function(results) {
-        app.render(res, 'construction', 'construction', content);
+        res.send(results);
+        // app.render(res, 'construction', 'construction', content);
 
     }, function() {
         res.send('Home error');
