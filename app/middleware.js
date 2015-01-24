@@ -60,7 +60,7 @@ module.exports.construction = function(req, res, next) {
 
     var content = {};
 
-    console.log(ctx.api.data.bookmarks);
+    console.log(res.locals.ctx.api.data.bookmarks);
 
     res.locals.ctx.api.form('everything')
         .ref(res.locals.ctx.ref)
