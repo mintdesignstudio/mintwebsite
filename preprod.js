@@ -48,8 +48,11 @@ htmlmin(dir.prodappview, '.hbs');
 // -----------------------------------------------------------------------------
 
 function uglify(dir) {
+    console.log('Uglify JS');
+
     var files = listFiles(dir, '.js')
         .map(function(file) {
+            console.log('    '+dir+file);
             return dir + file;
         });
 
@@ -57,9 +60,13 @@ function uglify(dir) {
         var content = UglifyJS.minify(file);
         fs.writeFileSync(file, content.code);
     });
+
+    console.log('');
 }
 
 function htmlmin(dir, ext) {
+    console.log('HTMLMin');
+
     minimize = new Minimize({
         empty: true,        // KEEP empty attributes
         cdata: true,        // KEEP CDATA from scripts
@@ -73,6 +80,7 @@ function htmlmin(dir, ext) {
 
     var files = listFiles(dir, ext)
         .map(function(file) {
+            console.log('    '+dir+file);
             return dir + file;
         });
 
@@ -82,9 +90,13 @@ function htmlmin(dir, ext) {
             fs.writeFileSync(file, data);
         });
     });
+
+    console.log('');
 }
 
 function imagemin(dir, ext, minifier) {
+    console.log('Imagemin '+dir+'*'+ext);
+
     var imagemin = new Imagemin()
         .src(dir + '*' + ext)
         .dest(dir)
@@ -95,11 +107,16 @@ function imagemin(dir, ext, minifier) {
             throw err;
         }
     });
+
+    console.log('');
 }
 
 function inline(dir, ext) {
+    console.log('Inline');
+
     var files = listFiles(dir, ext)
         .map(function(file) {
+            console.log('    '+dir+file);
             return dir + file;
         });
 
@@ -110,11 +127,15 @@ function inline(dir, ext) {
             rootpath: path.resolve('production/')
         });
     });
+
+    console.log('');
 }
 
 function minifyCss(dir) {
+    console.log('Minify CSS');
     var css_files = listFiles(dir, '.css')
         .map(function(file) {
+            console.log('    '+dir+file);
             return dir + file;
         });
 
@@ -123,6 +144,7 @@ function minifyCss(dir) {
         var minified = morecss.compress(source, true);
         fs.writeFileSync(file, minified);
     });
+    console.log('');
 }
 
 function listFiles(dir, ext) {
