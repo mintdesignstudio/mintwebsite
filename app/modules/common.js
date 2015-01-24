@@ -129,6 +129,10 @@ function getBookmarks(ctx) {
             var documents = {};
             articles.results.forEach(function(article) {
                 documents[lookup[article.id]] = article;
+
+                if (lookup[article.id] === 'about') {
+                    console.log(article.getGroup('about.employees'));
+                }
                 // console.log('-------------- article');
                 // console.log(article);
             });
