@@ -14,6 +14,12 @@ Add necessary credentials for authenticating with Prismic in ```.env``` file. **
 npm run dev
 ```
 
+#Prepare for deployment
+```
+npm run preprod
+```
+Runs ./preprod.js which minifies JavaScript, CSS and HTML, and inlines JS and CSS in the HTML. Images are also compressed.
+
 #Caching
 CloudFront is setup to cache everything in the public directory for three months, and everything else for 24 hours. Express serves all static content with a cache expiration set to three months.
 
