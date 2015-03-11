@@ -16,7 +16,7 @@ module.exports = {
     development:    process.env.NODE_ENV === 'development',
 
     // Set website in Under Construction mode
-    construction:   true,
+    construction:   false,
 };
 
 function bool(str) {
