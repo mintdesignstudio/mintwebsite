@@ -1,11 +1,11 @@
-var fs          = require('fs');
-var path        = require('path');
-var wrench      = require('wrench');
-var morecss     = require('more-css');
-var inline      = require('inline-source');
-var Imagemin    = require('imagemin');
-var Minimize    = require('minimize');
-var UglifyJS    = require("uglify-js");
+var fs              = require('fs');
+var path            = require('path');
+var wrench          = require('wrench');
+var morecss         = require('more-css');
+var inlineSource    = require('inline-source');
+var Imagemin        = require('imagemin');
+var Minimize        = require('minimize');
+var UglifyJS        = require("uglify-js");
 
 var svgo = Imagemin.svgo([
     {removeViewBox: true},
@@ -121,11 +121,12 @@ function inline(dir, ext) {
         });
 
     files.forEach(function(file) {
-        var html = inline(file, {
+        var html = inlineSource(file, {
             compress: false,
             swallowErrors: false,
             rootpath: path.resolve('production/')
         });
+        fs.writeFileSync(file, html);
     });
 
     console.log('');
