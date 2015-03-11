@@ -72,7 +72,6 @@ h2 {
     font-size: 28px;
     font-weight: 300;
     margin-top: 96px;
-    /* clear: both; */
 }
 
 .gallery {
@@ -240,6 +239,7 @@ h2 {
 
     .work .wrap {
         width: 25%;
+        height: 56.25%;
     }
 
     .work a div {
@@ -247,7 +247,7 @@ h2 {
     }
 
     .wrap.current {
-        width: 50%;
+         width: 50%;
     }
 
     .content p {
