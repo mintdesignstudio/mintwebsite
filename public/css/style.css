@@ -177,14 +177,20 @@ h2 {
 }
 
 .contact li {
-    width: 50%;
+    width: 33%;
     list-style: none;
     display: inline-block;
     text-align: center;
+    vertical-align: top;
 }
 
 .contact span {
     display: block;
+}
+
+.contact .content span p {
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
 .work a {
@@ -312,6 +318,14 @@ h2 {
         margin-right: 6%;
     }
 
+    .contact li {
+        width: 100%;
+        margin-bottom: 42px;
+    }
+
+    .contact .content li:last-child {
+        margin-bottom: 0px;
+    }
 }
 
 @media screen and (max-width: 400px) {

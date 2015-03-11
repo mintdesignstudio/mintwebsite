@@ -31,7 +31,7 @@ function contactPage(contact, common) {
     common.contact = {
         email:      utils.email(contact.getText('contact.email')),
         telephone:  contact.getText('contact.telephone'),
-        address:    contact.getText('contact.address'),
+        address:    contact.getStructuredText('contact.address').asHtml(),
         location:   contact.getGeoPoint('contact.location')
     };
 }
