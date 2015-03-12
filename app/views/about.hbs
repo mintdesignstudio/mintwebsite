@@ -69,9 +69,6 @@
                 {{#each common.about.clients}}
                     <li>
                         <picture>
-                            <source srcset="{{image.main}}" media="(min-width: 960px)">
-                            <source srcset="{{image.large}}" media="(min-width: 700px) and (max-width: 960px)">
-                            <source srcset="{{image.medium}}" media="(min-width: 400px) and (max-width: 700px)">
                             <img srcset="{{image.small}}" alt="{{image.alt}}">
                         </picture>
                         <span>{{fullname}}</span>
