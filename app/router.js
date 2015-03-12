@@ -10,6 +10,8 @@ var threeMonths = 60 * 60 * 24 * 90;
 
 module.exports = function() {
     var router = express.Router();
+
+    // TODO: Move to config
     var pubdir = config.development ?
                  config.public_dir :
                  config.prod_dir + '/public';

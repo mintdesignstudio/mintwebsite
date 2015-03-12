@@ -67,8 +67,8 @@ module.exports = function() {
         .use(cookieParser({
             secret: 'mintdesign123martheogchristian'
         }))
-        .use(router())
         .use(helmet())
+        .use(router())
         .use(errs.notFound)
         .use(errs.log)
         // .use(errs.json)
