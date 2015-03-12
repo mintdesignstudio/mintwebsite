@@ -395,8 +395,7 @@ h2 {
 
     .work .wrap a {
         opacity: 1;
-        background-color: black;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.3);
     }
 
     .about {
@@ -415,6 +414,9 @@ h2 {
         margin-right: 8%;
     }
 
+    .project {
+        margin-top: 0px;
+    }
 }
 
 
