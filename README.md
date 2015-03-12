@@ -21,7 +21,9 @@ npm run preprod
 Runs ./preprod.js which minifies JavaScript, CSS and HTML, and inlines JS and CSS in the HTML. Images are also compressed.
 
 #Caching
-CloudFront is setup to cache everything in the public directory for three months, and everything else for 24 hours. Express serves all static content with a cache expiration set to three months.
+CloudFront is setup to cache everything in the public directory for three months, and everything else for 24 hours. Express serves all static content with a cache expiration set to three months. The cache settings in Express is probably not necessary due to the cache settings in CloudFront.
+
+CloudFront accepts requests from www.domain.com The domain host forwards requests to domain.com to www.domain.com, without cloaking.
 
 #Enable under construction page
 Set the ```construction``` property to ```true``` in ```config.js```, commit and push the changes.
