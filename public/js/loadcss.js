@@ -5,12 +5,12 @@ var cb = function() {
     var h = document.getElementsByTagName('head')[0];
     h.appendChild(l);
 };
-var raf = window.requestAnimationFrame ||
-          window.mozRequestAnimationFrame ||
-          window.webkitRequestAnimationFrame ||
-          window.msRequestAnimationFrame;
-if (raf) {
-    raf(cb);
-} else {
+// var raf = window.requestAnimationFrame ||
+//           window.mozRequestAnimationFrame ||
+//           window.webkitRequestAnimationFrame ||
+//           window.msRequestAnimationFrame;
+// if (raf) {
+//     raf(cb);
+// } else {
     window.addEventListener('DOMContentLoaded', cb);
-}
+// }
