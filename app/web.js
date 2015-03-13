@@ -3,7 +3,6 @@ var fs              = require('fs');
 var path            = require('path');
 var express         = require('express');
 var exphbs          = require('express-handlebars');
-var helpers         = require('view-helpers');
 var compress        = require('compression');
 var favicon         = require('serve-favicon');
 var helmet          = require('helmet');
@@ -12,6 +11,7 @@ var cookieParser    = require('cookie-parser');
 var router          = require('./router');
 var errors          = require('./errors');
 var logs            = require('./logs');
+var hbHelpers       = require('./helpers/handlebars');
 var config          = require('../config');
 
 var web;
@@ -36,7 +36,7 @@ var viewdir = config.development ?
 var hbs = exphbs.create({
     extname:        hbs_ext,
     defaultLayout:  'main',
-    helpers:        helpers,
+    helpers:        hbHelpers,
     layoutsDir:     layoutdir,
     partialsDir:    partialdir
 });

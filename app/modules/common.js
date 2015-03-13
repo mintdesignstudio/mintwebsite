@@ -44,6 +44,7 @@ function aboutPage(about, common) {
     common.about = {
         headline:       about.getText('about.headline'),
         companyname:    about.getText('about.companyname'),
+        tagline_text:   about.getStructuredText('about.tagline').asText(),
         tagline:        about.getStructuredText('about.tagline').asHtml(),
         content:        about.getStructuredText('about.content').asHtml(),
         image:          utils.getImage(about.get('about.image'))

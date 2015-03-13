@@ -7,8 +7,15 @@
 
     <meta property="og:url" content="http://mintdesign.no" />
     <meta property="og:title" content="{{common.about.companyname}}" />
-    <meta property="og:description" content="{{common.about.tagline}}" />
-    <meta property="og:image" content="http://mintdesign.no/public/images/share.jpg" />
+    <meta property="og:description" content="{{common.about.tagline_text}}" />
+
+{{#if projects}}
+    {{#first projects}}
+        <meta property="og:image" content="{{image.main}}" />
+    {{/first}}
+{{else}}
+    <meta property="og:image" content="{{common.about.image.main}}" />
+{{/if}}
 
     <title>{{common.about.companyname}}</title>
 
