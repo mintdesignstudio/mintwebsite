@@ -8,5 +8,12 @@
         "layout":       "/app/views/layouts",
         "partials":     "/app/views/partials",
         "views":        "/app/views"
+    },
+    "routes": {
+        "home":       "/",
+        "works":      "/works",
+        "work":       "/work/:slug/:id",
+        "about":      "/about",
+        "contact":    "/contact"
     }
 }

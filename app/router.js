@@ -11,32 +11,15 @@ var threeMonths = 60 * 60 * 24 * 90;
 module.exports = function() {
     var router = express.Router();
 
+    // Setup routes using config.json
+    Object.keys(config.routes).forEach(function(page_name) {
+        router.get(config.routes[page_name],
+                   middleware.prismic,
+                   middleware.construction,
+                   app[page_name]);
+    });
+
     router
-        .get('/',
-             middleware.prismic,
-             middleware.construction,
-             app.home)
-
-        .get('/about',
-             middleware.prismic,
-             middleware.construction,
-             app.about)
-
-        .get('/contact',
-             middleware.prismic,
-             middleware.construction,
-             app.contact)
-
-        .get('/works',
-             middleware.prismic,
-             middleware.construction,
-             app.projects)
-
-        .get('/work/:slug/:id',
-             middleware.prismic,
-             middleware.construction,
-             app.project)
-
         .use('/public', express.static(config.dir('public'), {
             maxAge: threeMonths
         }));

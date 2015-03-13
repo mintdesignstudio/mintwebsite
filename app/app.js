@@ -59,7 +59,7 @@ var app = {
         });
     },
 
-    project: function(req, res, next) {
+    work: function(req, res, next) {
         var slug = clean(req.params.slug);
         var content = utils.defaultContent('work');
 
@@ -92,7 +92,7 @@ var app = {
 
     },
 
-    projects: function(req, res, next) {
+    works: function(req, res, next) {
         var content = utils.defaultContent('works');
 
         Promise.all([

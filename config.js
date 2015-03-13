@@ -11,21 +11,12 @@ module.exports = {
     port:           int(process.env.PORT),
     verbose:        bool(process.env.VERBOSE),
 
-    public_dir:     path.join(__dirname, '/public'),
-    prod_dir:       path.join(__dirname, '/production'),
     production:     process.env.NODE_ENV === 'production',
     development:    process.env.NODE_ENV === 'development',
 
     // Set website in Under Construction mode
     construction:   config.construction,
-
-    routes: {
-        home:       '/',
-        works:      '/works',
-        work:       '/work/:slug/:id',
-        about:      '/about',
-        contact:    '/contact',
-    }
+    routes:         config.routes
 }
 
 module.exports.dir = function(directory) {
