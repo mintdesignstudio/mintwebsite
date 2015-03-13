@@ -11,14 +11,6 @@ module.exports.getImage = function getImage(img) {
     };
 }
 
-module.exports.email = function email(value) {
-    return value ? '<a href="mailto:'+value+'">'+value+'</a>' : '';
-}
-
-module.exports.link = function link(value) {
-    return value ? '<a href="'+value+'">'+value+'</a>' : '';
-}
-
 module.exports.iterateGroup = function iterateGroup(options, cb) {
     options = options || undefined;
 
