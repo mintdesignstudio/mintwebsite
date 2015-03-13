@@ -11,6 +11,7 @@ nodemon({
     watch: [
         'app/**/*.*',
         'config.js',
+        'config.json',
         'main.js',
         'package.json'
     ],

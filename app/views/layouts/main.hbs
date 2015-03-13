@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <meta property="og:url" content="http://www.mintdesign.no" />
-    <meta property="og:title" content="{{common.about.companyname}}" />
-    <meta property="og:description" content="{{common.about.tagline_text}}" />
 
-{{#if projects}}
-    {{#first projects}}
-        <meta property="og:image" content="{{image.main}}" />
-    {{/first}}
-{{else}}
-    <meta property="og:image" content="{{common.about.image.main}}" />
-{{/if}}
+    <meta property="og:title" content="{{common.about.companyname}} : {{#capitalize}}{{page.name}}{{/capitalize}} {{#isWork page.name}}: {{project.name}}{{/isWork}}" />
 
-    <title>{{common.about.companyname}}</title>
+    {{#isWork page.name}}
+        <meta property="og:url" content="{{project.link}}" />
+        <meta property="og:description" content="{{project.og_description}}" />
+        <meta property="og:image" content="{{project.image.main}}" />
+    {{else}}
+        <meta property="og:url" content="{{page.url}}" />
+        <meta property="og:description" content="{{common.about.tagline_text}}" />
+        <meta property="og:image" content="{{common.about.image.main}}" />
+    {{/isWork}}
 
-    <script type="text/javascript" src="/public/js/resizer.js" inline></script>
+    <title>{{common.about.companyname}} : {{#capitalize}}{{page.name}}{{/capitalize}} {{#isWork page.name}}: {{project.name}}{{/isWork}}</title>
 
     <link rel="stylesheet" type="text/css" href="/public/css/reset.css" inline>
     <link rel="stylesheet" type="text/css" href="/public/css/fold.css" inline>
@@ -27,6 +26,8 @@
     <link rel="apple-touch-icon" href="/public/images/apple-touch-icon.png">
     <link rel="apple-touch-icon-precomposed" href="/public/images/apple-touch-icon-precomposed.png">
 
+    <!-- merge the scripts! -->
+    <script type="text/javascript" src="/public/js/resizer.js" inline></script>
     <script type="text/javascript" src="/public/js/loadfont.js" inline></script>
     <script type="text/javascript" src="/public/js/loadcss.js" inline></script>
 

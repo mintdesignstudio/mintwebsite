@@ -1,0 +1,12 @@
+{
+    "construction":     false,
+    "url": {
+        "base":         "http://www.mintdesign.no"
+    },
+    "dir": {
+        "public":       "/public",
+        "layout":       "/app/views/layouts",
+        "partials":     "/app/views/partials",
+        "views":        "/app/views"
+    }
+}

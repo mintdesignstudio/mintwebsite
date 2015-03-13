@@ -18,27 +18,12 @@ var web;
 var errs;
 var hbs_ext = '.hbs';
 
-// TODO: This needs to be cleaned up. Move to config
-
-var pubdir = config.development ?
-             __dirname + '/../public':
-             __dirname + '/../production/public';
-var layoutdir = config.development ?
-                __dirname + '/views/layouts':
-                __dirname + '/../production/app/views/layouts';
-var partialdir = config.development ?
-                 __dirname + '/views/partials':
-                 __dirname + '/../production/app/views/partials';
-var viewdir = config.development ?
-              __dirname + '/views':
-              __dirname + '/../production/app/views';
-
 var hbs = exphbs.create({
     extname:        hbs_ext,
     defaultLayout:  'main',
     helpers:        hbHelpers,
-    layoutsDir:     layoutdir,
-    partialsDir:    partialdir
+    layoutsDir:     config.dir('layout'),
+    partialsDir:    config.dir('partials')
 });
 
 module.exports = function() {
@@ -52,7 +37,7 @@ module.exports = function() {
 
     web.engine(hbs_ext,     hbs.engine);
     web.set('view engine',  hbs_ext);
-    web.set('views',        viewdir);
+    web.set('views',        config.dir('views'));
     web.set('view cache',   config.production);
 
     web
@@ -63,7 +48,7 @@ module.exports = function() {
             },
             level: 9
         }))
-        .use(favicon(pubdir + '/favicon.ico'))
+        .use(favicon(config.dir('public') + '/favicon.ico'))
         .use(cookieParser({
             secret: 'mintdesign123martheogchristian'
         }))

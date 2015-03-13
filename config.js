@@ -1,4 +1,5 @@
-var path = require('path');
+var path    = require('path');
+var config  = require('./config.json');
 
 module.exports = {
 
@@ -16,8 +17,28 @@ module.exports = {
     development:    process.env.NODE_ENV === 'development',
 
     // Set website in Under Construction mode
-    construction:   false,
-};
+    construction:   config.construction,
+
+    routes: {
+        home:       '/',
+        works:      '/works',
+        work:       '/work/:slug/:id',
+        about:      '/about',
+        contact:    '/contact',
+    }
+}
+
+module.exports.dir = function(directory) {
+    return __dirname +
+           (this.production ? '/production' : '') +
+           config.dir[directory];
+}
+
+module.exports.url = function(type) {
+    return this.production ?
+           config.url[type] :
+           'http://localhost:'+this.port;
+}
 
 function bool(str) {
     if (str == void 0) return false;

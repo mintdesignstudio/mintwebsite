@@ -1,4 +1,5 @@
 var Prismic         = require('prismic.io').Prismic;
+var config          = require('../../config');
 
 module.exports.getImage = function getImage(img) {
     return {
@@ -49,4 +50,13 @@ module.exports.iterateGroup = function iterateGroup(options, cb) {
     group = null;
     docs = null;
     return [];
+}
+
+module.exports.defaultContent = function(page_name) {
+    return {
+        page: {
+            name:   page_name,
+            url:    config.url('base') + config.routes[page_name]
+        }
+    }
 }

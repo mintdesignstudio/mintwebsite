@@ -11,11 +11,6 @@ var threeMonths = 60 * 60 * 24 * 90;
 module.exports = function() {
     var router = express.Router();
 
-    // TODO: Move to config
-    var pubdir = config.development ?
-                 config.public_dir :
-                 config.prod_dir + '/public';
-
     router
         .get('/',
              middleware.prismic,
@@ -42,7 +37,9 @@ module.exports = function() {
              middleware.construction,
              app.project)
 
-        .use('/public', express.static(pubdir, { maxAge: threeMonths }));
+        .use('/public', express.static(config.dir('public'), {
+            maxAge: threeMonths
+        }));
 
     return router;
 };

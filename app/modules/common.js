@@ -3,6 +3,7 @@ var Prismic         = require('prismic.io').Prismic;
 var utils           = require('./utils');
 var query           = require('./query');
 var projects        = require('./projects');
+var linkResolver    = require('./linkresolver');
 
 module.exports.get = function get(ctx, content) {
     content = content || {};
@@ -29,7 +30,7 @@ function contactPage(contact, common) {
     }
 
     common.contact = {
-        email:      utils.email(contact.getText('contact.email')),
+        email:      linkResolver.email(contact.getText('contact.email')),
         telephone:  contact.getText('contact.telephone'),
         address:    contact.getStructuredText('contact.address').asHtml(),
         location:   contact.getGeoPoint('contact.location')
@@ -60,7 +61,7 @@ function aboutPage(about, common) {
             fullname:   employee.getText('fullname'),
             about:      employee.getStructuredText('about').asHtml(),
             telephone:  employee.getText('telephone'),
-            email:      employee.getText('email'),
+            email:      linkResolver.email(employee.getText('email')),
             i:          i
         };
 
@@ -88,8 +89,8 @@ function aboutPage(about, common) {
             title:              award.getText('title'),
             nomination:         award.getText('nomination'),
             year:               award.getNumber('year'),
-            link:               utils.link(award.getText('link')),
-            related_article:    projects.link(award.getLink('related_article'))
+            link:               award.getText('link'),
+            related_article:    linkResolver.document('work', award.getLink('related_article'))
         };
 
     });

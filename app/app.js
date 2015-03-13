@@ -3,16 +3,16 @@ var logger          = require('logfmt');
 var Promise         = require('promise');
 var Prismic         = require('prismic.io').Prismic;
 var config          = require('../config');
+var utils           = require('./modules/utils');
 var clean           = require('./modules/clean');
 var projects        = require('./modules/projects');
 var common          = require('./modules/common');
 
 var app = {
-    home: function(req, res, next) {
 
-        var content = {
-            head: {}
-        };
+    home: function(req, res, next) {
+        var content = utils.defaultContent('home');
+        content.head = {};
 
         Promise.all([
             projects.get(res.locals.ctx, {
@@ -36,7 +36,7 @@ var app = {
     },
 
     about: function(req, res, next) {
-        var content = {};
+        var content = utils.defaultContent('about');
 
         common.get(res.locals.ctx, content)
         .then(function (common) {
@@ -48,7 +48,7 @@ var app = {
     },
 
     contact: function(req, res, next) {
-        var content = {};
+        var content = utils.defaultContent('contact');
 
         common.get(res.locals.ctx, content)
         .then(function (common) {
@@ -61,7 +61,7 @@ var app = {
 
     project: function(req, res, next) {
         var slug = clean(req.params.slug);
-        var content = {};
+        var content = utils.defaultContent('work');
 
         Promise.all([
             projects.get(res.locals.ctx, {
@@ -93,7 +93,7 @@ var app = {
     },
 
     projects: function(req, res, next) {
-        var content = {};
+        var content = utils.defaultContent('works');
 
         Promise.all([
             projects.get(res.locals.ctx, {sort: 'published desc'}, content),
