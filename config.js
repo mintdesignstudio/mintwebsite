@@ -1,7 +1,7 @@
 var path    = require('path');
 var config  = require('./config.json');
 
-var cfg = {
+module.exports = {
     apiEndpoint:    process.env.API_ENDPOINT,
     accessToken:    process.env.ACCESS_TOKEN,
     clientId:       process.env.CLIENT_ID,
@@ -17,8 +17,6 @@ var cfg = {
     construction:   config.construction,
     routes:         config.routes
 };
-
-module.exports = cfg;
 
 module.exports.dir = function(directory) {
     return __dirname +
