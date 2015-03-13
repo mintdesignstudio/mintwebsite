@@ -1,8 +1,7 @@
 var path    = require('path');
 var config  = require('./config.json');
 
-module.exports = {
-
+var cfg = {
     apiEndpoint:    process.env.API_ENDPOINT,
     accessToken:    process.env.ACCESS_TOKEN,
     clientId:       process.env.CLIENT_ID,
@@ -17,7 +16,9 @@ module.exports = {
     // Set website in Under Construction mode
     construction:   config.construction,
     routes:         config.routes
-}
+};
+
+module.exports = cfg;
 
 module.exports.dir = function(directory) {
     return __dirname +
