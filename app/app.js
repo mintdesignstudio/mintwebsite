@@ -73,6 +73,7 @@ var app = {
         .then(function (results) {
 
             if (content.projects.length === 0) {
+                // TODO: get path from config.routes
                 return res.redirect(301, '/works');
             }
 
@@ -87,6 +88,7 @@ var app = {
             console.log(util.inspect(process.memoryUsage()));
 
         }, function() {
+                // TODO: get path from config.routes
             return res.redirect(301, '/works');
         });
 
