@@ -27,6 +27,7 @@ module.exports.dir = function(directory) {
 }
 
 module.exports.url = function(type) {
+    console.log('NODE_ENV', process.env.NODE_ENV);
     return this.production ?
            config.url[type] :
            'http://localhost:'+this.port;
