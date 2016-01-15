@@ -19,6 +19,21 @@
     margin-bottom: 13px;
 }
 
+.contactfooter ul.social {
+    overflow: auto;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.contactfooter ul.social li {
+    margin-bottom: 0;
+    display: inline-block;
+}
+
+.contactfooter ul.social img {
+    width: 2em;
+}
+
 .contactfooter .logo, .contactfooter .symbol {
     background-position: 50% 0px;
     height: 80px;

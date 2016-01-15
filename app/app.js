@@ -7,6 +7,7 @@ var utils           = require('./modules/utils');
 var clean           = require('./modules/clean');
 var projects        = require('./modules/projects');
 var common          = require('./modules/common');
+var frontpage       = require('./modules/frontpage');
 
 var app = {
 
@@ -18,14 +19,21 @@ var app = {
             projects.get(res.locals.ctx, {
                 limit: 12,
                 sort: 'published desc'}, content),
-            common.get(res.locals.ctx, content)
+            common.get(res.locals.ctx, content),
+            frontpage.get(res.locals.ctx, content)
         ])
         .then(function(results) {
 
-            var projects = results[0];
-            if (projects.length > 0) {
-                content.head.image = projects[0].image;
+            var coverimage = results[2].coverimage;
+            if (typeof coverimage === 'undefined') {
+                var projects = results[0];
+                if (projects.length > 0) {
+                    content.head.image = projects[0].image;
+                }
+            } else {
+                content.head.image = coverimage;
             }
+
             app.render(res, 'main', 'home', content);
 
             console.log(util.inspect(process.memoryUsage()));

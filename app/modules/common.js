@@ -32,6 +32,9 @@ function contactPage(contact, common) {
     common.contact = {
         email:      linkResolver.email(contact.getText('contact.email')),
         telephone:  contact.getText('contact.telephone'),
+        facebook:   contact.getText('contact.facebook'),
+        instagram:  contact.getText('contact.instagram'),
+        linkedin:   contact.getText('contact.linkedin'),
         address:    contact.getStructuredText('contact.address').asHtml(),
         location:   contact.getGeoPoint('contact.location')
     };
