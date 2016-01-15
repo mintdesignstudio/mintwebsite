@@ -15,6 +15,8 @@ var app = {
         var content = utils.defaultContent('home');
         content.head = {};
 
+        console.log(res.locals.ctx);
+
         Promise.all([
             projects.get(res.locals.ctx, {
                 limit: 12,
