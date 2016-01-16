@@ -16,25 +16,25 @@ server.listen(config.port, onListen);
 
 function onListen() {
 
-    if (typeof API_ENDPOINT === 'undefined') {
+    if (typeof process.env.API_ENDPOINT === 'undefined') {
         logger.log({
             type: 'error',
             msg:  'Missing environment variable API_ENDPOINT'
         });
     }
-    if (typeof ACCESS_TOKEN === 'undefined') {
+    if (typeof process.env.ACCESS_TOKEN === 'undefined') {
         logger.log({
             type: 'error',
             msg:  'Missing environment variable ACCESS_TOKEN'
         });
     }
-    if (typeof CLIENT_ID === 'undefined') {
+    if (typeof process.env.CLIENT_ID === 'undefined') {
         logger.log({
             type: 'error',
             msg:  'Missing environment variable CLIENT_ID'
         });
     }
-    if (typeof CLIENT_SECRET === 'undefined') {
+    if (typeof process.env.CLIENT_SECRET === 'undefined') {
         logger.log({
             type: 'error',
             msg:  'Missing environment variable CLIENT_SECRET'
