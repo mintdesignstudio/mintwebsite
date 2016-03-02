@@ -2,3 +2,5 @@
 
 /node_modules/
 Temp
+*.sublime-workspace
+*.sublime-project

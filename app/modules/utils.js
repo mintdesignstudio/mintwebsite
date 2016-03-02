@@ -3,11 +3,10 @@ var config          = require('../../config');
 
 module.exports.getImage = function getImage(img) {
     return {
-        small:     img ? img.views.small.url : '',
-        medium:    img ? img.views.medium.url : '',
-        large:     img ? img.views.large.url : '',
-        main:      img ? img.main.url : '',
-        alt:       img ? img.main.alt : ''
+        small:     img ? img.views.small : { url: '' },
+        medium:    img ? img.views.medium : { url: '' },
+        large:     img ? img.views.large : { url: '' },
+        main:      img ? img.main : { url: '' }
     };
 }
 

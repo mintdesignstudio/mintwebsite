@@ -1,0 +1,69 @@
+{
+  "Main" : {
+    "image" : {
+      "type" : "Image",
+      "config" : {
+        "thumbnails" : [ {
+          "name" : "Small",
+          "width" : 592,
+          "height" : 333
+        }, {
+          "name" : "Medium",
+          "width" : 896,
+          "height" : 504
+        }, {
+          "name" : "Large",
+          "width" : 1200,
+          "height" : 675
+        } ]
+      }
+    },
+    "telephone" : {
+      "type" : "Text",
+      "fieldset" : "Telephone number",
+      "config" : {
+        "placeholder" : "The company's main telephone number"
+      }
+    },
+    "email" : {
+      "type" : "Text",
+      "fieldset" : "Email address",
+      "config" : {
+        "placeholder" : "The company's main email address"
+      }
+    },
+    "facebook" : {
+      "type" : "Text",
+      "fieldset" : "Facebook page",
+      "config" : {
+        "placeholder" : "The full URL to the Facebook page (including http)"
+      }
+    },
+    "instagram" : {
+      "type" : "Text",
+      "fieldset" : "Instagram page",
+      "config" : {
+        "placeholder" : "The full URL to the Instagram profile page (including http)"
+      }
+    },
+    "linkedin" : {
+      "type" : "Text",
+      "fieldset" : "LinkedIn page",
+      "config" : {
+        "placeholder" : "The full URL to the LinkedIn page (including http)"
+      }
+    },
+    "address" : {
+      "type" : "StructuredText",
+      "fieldset" : "Visiting address",
+      "config" : {
+        "multi" : "paragraph",
+        "placeholder" : "The company's visiting address"
+      }
+    },
+    "location" : {
+      "type" : "GeoPoint",
+      "fieldset" : "The company's location"
+    }
+  }
+}

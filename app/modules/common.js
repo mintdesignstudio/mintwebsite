@@ -30,6 +30,7 @@ function contactPage(contact, common) {
     }
 
     common.contact = {
+        image:      utils.getImage(contact.get('contact.image')),
         email:      linkResolver.email(contact.getText('contact.email')),
         telephone:  contact.getText('contact.telephone'),
         facebook:   contact.getText('contact.facebook'),
@@ -64,7 +65,9 @@ function aboutPage(about, common) {
             fullname:   employee.getText('fullname'),
             about:      employee.getStructuredText('about').asHtml(),
             telephone:  employee.getText('telephone'),
+            title:      employee.getText('title'),
             email:      linkResolver.email(employee.getText('email')),
+            id:         'employee_' + i,
             i:          i
         };
 
@@ -80,7 +83,6 @@ function aboutPage(about, common) {
             fullname:   client.getText('fullname'),
             i:          i
         };
-
     });
 
     common.about.awards = utils.iterateGroup({
@@ -90,12 +92,16 @@ function aboutPage(about, common) {
 
         return {
             title:              award.getText('title'),
-            nomination:         award.getText('nomination'),
+            giver:              award.getText('giver'),
             year:               award.getNumber('year'),
             link:               award.getText('link'),
             related_article:    linkResolver.document('work', award.getLink('related_article'))
         };
 
+    });
+
+    common.about.awards.sort(function(a, b) {
+        return parseInt(b.year) - parseInt(a.year);
     });
 }
 

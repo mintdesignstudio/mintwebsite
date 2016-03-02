@@ -1,453 +1,579 @@
-/* Other aspect ratios to try:
- * 56.25% = 16:9
- * 75% = 4:3
- * 66.66% = 3:2
- * 62.5% = 8:5
- */
+h1 {
+    font-size: 3em;
+    font-weight: 300;
+    margin-bottom: 1em;
+}
 
-.contactfooter {
-    -webkit-transform: translate3d(0, 0, 0);
+h2 {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin-bottom: 1em;
+}
+
+p {
+    font-size: 1em;
+    line-height: 1.4em;
+    padding-bottom: 1.5em;
+}
+
+.awards ul,
+.clients ul,
+.content .body,
+.content.contact,
+.content.about {
+    width: 90%;
+    margin: 3em auto 3em 5%;
+}
+
+.content h1 {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content.about h1,
+.content.contact h1 {
+    margin-top: 2em;
+}
+
+.contact p {
+    padding-bottom: 0.5em;
+}
+
+.awards ul,
+.clients ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.awards li {
+    flex: 1 0 100%;
+    display: block;
+}
+
+.awards li b {
+    display: block;
+    font-size: 1.5em;
+    font-weight: 100;
+    margin-bottom: 0.2em;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    padding-right: 1em;
+}
+
+.awards li div {
+    margin-bottom: 2em;
+    color: rgb(156,156,156);
+}
+
+.awards li div > span {
+    color: #6ae0cb;
+    margin-right: 0.5em;
+}
+
+footer {
+    padding-top: 3em;
+}
+
+.clients li {
+    flex: 1 0 50%;
+    box-sizing: border-box;
+    height: 11em;
+    padding: 3em;
+}
+
+.clients li img {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+.map {
+    height: 30em;
+    width: 90%;
+    margin: 0 5%;
+}
+
+.menu {
+    display: block;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0);
+    top: 0;
+}
+
+.menu > a {
+    width: 100%;
     text-align: center;
-    padding-top: 48px;
-    padding-bottom: 64px;
-    background: black;
+}
+
+.menu a {
+    box-sizing: border-box;
+    display: block;
+    padding: 0.8em 0.8em 0.8em 1.5em;
     color: white;
 }
 
-.contactfooter li {
-    list-style: none;
-    margin-bottom: 13px;
+.menu li:last-child a {
+    padding-right: 2em;
 }
 
-.contactfooter ul.social {
-    overflow: auto;
+.menu a:hover {
+    text-decoration: none;
+}
+
+.menu a img {
+    height: 1.8em;
+}
+
+.menu ul:before {
+    content: '';
+    display: inline-block;
+    height: 3.4em; /* padding of .menu a + height of .menu img */
+    vertical-align: middle;
+}
+
+.menu ul {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: none;
+    list-style: none;
+}
+
+.menu ul li {
+    display: inline-block;
+    flex: 1 0 33%;
+    vertical-align: middle;
+}
+
+.hero {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero > div {
+    padding: 10em 3em 3em 3em;
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.7) 100%);
+}
+
+.hero .logo {
+    width: 8em;
+    margin: 0 auto;
+    display: block;
+}
+
+.hero p {
+    text-align: center;
+    max-width: 30em;
+    margin: 2em auto;
+    font-size: 0.8em;
+    line-height: 1.4em;
+}
+
+.hero.about, .hero.contact {
+    min-height: 20em;
+}
+
+section.works h2 {
     text-align: center;
     margin-top: 2em;
 }
 
-.contactfooter ul.social li {
-    margin-bottom: 0;
+section.works > a {
     display: inline-block;
-}
-
-.contactfooter ul.social img {
-    width: 2em;
-    margin: 0 0.5em;
-}
-
-.contactfooter .logo, .contactfooter .symbol {
-    background-position: 50% 0px;
-    height: 80px;
-    margin-bottom: 32px;
-}
-
-.project {
-    float: left;
-    margin-top: 56px;
-}
-
-.content {
-    padding: 64px 40px;
-    margin-left: 15%;
-    margin-right: 15%;
-}
-
-.content p {
-    line-height: 1.2;
-    margin-bottom: 18px;
-}
-
-.content .body a {
-    font-weight: 400;
-}
-
-.content .body {
-    column-count: 2;
-    -webkit-column-count: 2;
-    column-gap: 48px;
-    -webkit-column-gap: 48px;
-    column-width: 260px;
-    -webkit-column-width: 260px;
-}
-
-.content .body p {
-    margin-bottom: 13px;
-    color: #aaa;
-    line-height: 1.6;
     width: 100%;
+    text-align: center;
+    padding: 2em 0;
 }
 
-h1 {
-    margin-bottom: 32px;
-    font-size: 32px;
-    font-weight: 400;
+div.work {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-h2 {
-    margin-bottom: 32px;
-    font-size: 28px;
+div.work .project {
+    display: flex;
+    flex: 1 0 100%;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.work .project.current {
+    flex: 1 0 50%;
+    min-height: 30em;
+}
+
+div.work .project .overlay {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-end;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+    opacity: 0.8;
+    transition: opacity 0.5s;
+}
+
+div.work .project .overlay:hover {
+    opacity: 1;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+}
+
+div.work .project a {
+    color: white;
+    font-size: 1.4em;
+    display: block;
+    box-sizing: border-box;
+    padding: 6em 1em 1em 1em;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+div.work .project a:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+div.work .project a span {
+    font-size: 0.8rem;
+    display: block;
+    padding-top: 0.6em;
+}
+
+footer .logo {
+    display: block;
+    width: 5em;
+    margin: 4em auto 2em auto;
+}
+
+footer .contact {
+    text-align: center;
+    line-height: 1.6em;
+    list-style: none;
+}
+
+footer .social {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+footer .social li {
+    display: inline-block;
+    margin: 2em 0.5em
+}
+
+footer .social li img {
+    width: 2em;
+    height: 2em;
+}
+
+section.workdescription {
+    width: 80%;
+    margin: 0 auto;
+}
+
+section.workdescription h1 {
+    font-size: 2em;
     font-weight: 300;
-    margin-top: 96px;
+    line-height: 1.2em;
+    padding: 5em 0 1em 0;
 }
 
-.gallery {
+section.workdescription p {
+    line-height: 1.25em;
+    padding-bottom: 1.5em;
+    color: rgb(220,220,220);
+    max-width: 30em;
+}
+
+section.workdescription > div {
+    padding-bottom: 4em;
+}
+
+section.gallery {
+    font-size: 0;
     line-height: 0;
 }
 
-.gallery img {
+section.gallery img {
     width: 100%;
-    position: relative;
-    float: left;
-}
-
-.employee {
-    width: 50%;
-    display: inline-block;
-    overflow: auto;
-    float: left;
-    margin-bottom: 96px;
-    margin-top: 32px;
-    box-sizing: border-box;
-    padding-left: 24px;
-}
-
-.employee.first {
-    padding-left: 0px;
-
-    padding-right: 24px;
-}
-
-.employee svg {
-    left: -20px;
-    position: relative;
-}
-
-.employee span {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    display: inline-block;
-    width: 100%;
-    font-size: 20px;
-}
-
-.employee ul {
-    margin: 0px 0px 32px 0px;
+    margin: 0;
     padding: 0;
 }
 
-.employee li {
-    list-style: none;
-    margin-bottom: 12px;
-}
-
-.awards {
-    clear: both;
-}
-
-.awards ul {
-    margin-top: 48px;
-}
-
-.awards li {
-    list-style: none;
-    clear: both;
+.employee {
     overflow: auto;
-    padding-bottom: 12px;
+    margin-bottom: 4em;
 }
 
-.awards li b {
-    font-size: 22px;
+.employee .about {
     float: left;
-    padding-bottom: 10px;
-    font-weight: 400;
-    width: 84%;
+    box-sizing: border-box;
+    padding: 3em 5%;
 }
 
-.awards li span#nomination {
+.profile {
     float: left;
-    clear: left;
-    margin-left: 16%;
-    margin-bottom: 16px;
-    color: #aaa;
-}
-
-.awards li span#year {
-    float: left;
-    width: 16%;
-    padding-top: 2px;
-}
-
-.contact {
-    margin-top: 56px;
-    float: left;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-}
-
-.contact #map {
-    height: 400px;
-}
-
-.contact span#medium {
-    margin-bottom: 12px;
-}
-
-.contact li {
-    width: 33%;
-    list-style: none;
-    display: inline-block;
-    text-align: center;
-    vertical-align: top;
-}
-
-.contact span {
-    display: block;
-}
-
-.contact .content span p {
-    line-height: 1.6;
-    margin-bottom: 0;
-}
-
-.work a {
-    -webkit-transform: translate3d(0, 0, 0);
-    display: block;
-    width: 100%;
-    clear: left;
-    text-align: center;
-    padding-top: 24px;
-    padding-bottom: 48px;
-}
-
-.clients {
-    overflow: auto;
-    float: left;
-    clear: both;
-}
-
-.clients ul {
-    width: 100%;
-}
-
-.clients li {
-    list-style: none;
-    width: 17%;
-    float: left;
-    margin-left: 4%;
-    margin-right: 4%;
-    margin-bottom: 96px;
-    display: block;
     position: relative;
 }
 
-.clients img {
-    width: 100%;
-}
-
-.clients span {
-    width: 100%;
-    text-align: center;
+.profile .photo {
+    flex: 1 0 100%;
+    height: 20em;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     display: block;
-    margin-top: 24px;
-    position: absolute;
 }
 
-@media screen and (min-width: 960px) {
-
-    .work .wrap {
-        width: 25%;
-        height: 56.25%;
-    }
-
-    .work a div {
-        font-size: 24px;
-    }
-
-    .wrap.current {
-         width: 50%;
-    }
-
-    .content p {
-        line-height: 1.6;
-        margin-bottom: 18px;
-    }
-
+.profile .details {
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+    justify-content: center;
+    padding: 2em;
+    line-height: 2em;
+    color: white;
+    box-sizing: border-box;
+    background-color: rgb(50,50,50);
 }
 
-@media screen and (max-width: 960px) {
-
-    .work .wrap {
-        width: 33.3334%;
-    }
-
-    .menu a {
-        font-size: 16px;
-    }
-
-    .head span {
-        font-size: 16px;
-        margin-top: 3%;
-    }
-
-    .work a div {
-        font-size: 22px;
-    }
-
-    .content {
-        margin-left: 10%;
-        margin-right: 10%;
-    }
-
+.profile .details h2 {
+    font-size: 1.5em;
+    word-break: break-word;
 }
 
-@media screen and (max-width: 700px) {
+.profile .details ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
-    .work .wrap {
-        width: 50%;
+@media screen and (min-width: 35em) {
+    .hero .logo {
+        width: 10em;
     }
 
-    .work a div {
-        font-size: 18px;
+    .hero p {
+        font-size: 1em;
+        line-height: 1.2em;
     }
 
-    .menu .logo {
-        padding-left: 28px;
-        font-size: 20px;
+    .hero.about, .hero.contact {
+        min-height: 25em;
     }
 
-    .menu li a {
-        font-size: 16px;
-        width: 100%;
-        display: inline-block;
+    div.work .project.current {
+        flex: 1 0 100%;
     }
 
-    .head span {
-        white-space: normal;
+    div.work .project {
+        flex: 1 0 50%;
     }
 
-    .content {
-        margin: auto;
+    .awards li {
+        flex: 1 0 50%;
+        display: block;
     }
 
     .clients li {
-        width: 21.33%;
-        margin-left: 6%;
-        margin-right: 6%;
-    }
-
-    .contact li {
-        width: 100%;
-        margin-bottom: 42px;
-    }
-
-    .contact .content li:last-child {
-        margin-bottom: 0px;
+        flex: 1 0 33.3336%;
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (min-width: 40em) {
+    .hero .logo {
+        width: 12em;
+    }
 
-    .work .wrap {
-        width: 100%;
+    .hero > div {
+        padding: 8em 3em 3em 3em;
     }
 
     .menu {
-        text-align: center;
-        overflow: auto;
-        padding-top: 32px;
-        padding-bottom: 32px;
-        position: relative;
+        display: flex;
+        flex-direction: row;
     }
 
-    .menu li a {
-        font-size: 16px;
-        line-height: 32px;
-        width: 100%;
-        display: inline-block;
-    }
-
-    .menu li {
-        float: none;
-        text-align: center;
-        margin-left: auto;
+    .menu > a {
+        width: auto;
+        text-align: left;
     }
 
     .menu ul {
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0);
-        -webkit-transform: translate(-50%, 0);
-        -moz-transform: translate(-50%, 0);
-        -ms-transform: translate(-50%, 0);
-        -o-transform: translate(-50%, 0);
-        margin-top: 24px;
+        text-align: left;
+        display: block;
+        margin-left: auto;
     }
 
-    .menu .logo {
-        padding-left: 0px;
-        font-size: 18px;
-        float: none;
-        background-position: 50% 0px;
-        margin-left: 0px;
+    .menu ul li {
+        display: inline-block;
+        flex: none;
+        vertical-align: middle;
     }
 
-    .head {
-        margin-top: auto;
-        display: none;
+    div.work h2 {
+        font-size: 2.6em;
+        margin: 3em auto 1em auto;
     }
 
-    .head span {
-        white-space: normal;
+    .profile {
+        flex-direction: row;
     }
 
-    .work {
-        margin-top: auto;
+    .profile .photo {
+        flex: 1 0 50%;
     }
 
-    .work h2 {
-        margin-top: 12px;
-        margin-bottom: 12px;
-        display: none;
-    }
-
-    .work .wrap a {
-        opacity: 1;
-        background-color: rgba(0, 0, 0, 0.3);
-    }
-
-    .about {
-        margin-top: auto;
-    }
-
-    .awards {
-        margin-top: 32px;
-        float: left;
-        width: 100%;
-    }
-
-    .clients li {
-        width: 34%;
-        margin-left: 8%;
-        margin-right: 8%;
-    }
-
-    .project {
-        margin-top: 0px;
+    .profile .details {
+        flex: 1 0 50%;
     }
 }
 
+@media screen and (min-width: 50em) {
+    div.work .project.current {
+        flex: 1 0 66.6667%;
+    }
 
-@media screen and (max-width: 550px) {
+    div.work .project {
+        flex: 1 0 33.3336%;
+    }
+
+    div.work .project a {
+        opacity: 0.5;
+    }
+
+    .hero.about, .hero.contact {
+        min-height: 30em;
+    }
+
+    .profile {
+        width: 50%;
+        box-sizing: border-box;
+        padding-right: 3em;
+        flex-direction: column;
+    }
+
+    .employee .about {
+        width: 50%;
+        padding: 0 5% 3em 0;
+        max-width: 30em;
+        box-sizing: border-box;
+    }
+
+    .content .body {
+        max-width: 45%;
+        box-sizing: border-box;
+        padding-right: 3em;
+    }
+
+    .clients li {
+        flex: 1 0 25%;
+    }
+}
+
+@media screen and (min-width: 70em) {
+    .hero .logo {
+        width: 16em;
+    }
+
+    .hero p {
+        font-size: 1.2em;
+        line-height: 1.6em;
+    }
+
+    .hero.about, .hero.contact {
+        min-height: 35em;
+    }
+
+    div.work .project.current {
+        flex: 1 0 50%;
+    }
+
+    div.work .project {
+        flex: 1 0 25%;
+    }
+
+    section.workdescription > div {
+        max-width: 60em;
+        columns: 20em 2;
+        -webkit-columns: 20em 2;
+        -moz-columns:  20em 2;
+        column-gap: 4em;
+        -webkit-column-gap: 4em;
+        -moz-column-gap: 4em;
+        padding-bottom: 5em;
+    }
 
     .employee {
-        width: 100%;
-        margin-bottom: 16px;
-        padding-left: 0px;
+        width: 90%;
+        margin: 0 auto;
     }
 
-    .head span {
-        white-space: normal;
-        margin-left: 30px;
-        margin-right: 30px;
+    .profile {
+        flex-direction: row;
     }
 
+    .clients li {
+        flex: 1 0 20%;
+    }
+
+    .map {
+        height: 40em;
+    }
+}
+
+@media screen and (min-width: 110em) {
+    .hero .logo {
+        width: 22em;
+    }
+
+    .hero.about, .hero.contact {
+        min-height: 40em;
+    }
+
+    .clients li {
+        flex: 1 0 16.6667%;
+    }
+
+    .map {
+        height: 50em;
+    }
+}
+
+@media screen and (min-width: 170em) {
+    .hero .logo {
+        width: 28em;
+    }
+
+    .hero.about, .hero.contact {
+        min-height: 50em;
+    }
+
+    .clients li {
+        flex: 1 0 14.28%;
+    }
+
+    .map {
+        height: 60em;
+    }
 }

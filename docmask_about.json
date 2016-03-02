@@ -1,0 +1,190 @@
+{
+  "Main" : {
+    "image" : {
+      "type" : "Image",
+      "config" : {
+        "thumbnails" : [ {
+          "name" : "Small",
+          "width" : 592,
+          "height" : 333
+        }, {
+          "name" : "Medium",
+          "width" : 896,
+          "height" : 504
+        }, {
+          "name" : "Large",
+          "width" : 1200,
+          "height" : 675
+        } ]
+      }
+    },
+    "headline" : {
+      "type" : "Text",
+      "fieldset" : "Headline",
+      "config" : {
+        "placeholder" : "The title of the page"
+      }
+    },
+    "companyname" : {
+      "type" : "Text",
+      "fieldset" : "Company name",
+      "config" : {
+        "placeholder" : "The name of the company"
+      }
+    },
+    "tagline" : {
+      "type" : "StructuredText",
+      "fieldset" : "Tagline",
+      "config" : {
+        "placeholder" : "The tagline to put under the logo"
+      }
+    },
+    "content" : {
+      "type" : "StructuredText",
+      "fieldset" : "Page content"
+    }
+  },
+  "Employees" : {
+    "employees" : {
+      "fieldset" : "Employees",
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "image" : {
+            "type" : "Image",
+            "config" : {
+              "thumbnails" : [ {
+                "name" : "Small",
+                "width" : 500,
+                "height" : 500
+              }, {
+                "name" : "Medium",
+                "width" : 700,
+                "height" : 700
+              }, {
+                "name" : "Large",
+                "width" : 900,
+                "height" : 900
+              } ]
+            }
+          },
+          "fullname" : {
+            "type" : "Text",
+            "fieldset" : "Full name",
+            "config" : {
+              "placeholder" : "The employee's full name"
+            }
+          },
+          "title" : {
+            "type" : "Text",
+            "fieldset" : "Title",
+            "config" : {
+              "placeholder" : "Title"
+            }
+          },
+          "telephone" : {
+            "type" : "Text",
+            "fieldset" : "Telephone number",
+            "config" : {
+              "placeholder" : "Telephone number"
+            }
+          },
+          "email" : {
+            "type" : "Text",
+            "fieldset" : "Email address",
+            "config" : {
+              "placeholder" : "Email address"
+            }
+          },
+          "about" : {
+            "type" : "StructuredText",
+            "fieldset" : "About",
+            "config" : {
+              "placeholder" : "A little about the employee"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Clients" : {
+    "clients" : {
+      "fieldset" : "Clients",
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "image" : {
+            "type" : "Image",
+            "config" : {
+              "thumbnails" : [ {
+                "name" : "Small",
+                "width" : 592,
+                "height" : 333
+              }, {
+                "name" : "Medium",
+                "width" : 896,
+                "height" : 504
+              }, {
+                "name" : "Large",
+                "width" : 1200,
+                "height" : 675
+              } ]
+            }
+          },
+          "fullname" : {
+            "type" : "Text",
+            "fieldset" : "Full name",
+            "config" : {
+              "placeholder" : "The employee's full name"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Awards" : {
+    "awards" : {
+      "fieldset" : "Awards",
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "title" : {
+            "type" : "Text",
+            "fieldset" : "Title",
+            "config" : {
+              "placeholder" : "The award's title"
+            }
+          },
+          "giver" : {
+            "type" : "Text",
+            "fieldset" : "Giver",
+            "config" : {
+              "placeholder" : "Who gave you the award?"
+            }
+          },
+          "year" : {
+            "type" : "Number",
+            "config" : {
+              "label" : "Year of the award"
+            }
+          },
+          "link" : {
+            "type" : "Text",
+            "fieldset" : "Link",
+            "config" : {
+              "placeholder" : "Link to the award's website"
+            }
+          },
+          "related_article" : {
+            "type" : "Link",
+            "fieldset" : "Link to related project",
+            "config" : {
+              "select" : "document",
+              "masks" : [ "project" ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

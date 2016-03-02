@@ -4,22 +4,16 @@
     {{#each projects}}
 
     {{#if i}}
-        <div class="wrap">
+        <div class="project" id="{{id}}">
     {{else}}
-        <div class="wrap current">
+        <div class="project current" id="{{id}}">
     {{/if}}
-
-        <div class="thumb">
+        {{{background id image}}}
+        <div class="overlay">
             <a href="{{link}}">
-                <div>
-                    {{name}}
-                    <span>{{description}}</span>
-                </div>
+                {{name}}
+                <span>{{description}}</span>
             </a>
-            <picture>
-                <source srcset="{{image.medium}}" media="(min-width: 960px)">
-                <img srcset="{{image.small}}" alt="{{image.alt}}">
-            </picture>
         </div>
     </div>
     {{/each}}

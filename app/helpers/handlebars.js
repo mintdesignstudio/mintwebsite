@@ -1,4 +1,30 @@
+var Handlebars = require('handlebars');
 var config = require('../../config');
+
+module.exports.background = function(id, image) {
+    return new Handlebars.SafeString(
+        '<style type="text/css">' +
+        '#' + id + ' {'+
+            'background-image: url(' + image.small.url + ');'+
+        '}' +
+        '@media screen and (min-width: 40em) and (max-width: 60em) {' +
+            '#' + id + '{' +
+                'background-image: url(' + image.medium.url + ');' +
+            '}' +
+        '}' +
+        '@media screen and (min-width: 60em) and (max-width: 80em) {' +
+            '#' + id + '{' +
+                'background-image: url(' + image.large.url + ');' +
+            '}' +
+        '}' +
+        '@media screen and (min-width: 80em) {' +
+            '#' + id + '{' +
+                'background-image: url(' + image.main.url + ');' +
+            '}' +
+        '}' +
+        '</style>'
+    );
+}
 
 module.exports.first = function(context, options) {
     return options.fn(context[0]);
