@@ -30,9 +30,7 @@
     "prismic.io": "1.0.29",
     "promise": "6.0.1",
     "serve-favicon": "2.1.6",
-    "serve-static": "1.7.0"
-  },
-  "devDependencies": {
+    "serve-static": "1.7.0",
     "imagemin": "3.1.0",
     "inline-source": "1.1.2",
     "minimize": "1.2.0",
