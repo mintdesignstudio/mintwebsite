@@ -5,7 +5,7 @@ var morecss         = require('more-css');
 var inlineSource    = require('inline-source');
 var Imagemin        = require('imagemin');
 var Minimize        = require('minimize');
-var UglifyJS        = require("uglify-js");
+var UglifyJS        = require('uglify-js');
 
 var svgo = Imagemin.svgo([
     {removeViewBox: true},
