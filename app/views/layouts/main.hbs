@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
+    <meta http-equiv="cache-control" content="max-age=21600" />
 
     <meta property="og:title" content="{{common.about.companyname}} : {{#capitalize}}{{page.name}}{{/capitalize}} {{#isWork page.name}}: {{project.name}}{{/isWork}}" />
 
@@ -26,43 +27,7 @@
     <link rel="apple-touch-icon" href="/public/images/apple-touch-icon.png">
     <link rel="apple-touch-icon-precomposed" href="/public/images/apple-touch-icon-precomposed.png">
 
-    <!-- merge the scripts! -->
-    <!--script type="text/javascript" src="/public/js/resizer.js" inline></script-->
-    <script type="text/javascript" src="/public/js/loadfont.js" inline></script>
-    <script type="text/javascript" src="/public/js/loadcss.js" inline></script>
-    <script type="text/javascript">
-        window.mint_menu;
-
-        function scrollY() {
-            if (window.pageYOffset !== undefined) {
-                return window.pageYOffset;
-            }
-
-            return (document.documentElement ||
-                document.body.parentNode ||
-                document.body).scrollTop;
-        }
-
-        function changeOpacity(element) {
-            var value = (scrollY() / 200);
-            value = value > 1 ? 1 : value;
-            value *= 0.7;
-            element.style.backgroundColor = 'rgba(0,0,0,'+value+')';
-        }
-
-
-        window.addEventListener('scroll', function(e) {
-            if (!window.mint_menu) {
-                return;
-            }
-            changeOpacity(window.mint_menu);
-        });
-
-        document.addEventListener('DOMContentLoaded', function(event) {
-            window.mint_menu = document.getElementById('menu');
-            changeOpacity(window.mint_menu);
-        });
-    </script>
+    <script type="text/javascript" src="/public/js/main.js" inline></script>
 
     <script>
         document.createElement('picture');
