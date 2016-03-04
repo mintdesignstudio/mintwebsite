@@ -1,8 +1,6 @@
 .awards ul,
 .clients ul,
-.content .body,
-.content.contact,
-.content.about {
+.content .body {
     width: 90%;
     margin: 3em auto 3em 5%;
 }
@@ -229,7 +227,6 @@ section.gallery img {
 }
 
 .profile .photo {
-    flex: 1 0 100%;
     height: 20em;
     position: relative;
     background-repeat: no-repeat;
@@ -239,12 +236,7 @@ section.gallery img {
 }
 
 .profile .details {
-    vertical-align: middle;
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 100%;
-    justify-content: center;
-    padding: 2em;
+    padding: 2em 5%;
     line-height: 2em;
     color: white;
     box-sizing: border-box;
@@ -340,6 +332,10 @@ section.gallery img {
 
     .profile .details {
         flex: 1 0 50%;
+        vertical-align: middle;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 }
 
@@ -365,6 +361,14 @@ section.gallery img {
         box-sizing: border-box;
         padding-right: 3em;
         flex-direction: column;
+    }
+
+    .profile .photo {
+        flex: none;
+    }
+
+    .profile .details {
+        flex: none;
     }
 
     .employee .about {
@@ -425,6 +429,14 @@ section.gallery img {
 
     .profile {
         flex-direction: row;
+    }
+
+    .profile .photo {
+        flex: 1 0 50%;
+    }
+
+    .profile .details {
+        flex: 1 0 50%;
     }
 
     .clients li {
