@@ -38,6 +38,7 @@
     font-size: 1.5em;
     font-weight: 100;
     margin-bottom: 0.2em;
+    word-wrap: normal;
     word-wrap: break-word;
     box-sizing: border-box;
     padding-right: 1em;
@@ -60,14 +61,14 @@ footer {
 .clients li {
     flex: 1 0 50%;
     box-sizing: border-box;
-    height: 11em;
-    padding: 3em;
 }
 
 .clients li img {
-    width: 100%;
-    margin: 0 auto;
     display: block;
+    margin: 0 auto;
+    width: auto;
+    height: 5em;
+    padding: 3em 0;
 }
 
 .map {
@@ -245,6 +246,7 @@ section.gallery img {
 
 .profile .details h2 {
     font-size: 1.5em;
+    word-break: normal;
     word-break: break-word;
 }
 
@@ -436,7 +438,7 @@ section.gallery img {
     }
 
     .profile .details {
-        flex: 1 0 50%;
+        flex: 1 0 45%;
     }
 
     .clients li {
