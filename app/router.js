@@ -453,11 +453,6 @@ module.exports.init = function(app) {
     app.route('/contact').get(routeHandler(contact));
     app.route('/works').get(routeHandler(works));
     app.route('/work/:slug/:id').get(routeHandler(work));
-    app
-        .route('/.well-known/acme-challenge/:id')
-        .get(function(req, res) {
-            res.send('qIP8edMzQn3Ybx6j6THsA2iRYTYebbrzjblGeS5HgT4.UEnVpJuLLwdQNXYhpSnU6oj80p2iLLVYqF4WP5_pb4s');
-        });
 };
 
 function render(res, layout, template, content) {
