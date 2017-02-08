@@ -1,6 +1,7 @@
 var fs              = require('fs');
 var path            = require('path');
-var wrench          = require('wrench');
+var fse             = require('fs-extra');
+var klawSync        = require('klaw-sync');
 var morecss         = require('more-css');
 var inlineSource    = require('inline-source');
 var Imagemin        = require('imagemin');
@@ -35,15 +36,22 @@ var dir = {
 };
 
 // -----------------------------------------------------------------------------
-cleanCopyDir(dir.pub,       dir.prodpub);
-cleanCopyDir(dir.appview,   dir.prodappview);
 
-minifyCss(dir.prod);
-uglify(dir.prodpub + 'js/');
-inline(dir.prodappview + 'layouts/', '.hbs');
-imagemin(dir.prodpub + 'images/', '.svg', svgo);
-imagemin(dir.prodpub + 'images/', '.png', optipng);
-htmlmin(dir.prodappview, '.hbs');
+cleanCopyDir(dir.pub,       dir.prodpub, function() {
+    console.log('Copy '+dir.prodpub);
+
+    cleanCopyDir(dir.appview,   dir.prodappview, function() {
+        console.log('Copy '+dir.prodappview);
+
+        minifyCss(dir.prod);
+        uglify(dir.prodpub + 'js/');
+        inline(dir.prodappview + 'layouts/', '.hbs');
+        imagemin(dir.prodpub + 'images/', '.svg', svgo);
+        imagemin(dir.prodpub + 'images/', '.png', optipng);
+        htmlmin(dir.prodappview, '.hbs');
+    });
+});
+
 
 // -----------------------------------------------------------------------------
 
@@ -52,8 +60,8 @@ function uglify(dir) {
 
     var files = listFiles(dir, '.js')
         .map(function(file) {
-            console.log('    '+dir+file);
-            return dir + file;
+            console.log('    '+file.path);
+            return file.path;
         });
 
     files.forEach(function(file) {
@@ -80,8 +88,8 @@ function htmlmin(dir, ext) {
 
     var files = listFiles(dir, ext)
         .map(function(file) {
-            console.log('    '+dir+file);
-            return dir + file;
+            console.log('    '+file.path);
+            return file.path;
         });
 
     files.forEach(function(file) {
@@ -116,8 +124,8 @@ function inline(dir, ext) {
 
     var files = listFiles(dir, ext)
         .map(function(file) {
-            console.log('    '+dir+file);
-            return dir + file;
+            console.log('    '+file.path);
+            return file.path;
         });
 
     files.forEach(function(file) {
@@ -136,8 +144,8 @@ function minifyCss(dir) {
     console.log('Minify CSS');
     var css_files = listFiles(dir, '.css')
         .map(function(file) {
-            console.log('    '+dir+file);
-            return dir + file;
+            console.log('    '+file.path);
+            return file.path;
         });
 
     css_files.forEach(function(file) {
@@ -149,20 +157,35 @@ function minifyCss(dir) {
 }
 
 function listFiles(dir, ext) {
-    return wrench.readdirSyncRecursive(dir).filter(function(file) {
-        return path.extname(file) === ext;
+    return klawSync(dir, {nodir: true}).filter(function(file) {
+        return path.extname(file.path) === ext;
     });
 }
 
-function cleanCopyDir(from, to) {
-    wrench.rmdirSyncRecursive(to, true);
-    wrench.mkdirSyncRecursive(to, 0777);
+function cleanCopyDir(from, to, cb) {
+    removeDir(to, function() {
+        copyDir(from, to, cb);
+    });
+}
 
-    wrench.copyDirSyncRecursive(from, to, {
-        forceDelete: true,
-        excludeHiddenUnix: false,
-        preserveFiles: false,
-        preserveTimestamps: false,
-        inflateSymlinks: false
+function removeDir(dir, cb) {
+    fse.remove(dir, function(err) {
+        if (err) {
+            return console.error('[ERROR REMOVE]', err);
+        }
+        if (typeof cb !== 'undefined') {
+            cb();
+        }
+    });
+}
+
+function copyDir(from_dir, to_dir, cb) {
+    fse.copy(from_dir, to_dir, function (err) {
+        if (err) {
+            return console.error('[ERROR COPY]', err);
+        }
+        if (typeof cb !== 'undefined') {
+            cb();
+        }
     });
 }

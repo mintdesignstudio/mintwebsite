@@ -426,7 +426,7 @@ section.gallery img {
 
     .employee {
         width: 90%;
-        margin: 0 auto;
+        margin: 1em auto 0;
     }
 
     .profile {

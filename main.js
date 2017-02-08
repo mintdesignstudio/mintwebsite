@@ -1,21 +1,26 @@
-var logger    = require('logfmt');
-var http      = require('http');
+var app     = require('./app/app');
+var config  = require('./config');
+var logger  = require('logfmt');
 
-var config    = require('./config');
-var web       = require('./app/web');
+var instance = app.init();
 
-process.on('SIGTERM', onShutdown);
+process.on('SIGTERM', function() {
+    logger.log({
+        type: 'info',
+        msg:  'shutting down'
+    });
+    server.close(function() {
+        logger.log({ type: 'info', msg: 'exiting' });
+        process.exit();
+    });
+});
 
 logger.log({
     type: 'info',
     msg:  'starting server'
 });
 
-var server = http.createServer(web());
-server.listen(config.port, onListen);
-
-function onListen() {
-
+instance.listen(config.port, function() {
     if (typeof process.env.API_ENDPOINT === 'undefined') {
         logger.log({
             type: 'error',
@@ -44,17 +49,6 @@ function onListen() {
     logger.log({
         type: 'info',
         msg: 'listening',
-        port: server.address().port
+        port: config.port
     });
-}
-
-function onShutdown() {
-    logger.log({
-        type: 'info',
-        msg: 'shutting down'
-    });
-    server.close(function() {
-        logger.log({ type: 'info', msg: 'exiting' });
-        process.exit();
-    });
-}
+});

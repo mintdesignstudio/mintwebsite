@@ -1,10 +1,38 @@
-var config          = require('../../config');
+var config          = require('../config.js');
 
-module.exports.ahref = function(url) {
+module.exports.getImage = function getImage(img) {
+    return {
+        small:     img ? img.views.small : { url: '' },
+        medium:    img ? img.views.medium : { url: '' },
+        large:     img ? img.views.large : { url: '' },
+        main:      img ? img.main : { url: '' }
+    };
+};
+
+module.exports.getStructuredText = function(doc, prop, fn) {
+    var txt = doc.getStructuredText(prop);
+    return txt !== null ? txt[fn]() : '';
+};
+
+module.exports.getText = function(doc, prop, fn) {
+    var txt = doc.getText(prop);
+    return txt !== null ? txt : '';
+};
+
+module.exports.defaultContent = function(page_name, req) {
+    return {
+        page: {
+            name:   page_name,
+            url:    req.protocol + '://' + req.get('host') + req.originalUrl,
+        }
+    }
+}
+
+module.exports.ahrefLink = function(url) {
     return url ? '<a href="'+url+'">'+url+'</a>' : null;
 }
 
-module.exports.email = function(value) {
+module.exports.emailLink = function(value) {
     return value ? '<a href="mailto:'+value+'">'+value+'</a>' : '';
 }
 
@@ -19,7 +47,7 @@ module.exports.email = function(value) {
 
 // TODO: The resolver should implement better checking and error reporting for
 // required params (the ones that start with ':').
-module.exports.document = function(type, doc) {
+module.exports.documentLink = function(type, doc) {
     if (doc) {
         var url = config.routes[type].split('/');
 
@@ -37,7 +65,7 @@ module.exports.document = function(type, doc) {
             return param;
         });
 
-        return config.url('base') + url.join('/');
+        return url.join('/').substring(1);
     }
 
     return null;

@@ -1,141 +1,84 @@
-var util            = require('util');
-var logger          = require('logfmt');
-var Promise         = require('promise');
-var Prismic         = require('prismic.io').Prismic;
-var config          = require('../config');
-var utils           = require('./modules/utils');
-var clean           = require('./modules/clean');
-var projects        = require('./modules/projects');
-var common          = require('./modules/common');
-var frontpage       = require('./modules/frontpage');
+var express         = require('express'),
+    exphbs          = require('express-handlebars')
+    favicon         = require('serve-favicon'),
+    busBoy          = require('express-busboy'),
+    cookieParser    = require('cookie-parser'),
+    methodOverride  = require('method-override'),
+    errorHandler    = require('errorhandler'),
+    http            = require('http'),
+    path            = require('path'),
+    helmet          = require('helmet'),
+    compress        = require('compression'),
+    config          = require('../config.js'),
+    router          = require('./router'),
+    hbHelpers       = require('./helpers/handlebars'),
+    errors          = require('./errors'),
+    logs            = require('./logs');
 
-var app = {
+module.exports.init = function() {
+    var staticOptions = {
+        dotfiles: 'ignore',
+        etag: true,
+        index: false,
+        // maxAge: '1d',
+        redirect: false
+    };
 
-    home: function(req, res, next) {
-        var content = utils.defaultContent('home');
-        content.head = {};
+    var hbs_ext = '.hbs';
 
-        Promise.all([
-            projects.get(res.locals.ctx, {
-                limit: 12,
-                sort: 'published desc'}, content),
-            common.get(res.locals.ctx, content),
-            frontpage.get(res.locals.ctx, content)
-        ])
-        .then(function(results) {
+    var hbs = exphbs.create({
+        extname:        hbs_ext,
+        defaultLayout:  'main',
+        helpers:        hbHelpers,
+        layoutsDir:     config.dir('layout'),
+        partialsDir:    config.dir('partials')
+    });
 
-            var coverimage = results[2].coverimage;
-            if (typeof coverimage === 'undefined') {
-                var projects = results[0];
-                if (projects.length > 0) {
-                    content.head.image = projects[0].image;
-                }
-            } else {
-                content.head.image = coverimage;
-            }
+    var errs = errors(config.verbose);
 
-            app.render(res, 'main', 'home', content);
+    var app = express()
+        .set('port', config.port)
 
-            console.log(util.inspect(process.memoryUsage()));
+        .engine(hbs_ext,     hbs.engine)
+        .set('view engine',  hbs_ext)
+        .set('views',        config.dir('views'))
+        .set('view cache',   config.production)
 
-        }, function() {
-            res.send('Home error');
-        });
-    },
+        .use(favicon(config.dir('public') + '/favicon.ico'))
+        .use(logs(config.verbose))
 
-    about: function(req, res, next) {
-        var content = utils.defaultContent('about');
+        .use(compress({
+            filter: function (req, res) {
+                return /json|text|javascript|css|svg/.test(res.getHeader('Content-Type'));
+            },
+            level: 9
+        }))
 
-        common.get(res.locals.ctx, content)
-        .then(function (common) {
-            app.render(res, 'main', 'about', content);
-            console.log(util.inspect(process.memoryUsage()));
-        }, function() {
-            res.send('About error');
-        });
-    },
+        .use(cookieParser({
+            secret: 'mintdesign123martheogchristian'
+        }))
 
-    contact: function(req, res, next) {
-        var content = utils.defaultContent('contact');
+        .use(helmet())
+        .use(methodOverride());
 
-        common.get(res.locals.ctx, content)
-        .then(function (common) {
-            app.render(res, 'main', 'contact', content);
-            console.log(util.inspect(process.memoryUsage()));
-        }, function() {
-            res.send('Contact error');
-        });
-    },
+    app.use('/public', express.static(config.dir('public'), staticOptions));
 
-    work: function(req, res, next) {
-        var slug = clean(req.params.slug);
-        var content = utils.defaultContent('work');
+    router.init(app);
 
-        Promise.all([
-            projects.get(res.locals.ctx, {
-                sort:   'published desc',
-                id:     req.params.id
-            }, content),
-            common.get(res.locals.ctx, content)
-        ])
-        .then(function (results) {
+    // redirect http to https
 
-            if (content.projects.length === 0) {
-                // TODO: get path from config.routes
-                return res.redirect(301, '/works');
-            }
+    app
+        .use(errs.notFound)
+        .use(errs.log)
+        // .use(errs.json)
+        .use(errs.html);
 
-            content.project = content.projects[0];
+    busBoy.extend(app);
 
-            if (content.project.slug != slug &&
-                content.project.slugs.indexOf(slug) >= 0) {
-                return res.redirect(301, projects.link(content.project));
-            }
-
-            app.render(res, 'main', 'project', content);
-            console.log(util.inspect(process.memoryUsage()));
-
-        }, function() {
-                // TODO: get path from config.routes
-            return res.redirect(301, '/works');
-        });
-
-    },
-
-    works: function(req, res, next) {
-        var content = utils.defaultContent('works');
-
-        Promise.all([
-            projects.get(res.locals.ctx, {sort: 'published desc'}, content),
-            common.get(res.locals.ctx, content)
-        ])
-        .then(function (results) {
-            app.render(res, 'main', 'projects', content);
-            console.log(util.inspect(process.memoryUsage()));
-        }, function() {
-            res.send('Projects error');
-        });
-
-    },
-
-    render: function(res, layout, template, content) {
-        var options = {
-            layout: layout
-        };
-
-        Object.keys(content).forEach(function(key) {
-            if (key === 'layout') {
-                logger.log({
-                    type:   'error',
-                    msg:    'Render: Content object cannot contain a '+
-                            'property called layout'
-                });
-            }
-            options[key] = content[key];
-        });
-
-        res.render(template, options);
+    if (config.development) {
+        app.use(errorHandler());
+        app.set('showStackError', true);
     }
-};
 
-module.exports = app;
+    return app;
+};
