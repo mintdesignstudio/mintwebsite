@@ -25,6 +25,10 @@ module.exports.pageUrl = function(req) {
     return req.protocol + '://' + req.get('host') + req.originalUrl;
 };
 
+module.exports.siteUrl = function(req) {
+    return req.protocol + '://' + req.get('host') + '/';
+};
+
 // module.exports.url = function(type) {
 //     return this.production
 //         ? config.url[type]

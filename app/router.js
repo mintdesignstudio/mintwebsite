@@ -111,7 +111,7 @@ function frontpage(api, req, res) {
             var p = projects[i];
             content.projects.push({
                 id:             p.id,
-                link:           config.pageUrl(req)
+                link:           config.siteUrl(req)
                                 + utils.documentLink('work', p),
                 image:          utils.getImage(p.getImage('project.image')),
                 name:           p.getText('project.name'),
@@ -207,6 +207,44 @@ function about(api, req, res) {
                 email:      utils.emailLink(employee.getText('email')),
                 id:         'employee_' + i,
                 i:          i
+            });
+        }
+
+        var clients = about.getGroup('about.clients').toArray();
+        content.common.about.clients = [];
+
+        for (var i=0; i<clients.length; i++) {
+            var client = clients[i];
+            content.common.about.clients.push({
+                image:      utils.getImage(client.getImage('image')),
+                fullname:   utils.getText(client, 'fullname'),
+                i:          i
+            });
+        }
+
+        var awards = about.getGroup('about.awards').toArray();
+        content.common.about.awards = [];
+
+        for (var i=0; i<awards.length; i++) {
+            var award = awards[i];
+
+            // Don't have to pass a link resolver when the link
+            // is a web link
+            var link_web = award.getLink('link');
+            link_web = link_web === null ? '' : link_web.url();
+
+            var link_art = award.getLink('related_article');
+            link_art = link_art === null
+                ? null
+                : config.siteUrl(req) + utils.documentLink('work', award);
+
+            content.common.about.awards.push({
+                title:              utils.getText(award, 'title'),
+                giver:              utils.getText(award, 'giver'),
+                year:               award.getNumber('year'),
+                link:               link_web,
+                related_article:    link_art,
+                i:                  i
             });
         }
 
@@ -325,7 +363,7 @@ function works(api, req, res) {
             content.projects.push({
                 i:              i,
                 id:             p.id,
-                link:           config.pageUrl(req)
+                link:           config.siteUrl(req)
                                 + utils.documentLink('work', p),
                 image:          utils.getImage(p.getImage('project.image')),
                 name:           p.getText('project.name'),
@@ -386,7 +424,7 @@ function work(api, req, res) {
         }
 
         var project = projects[0];
-        var link = config.pageUrl(req) + utils.documentLink('work', project);
+        var link = config.siteUrl(req) + utils.documentLink('work', project);
 
         if (project.slug != slug &&
             project.slugs.indexOf(slug) >= 0) {
