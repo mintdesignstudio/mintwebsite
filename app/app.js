@@ -61,15 +61,15 @@ module.exports.init = function() {
         .use(helmet())
         .use(methodOverride());
 
-    if (config.production) {
-        app.get('*',function(req,res,next) {
-            if (req.headers['x-forwarded-proto'] !== 'https') {
-                res.redirect('https://' + req.headers.host + req.url);
-            } else {
-                next();
-            }
-        });
-    }
+    // if (config.production) {
+    //     app.get('*',function(req,res,next) {
+    //         if (req.headers['x-forwarded-proto'] !== 'https') {
+    //             res.redirect('https://' + req.headers.host + req.url);
+    //         } else {
+    //             next();
+    //         }
+    //     });
+    // }
 
     app.use('/public', express.static(config.dir('public'), staticOptions));
 
