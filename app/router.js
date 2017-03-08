@@ -1,38 +1,9 @@
+var ru              = require('./router-utils');
 var putils          = require('../prismic-utils');
 var config          = require('../config');
 var utils           = require('./utils.js');
 var clean           = require('./modules/clean');
 var Prismic         = require('prismic-nodejs');
-
-function getAPI(req, res) {
-    res.locals.ctx = {
-        endpoint:       config.apiEndpoint,
-        linkResolver:   putils.linkResolver
-    };
-
-    return Prismic.api(config.apiEndpoint, {
-        accessToken:    config.accessToken,
-        req:            req
-    });
-}
-
-function handleError(err, req, res) {
-    if (err.status === 404) {
-        res.status(404).send("404 not found");
-    } else {
-        res.status(500).send("Error 500: " + err.message);
-    }
-}
-
-function routeHandler(route) {
-    return function(req, res) {
-        getAPI(req, res).then(function(api) {
-            route(api, req, res);
-        }).catch(function(err) {
-            handleError(err, req, res);
-        });
-    };
-}
 
 function preview(api, req, res) {
     return Prismic.preview(api, putils.linkResolver, req, res);
@@ -41,52 +12,49 @@ function preview(api, req, res) {
 function frontpage(api, req, res) {
     var content = utils.defaultContent('home', req);
 
-    // get 12 projects sorted by date
-    var q_projects = api.query([
-        Prismic.Predicates.at('document.type', 'project')
-    ], {
-        pageSize : 12,
-        page : 1,
-        orderings : '[my.project.published desc]',
-        fetch: [
-            'project.id',
-            'project.image',
-            'project.name',
-            'project.description',
-        ]
-    });
+    var promises = [
+        // 0
+        api.query([
+            Prismic.Predicates.at('document.type', 'project')
+        ], {
+            pageSize : 12,
+            page : 1,
+            orderings : '[my.project.published desc]',
+            fetch: [
+                'project.id',
+                'project.image',
+                'project.name',
+                'project.description',
+            ]
+        }),
 
-    // Could have used one of the helper methods on the api
-    // object if the articles had the UID field, but they
-    // don't. I don't want to mess up the inbound links.
-    var q_frontpage = api.query([
-        Prismic.Predicates.at('document.type', 'frontpage')
-    ]);
+        // 1
+        api.query([
+            Prismic.Predicates.at('document.type', 'frontpage')
+        ]),
 
-    var q_about = api.query([
-        Prismic.Predicates.at('document.type', 'about')
-    ]);
+        // 2
+        api.query([
+            Prismic.Predicates.at('document.type', 'about')
+        ]),
 
-    var q_contact = api.query([
-        Prismic.Predicates.at('document.type', 'contact')
-    ]);
+        // 3
+        api.query([
+            Prismic.Predicates.at('document.type', 'contact')
+        ]),
 
-    var q_services = api.query([
-        Prismic.Predicates.at('document.type', 'services')
-    ]);
+        // 4
+        api.query([
+            Prismic.Predicates.at('document.type', 'services')
+        ]),
 
-    var q_menu = api.query([
-        Prismic.Predicates.at('document.type', 'menu')
-    ]);
+        // 5
+        api.query([
+            Prismic.Predicates.at('document.type', 'menu')
+        ])
+    ];
 
-    Promise.all([
-        q_projects,
-        q_frontpage,
-        q_about,
-        q_contact,
-        q_services,
-        q_menu
-    ])
+    Promise.all(promises)
     .then(function(contents) {
 
         var projects = contents[0].results;
@@ -176,11 +144,11 @@ function frontpage(api, req, res) {
 
         content.menu = getMenu(contents[5].results[0]);
 
-        render(res, 'main', 'home', content);
+        ru.render(res, 'main', 'home', content);
     })
 
     .catch(function(err) {
-        handleError(err, req, res);
+        ru.handleError(err, req, res);
     });
 }
 
@@ -238,11 +206,11 @@ function services(api, req, res) {
 
         content.menu = getMenu(contents[2].results[0]);
 
-        render(res, 'main', 'services', content);
+        ru.render(res, 'main', 'services', content);
     })
 
     .catch(function(err) {
-        handleError(err, req, res);
+        ru.handleError(err, req, res);
     });
 }
 
@@ -349,11 +317,11 @@ function about(api, req, res) {
 
         content.menu = getMenu(contents[2].results[0]);
 
-        render(res, 'main', 'about', content);
+        ru.render(res, 'main', 'about', content);
     })
 
     .catch(function(err) {
-        handleError(err, req, res);
+        ru.handleError(err, req, res);
     });
 }
 
@@ -403,11 +371,11 @@ function contact(api, req, res) {
 
         content.menu = getMenu(contents[2].results[0]);
 
-        render(res, 'main', 'contact', content);
+        ru.render(res, 'main', 'contact', content);
     })
 
     .catch(function(err) {
-        handleError(err, req, res);
+        ru.handleError(err, req, res);
     });
 }
 
@@ -486,11 +454,11 @@ function works(api, req, res) {
 
         content.menu = getMenu(contents[3].results[0]);
 
-        render(res, 'main', 'projects', content);
+        ru.render(res, 'main', 'projects', content);
     })
 
     .catch(function(err) {
-        handleError(err, req, res);
+        ru.handleError(err, req, res);
     });
 }
 
@@ -501,7 +469,7 @@ function workOld(api, req, res) {
             res.redirect(301, config.siteUrl(req) + 'work/' + doc.uid + '/');
         })
         .catch(function(err) {
-            handleError(err, req, res);
+            ru.handleError(err, req, res);
         });
 }
 
@@ -594,11 +562,11 @@ function work(api, req, res) {
 
         content.menu = getMenu(contents[3].results[0]);
 
-        render(res, 'main', 'project', content);
+        ru.render(res, 'main', 'project', content);
     })
 
     .catch(function(err) {
-        handleError(err, req, res);
+        ru.handleError(err, req, res);
     });
 }
 
@@ -619,32 +587,41 @@ function getMenu(contents) {
     return menu;
 }
 
-module.exports.init = function(app) {
-    app.route('/preview').get(routeHandler(preview));
-    app.route('/').get(routeHandler(frontpage));
-    app.route('/about').get(routeHandler(about));
-    app.route('/contact').get(routeHandler(contact));
-    app.route('/services').get(routeHandler(services));
-    app.route('/works').get(routeHandler(works));
-    app.route('/work/:slug/:id').get(routeHandler(workOld));
-    app.route('/work/:slug/').get(routeHandler(work));
-};
+function getProjects(contents, req) {
+    var projects = [];
 
-function render(res, layout, template, content) {
-    var options = {
-        layout: layout
-    };
+    for (var i=0; i<contents.length; i++) {
+        var p = contents[i];
+        projects.push({
+            id:             p.id,
+            link:           config.siteUrl(req)
+                            + utils.documentLink('work', p),
+            image:          utils.getImage(p.getImage('project.image')),
+            name:           p.getText('project.name'),
+            description:    p.getText('project.description'),
+        });
+    }
 
-    Object.keys(content).forEach(function(key) {
-        if (key === 'layout') {
-            logger.log({
-                type:   'error',
-                msg:    'Render: Content object cannot contain a '+
-                        'property called layout'
-            });
-        }
-        options[key] = content[key];
-    });
-
-    res.render(template, options);
+    return projects;
 }
+
+function getHead(cover_image, project_image) {
+    var head = {};
+    if (typeof cover_image === 'undefined') {
+        head.image = project_image;
+    } else {
+        head.image = cover_image;
+    }
+    return head;
+}
+
+module.exports.init = function(app) {
+    app.route('/preview').get(ru.routeHandler(preview));
+    app.route('/').get(ru.routeHandler(frontpage));
+    app.route('/about').get(ru.routeHandler(about));
+    app.route('/contact').get(ru.routeHandler(contact));
+    app.route('/services').get(ru.routeHandler(services));
+    app.route('/works').get(ru.routeHandler(works));
+    app.route('/work/:slug/:id').get(ru.routeHandler(workOld));
+    app.route('/work/:slug/').get(ru.routeHandler(work));
+};

@@ -61,19 +61,18 @@ module.exports.init = function() {
         }))
 
         .use(helmet())
-        .use(methodOverride());
+        .use(methodOverride())
+        .use('/public', express.static(config.dir('public'), staticOptions));
 
-    // if (config.production) {
-    //     app.get('*',function(req,res,next) {
-    //         if (req.headers['x-forwarded-proto'] !== 'https') {
-    //             res.redirect('https://' + req.headers.host + req.url);
-    //         } else {
-    //             next();
-    //         }
-    //     });
-    // }
-
-    app.use('/public', express.static(config.dir('public'), staticOptions));
+    if (config.production) {
+        app.get('*',function(req,res,next) {
+            if (req.headers['x-forwarded-proto'] !== 'https') {
+                res.redirect('https://' + req.headers.host + req.url);
+            } else {
+                next();
+            }
+        });
+    }
 
     app.get('/.well-known/acme-challenge/:acmeToken', function(req, res, next) {
         var acmeToken = req.params.acmeToken;
@@ -102,8 +101,6 @@ module.exports.init = function() {
     });
 
     router.init(app);
-
-    // redirect http to https
 
     app
         .use(errs.notFound)
