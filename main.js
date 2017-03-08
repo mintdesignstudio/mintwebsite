@@ -9,7 +9,7 @@ process.on('SIGTERM', function() {
         type: 'info',
         msg:  'shutting down'
     });
-    server.close(function() {
+    instance.close(function() {
         logger.log({ type: 'info', msg: 'exiting' });
         process.exit();
     });

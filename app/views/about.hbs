@@ -11,8 +11,8 @@
     </div>
 
     {{#if common.about.employees}}
-        {{#each common.about.employees}}
-        <div class="employee">
+        <div class="employees">
+            {{#each common.about.employees}}
             <div class="profile">
                 <div class="photo" id="{{id}}">
                     {{{background id image}}}
@@ -26,11 +26,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="about">
-                {{{about}}}
-            </div>
+            {{/each}}
         </div>
-        {{/each}}
     {{/if}}
 
     {{#if common.about.awards}}

@@ -11,7 +11,7 @@
     "routes": {
         "home":       "/",
         "works":      "/works",
-        "work":       "/work/:slug/:id",
+        "work":       "/work/:uid/",
         "about":      "/about",
         "contact":    "/contact"
     }

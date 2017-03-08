@@ -4,31 +4,6 @@ var utils           = require('./utils.js');
 var clean           = require('./modules/clean');
 var Prismic         = require('prismic-nodejs');
 
-
-
-
-// optimize queries
-// fix ssl
-// test performance without cloudfront
-// google analytics
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function getAPI(req, res) {
     res.locals.ctx = {
         endpoint:       config.apiEndpoint,
@@ -96,11 +71,21 @@ function frontpage(api, req, res) {
         Prismic.Predicates.at('document.type', 'contact')
     ]);
 
+    var q_services = api.query([
+        Prismic.Predicates.at('document.type', 'services')
+    ]);
+
+    var q_menu = api.query([
+        Prismic.Predicates.at('document.type', 'menu')
+    ]);
+
     Promise.all([
         q_projects,
         q_frontpage,
         q_about,
-        q_contact
+        q_contact,
+        q_services,
+        q_menu
     ])
     .then(function(contents) {
 
@@ -145,6 +130,21 @@ function frontpage(api, req, res) {
             image:          utils.getImage(about.get('about.image'))
         };
 
+        var clients = about.getGroup('about.clients').toArray();
+        content.common.about.clients = [];
+
+        var max_clients = frontpage.getNumber('frontpage.max-num-clients');
+        max_clients = clients.length < max_clients
+            ? clients.length
+            : max_clients;
+
+        for (var i=0; i<max_clients; i++) {
+            var client = clients[i];
+            content.common.about.clients.push({
+                image:      utils.getImage(client.getImage('image')),
+            });
+        }
+
         var contact = contents[3].results[0];
         content.common.contact = {
             image:      utils.getImage(contact.get('contact.image')),
@@ -157,7 +157,88 @@ function frontpage(api, req, res) {
             location:   contact.getGeoPoint('contact.location')
         };
 
+
+        if (contents[4].results.length > 0) {
+            var services = contents[4].results[0];
+            var srv_group = services.getGroup('services.services').toArray();
+            content.services = [];
+
+            for (var i=0; i<srv_group.length; i++) {
+                var service = srv_group[i];
+                content.services.push({
+                    link:       config.siteUrl(req) + 'services/#' + service.getText('uid'),
+                    title:      utils.getStructuredText(service, 'title', 'asHtml'),
+                    icon:       utils.getImage(service.getImage('icon')),
+                    excerpt:    utils.getStructuredText(service, 'excerpt', 'asHtml'),
+                });
+            }
+        }
+
+        content.menu = getMenu(contents[5].results[0]);
+
         render(res, 'main', 'home', content);
+    })
+
+    .catch(function(err) {
+        handleError(err, req, res);
+    });
+}
+
+function services(api, req, res) {
+    var content = utils.defaultContent('services', req);
+
+    var q_services = api.query([
+        Prismic.Predicates.at('document.type', 'services')
+    ]);
+    var q_about = api.query([
+        Prismic.Predicates.at('document.type', 'about')
+    ]);
+
+    var q_menu = api.query([
+        Prismic.Predicates.at('document.type', 'menu')
+    ]);
+
+    Promise.all([
+        q_services,
+        q_about,
+        q_menu
+    ])
+    .then(function(contents) {
+        content.common = {};
+
+        var services = contents[0].results[0];
+        content.title = utils.getStructuredText(services, 'services.title', 'asHtml');
+
+        var group = services.getGroup('services.services').toArray();
+        content.services = [];
+
+        for (var i=0; i<group.length; i++) {
+            var service = group[i];
+            content.services.push({
+                id:         'service_' + i,
+                side:       i % 2 === 0 ? 'left' : 'right',
+                uid:        service.getText('uid'),
+                title:      utils.getStructuredText(service, 'title', 'asHtml'),
+                icon:       utils.getImage(service.getImage('icon')),
+                photo:      utils.getImage(service.getImage('photo')),
+                // excerpt:    utils.getStructuredText(service, 'excerpt', 'asHtml'),
+                body:       utils.getStructuredText(service, 'body-text', 'asHtml'),
+            });
+        }
+
+        var about = contents[1].results[0];
+        content.common.about = {
+            headline:       about.getText('about.headline'),
+            companyname:    about.getText('about.companyname'),
+            tagline_text:   utils.getStructuredText(about, 'about.tagline', 'asText'),
+            tagline:        utils.getStructuredText(about, 'about.tagline', 'asHtml'),
+            content:        utils.getStructuredText(about, 'about.content', 'asHtml'),
+            image:          utils.getImage(about.get('about.image'))
+        };
+
+        content.menu = getMenu(contents[2].results[0]);
+
+        render(res, 'main', 'services', content);
     })
 
     .catch(function(err) {
@@ -176,9 +257,14 @@ function about(api, req, res) {
         Prismic.Predicates.at('document.type', 'contact')
     ]);
 
+    var q_menu = api.query([
+        Prismic.Predicates.at('document.type', 'menu')
+    ]);
+
     Promise.all([
         q_about,
-        q_contact
+        q_contact,
+        q_menu
     ])
     .then(function(contents) {
         content.common = {};
@@ -198,10 +284,11 @@ function about(api, req, res) {
 
         for (var i=0; i<employees.length; i++) {
             var employee = employees[i];
+            var img = utils.getImage(employee.getImage('image'));
             content.common.about.employees.push({
-                image:      utils.getImage(employee.getImage('image')),
+                image:      img,
+                has_image:  img.main.url !== '',
                 fullname:   utils.getText(employee, 'fullname'),
-                about:      utils.getStructuredText(employee, 'about', 'asHtml'),
                 telephone:  utils.getText(employee, 'telephone'),
                 title:      utils.getText(employee, 'title'),
                 email:      utils.emailLink(employee.getText('email')),
@@ -260,6 +347,8 @@ function about(api, req, res) {
             location:   contact.getGeoPoint('contact.location')
         };
 
+        content.menu = getMenu(contents[2].results[0]);
+
         render(res, 'main', 'about', content);
     })
 
@@ -278,10 +367,14 @@ function contact(api, req, res) {
     var q_contact = api.query([
         Prismic.Predicates.at('document.type', 'contact')
     ]);
+    var q_menu = api.query([
+        Prismic.Predicates.at('document.type', 'menu')
+    ]);
 
     Promise.all([
         q_about,
-        q_contact
+        q_contact,
+        q_menu
     ])
     .then(function(contents) {
         content.common = {};
@@ -307,6 +400,8 @@ function contact(api, req, res) {
             address:    utils.getStructuredText(contact, 'contact.address', 'asHtml'),
             location:   contact.getGeoPoint('contact.location')
         };
+
+        content.menu = getMenu(contents[2].results[0]);
 
         render(res, 'main', 'contact', content);
     })
@@ -346,11 +441,15 @@ function works(api, req, res) {
             'contact.linkedin'
         ]
     });
+    var q_menu = api.query([
+        Prismic.Predicates.at('document.type', 'menu')
+    ]);
 
     Promise.all([
         q_projects,
         q_about,
-        q_contact
+        q_contact,
+        q_menu
     ])
     .then(function(contents) {
         content.common = {};
@@ -385,6 +484,8 @@ function works(api, req, res) {
             linkedin:   utils.getText(contact, 'contact.linkedin'),
         };
 
+        content.menu = getMenu(contents[3].results[0]);
+
         render(res, 'main', 'projects', content);
     })
 
@@ -393,12 +494,23 @@ function works(api, req, res) {
     });
 }
 
+function workOld(api, req, res) {
+    api
+        .getByID(req.params.id)
+        .then(function (doc) {
+            res.redirect(301, config.siteUrl(req) + 'work/' + doc.uid + '/');
+        })
+        .catch(function(err) {
+            handleError(err, req, res);
+        });
+}
+
 function work(api, req, res) {
     var slug = clean(req.params.slug);
     var content = utils.defaultContent('work', req);
 
     var q_project = api.query([
-        Prismic.Predicates.at('document.id', req.params.id)
+        Prismic.Predicates.at('my.project.uid', slug)
     ], {
         orderings : '[my.project.published desc]'
     });
@@ -410,11 +522,15 @@ function work(api, req, res) {
     var q_contact = api.query([
         Prismic.Predicates.at('document.type', 'contact')
     ]);
+    var q_menu = api.query([
+        Prismic.Predicates.at('document.type', 'menu')
+    ]);
 
     Promise.all([
         q_project,
         q_about,
-        q_contact
+        q_contact,
+        q_menu
     ])
     .then(function(contents) {
         var projects = contents[0].results;
@@ -476,6 +592,8 @@ function work(api, req, res) {
             linkedin:   utils.getText(contact, 'contact.linkedin'),
         };
 
+        content.menu = getMenu(contents[3].results[0]);
+
         render(res, 'main', 'project', content);
     })
 
@@ -484,13 +602,32 @@ function work(api, req, res) {
     });
 }
 
+function getMenu(contents) {
+    var options = contents.getGroup('menu.options').toArray();
+    var menu = [];
+
+    for (var i=0; i<options.length; i++) {
+        var option = options[i];
+        menu.push({
+            link:   utils.ahrefLink(
+                        option.getLink('link').url(putils.linkResolver),
+                        utils.getText(option, 'label')
+                    ),
+        });
+    }
+
+    return menu;
+}
+
 module.exports.init = function(app) {
     app.route('/preview').get(routeHandler(preview));
     app.route('/').get(routeHandler(frontpage));
     app.route('/about').get(routeHandler(about));
     app.route('/contact').get(routeHandler(contact));
+    app.route('/services').get(routeHandler(services));
     app.route('/works').get(routeHandler(works));
-    app.route('/work/:slug/:id').get(routeHandler(work));
+    app.route('/work/:slug/:id').get(routeHandler(workOld));
+    app.route('/work/:slug/').get(routeHandler(work));
 };
 
 function render(res, layout, template, content) {

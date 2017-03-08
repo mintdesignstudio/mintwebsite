@@ -1,7 +1,7 @@
+
 .awards ul,
 .clients ul,
 .content .body {
-    width: 90%;
     margin: 3em auto 3em 5%;
 }
 
@@ -11,9 +11,14 @@
     margin-right: auto;
 }
 
+.content.home h1,
 .content.about h1,
 .content.contact h1 {
     margin-top: 2em;
+}
+
+.content.services h1 {
+    margin-top: 3em;
 }
 
 .contact p {
@@ -26,6 +31,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .awards li {
@@ -45,8 +51,10 @@
 }
 
 .awards li div {
-    margin-bottom: 2em;
+    margin: 0.5em 0 2em 0;
     color: rgb(156,156,156);
+    display: flex;
+    flex-direction: row;
 }
 
 .awards li div > span {
@@ -59,16 +67,16 @@ footer {
 }
 
 .clients li {
-    flex: 1 0 50%;
     box-sizing: border-box;
+    margin: 1em 2em;
 }
 
 .clients li img {
     display: block;
     margin: 0 auto;
     width: auto;
-    height: 5em;
-    padding: 3em 0;
+    height: 4em;
+    padding: 0;
 }
 
 .map {
@@ -208,23 +216,21 @@ section.gallery img {
     padding: 0;
 }
 
-.employee {
-    overflow: auto;
-    margin-bottom: 4em;
-}
-
-.employee .about {
-    float: left;
-    box-sizing: border-box;
-    padding: 3em 5%;
+.employees {
+     overflow: auto;
+     margin-bottom: 4em;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     align-content: flex-end;
 }
 
 .profile {
-    float: left;
     display: flex;
     flex-direction: column;
-    width: 100%;
     position: relative;
+    margin-bottom: 1em;
+    flex: 1 0 100%;
 }
 
 .profile .photo {
@@ -256,6 +262,109 @@ section.gallery img {
     padding: 0;
 }
 
+.services.excerpts {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin: 6em 5%;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.services.excerpts > div {
+    flex: 1 0 100%;
+    margin-bottom: 6em;
+}
+
+.services.excerpts > div:last-child {
+    margin-bottom: 0;
+}
+
+.services.excerpts > div img {
+    height: 4em;
+    padding-bottom: 2em;
+}
+
+.services.excerpts > div {
+    color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+    box-sizing: border-box;
+}
+
+.services .anchor {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding-top: 8.5em;
+}
+
+.services .service {
+    position: relative;
+}
+
+.services .content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3em 5% 0 5%;
+    position: relative;
+}
+
+.services .background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.services .left .background {
+    right: 0;
+    background-position: 50% 50%;
+    width: 100%;
+}
+
+.services .right .background {
+    width: 100%;
+    left: 0;
+    background-position: 0% 50%;
+}
+
+.services .service.left {
+    background-position: 50% 50%;
+}
+
+.services .service.right {
+    background-position: 50% 50%;
+    overflow: auto;
+}
+
+.services .left .background:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
+}
+
+.services .right .background:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
+}
+
 @media screen and (min-width: 35em) {
     .hero .logo {
         width: 10em;
@@ -281,10 +390,12 @@ section.gallery img {
     .awards li {
         flex: 1 0 50%;
         display: block;
+        padding-right: 1em;
+        box-sizing: border-box;
     }
 
-    .clients li {
-        flex: 1 0 33.3336%;
+    .services.excerpts > div {
+        flex: 1 0 40%;
     }
 }
 
@@ -325,19 +436,20 @@ section.gallery img {
     }
 
     .profile {
-        flex-direction: row;
-    }
-
-    .profile .photo {
-        flex: 1 0 50%;
-    }
-
-    .profile .details {
-        flex: 1 0 50%;
-        vertical-align: middle;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
+        flex: 1 0 50%;
+    }
+
+    .clients li img {
+        height: 5em;
+    }
+
+    .services.excerpts > div {
+        flex: 1 0 25%;
+    }
+
+    .services.excerpts > div img {
+        height: 5em;
     }
 }
 
@@ -359,17 +471,11 @@ section.gallery img {
     }
 
     .profile {
-        width: 50%;
         box-sizing: border-box;
-        padding-right: 3em;
         flex-direction: column;
     }
 
     .profile .photo {
-        flex: none;
-    }
-
-    .profile .details {
         flex: none;
     }
 
@@ -386,8 +492,61 @@ section.gallery img {
         padding-right: 3em;
     }
 
-    .clients li {
-        flex: 1 0 25%;
+    .services .anchor {
+        padding-top: 0;
+    }
+
+    .services .content {
+        width: 50%;
+        padding-bottom: 3em;
+    }
+
+    .services .left .background,
+    .services .right .background {
+        width: 60%;
+    }
+
+    .services .service.left .content {
+        padding-left: 5%;
+    }
+
+    .services .service.right .content {
+        float: right;
+        padding-right: 5%;
+    }
+
+    .services .left .background:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 100%);
+        background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 40%,rgba(0,0,0,0) 100%);
+        background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 40%,rgba(0,0,0,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 );
+    }
+
+    .services .right .background:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%);
+        background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 60%,rgba(0,0,0,1) 100%);
+        background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 60%,rgba(0,0,0,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 );
+    }
+
+    .clients li img {
+        height: 5em;
+    }
+
+    .services.excerpts > div img {
+        height: 6em;
     }
 }
 
@@ -425,8 +584,8 @@ section.gallery img {
     }
 
     .employee {
-        width: 90%;
-        margin: 1em auto 0;
+        width: 40%;
+        margin: 1em 5% 0 5%;
     }
 
     .profile {
@@ -441,12 +600,22 @@ section.gallery img {
         flex: 1 0 45%;
     }
 
-    .clients li {
-        flex: 1 0 20%;
-    }
-
     .map {
         height: 40em;
+    }
+
+    .services .content {
+        padding-top: 6em;
+        padding-bottom: 6em;
+    }
+
+    .services.excerpts > div {
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+
+    .services.excerpts > div img {
+        height: 7em;
     }
 }
 
@@ -457,10 +626,6 @@ section.gallery img {
 
     .hero.about, .hero.contact {
         min-height: 40em;
-    }
-
-    .clients li {
-        flex: 1 0 16.6667%;
     }
 
     .map {
@@ -475,10 +640,6 @@ section.gallery img {
 
     .hero.about, .hero.contact {
         min-height: 50em;
-    }
-
-    .clients li {
-        flex: 1 0 14.28%;
     }
 
     .map {

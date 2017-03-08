@@ -2,6 +2,7 @@ var express         = require('express'),
     exphbs          = require('express-handlebars')
     favicon         = require('serve-favicon'),
     busBoy          = require('express-busboy'),
+    robots          = require('express-robots'),
     cookieParser    = require('cookie-parser'),
     methodOverride  = require('method-override'),
     errorHandler    = require('errorhandler'),
@@ -46,6 +47,7 @@ module.exports.init = function() {
 
         .use(favicon(config.dir('public') + '/favicon.ico'))
         .use(logs(config.verbose))
+        .use(robots({ UserAgent: '*' }))
 
         .use(compress({
             filter: function (req, res) {

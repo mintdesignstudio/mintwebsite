@@ -28,8 +28,8 @@ module.exports.defaultContent = function(page_name, req) {
     }
 }
 
-module.exports.ahrefLink = function(url) {
-    return url ? '<a href="'+url+'">'+url+'</a>' : null;
+module.exports.ahrefLink = function(url, label) {
+    return url ? '<a href="'+url+'">'+label+'</a>' : null;
 }
 
 module.exports.emailLink = function(value) {

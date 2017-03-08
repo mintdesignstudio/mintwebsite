@@ -8,6 +8,20 @@
     </div>
 </div>
 
+{{#if services}}
+<section class="services excerpts">
+    {{#each services}}
+    <div>
+        <a href="{{link}}">
+            {{{img icon "main"}}}
+            {{{title}}}
+        </a>
+        {{{excerpt}}}
+    </div>
+    {{/each}}
+</section>
+{{/if}}
+
 <section class="works">
     <h2>Work</h2>
 
@@ -27,5 +41,25 @@
 
     <a href="/works">Full work list</a>
 </section>
+
+<div class="content home">
+    {{#if common.about.clients}}
+    <div class="clients center">
+        <h1>Clients</h1>
+        <ul>
+        {{#each common.about.clients}}
+            {{#if image.main.url}}
+            <li>
+                <picture>
+                    <source srcset="{{image.medium.url}}" media="(min-width: 40em)">
+                    <img srcset="{{image.small.url}}" alt="{{alt}}">
+                </picture>
+            </li>
+            {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+</div>
 
 {{> footer}}

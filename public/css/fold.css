@@ -50,7 +50,7 @@ p {
 .menu a {
     box-sizing: border-box;
     display: block;
-    padding: 0.8em 0.8em 0.8em 1.5em;
+    padding: 0.8em;
     color: white;
 }
 
@@ -60,6 +60,7 @@ p {
 
 .menu a:hover {
     text-decoration: none;
+    color: #6ae0cb;
 }
 
 .menu a img {
@@ -84,7 +85,7 @@ p {
 
 .menu ul li {
     display: inline-block;
-    flex: 1 0 33%;
+    flex: 1 0 25%;
     vertical-align: middle;
 }
 
@@ -119,4 +120,8 @@ p {
 
 .hero.about, .hero.contact {
     min-height: 20em;
+}
+
+.center {
+    text-align: center;
 }

@@ -1,6 +1,18 @@
 var Handlebars = require('handlebars');
 var config = require('../../config');
 
+module.exports.img = function(image, size) {
+    if (typeof image === 'undefined') {
+        return '';
+    }
+    if (image[size].url === '') {
+        return '';
+    }
+    return new Handlebars.SafeString(
+        '<img src="' + image[size].url + '" />'
+    );
+}
+
 module.exports.background = function(id, image) {
     return new Handlebars.SafeString(
         '<style type="text/css">' +
