@@ -12,7 +12,7 @@ function preview(api, req, res) {
 
 function frontpage(api, req, res) {
     queries
-    .create(api)
+    .create(api, req)
     .doctype('project', {
         pageSize : 12,
         page : 1,
@@ -100,7 +100,7 @@ function services(api, req, res) {
     var content = utils.defaultContent('services', req);
 
     queries
-    .create(api)
+    .create(api, req)
     .doctype('services')
     .doctype('about')
     .doctype('menu')
@@ -152,7 +152,7 @@ function about(api, req, res) {
     var content = utils.defaultContent('about', req);
 
     queries
-    .create(api)
+    .create(api, req)
     .doctype('about')
     .doctype('contact')
     .doctype('menu')
@@ -252,7 +252,7 @@ function contact(api, req, res) {
     var content = utils.defaultContent('contact', req);
 
     queries
-    .create(api)
+    .create(api, req)
     .doctype('about')
     .doctype('contact')
     .doctype('menu')
@@ -296,7 +296,7 @@ function works(api, req, res) {
     var content = utils.defaultContent('works', req);
 
     queries
-    .create(api)
+    .create(api, req)
     .doctype('project', {
         pageSize : 50,
         page : 1,
@@ -363,7 +363,7 @@ function work(api, req, res) {
     var content = utils.defaultContent('work', req);
 
     queries
-    .create(api)
+    .create(api, req)
     .predicate('my.project.uid', slug, {
         orderings : '[my.project.published desc]'
     })
@@ -525,3 +525,16 @@ module.exports.init = function(app) {
     app.route('/work/:slug/:id').get(ru.routeHandler(workOld));
     app.route('/work/:slug/').get(ru.routeHandler(work));
 };
+
+// var routes = {
+//     '/': frontpage,
+// };
+
+// app.use(function(req, res) {
+//     var handler = routes[req.pathname];
+//     if (typeof handler === 'undefined') {
+//         error();
+//     } else {
+//         ru.routehandler(handler, req, res);
+//     }
+// });
