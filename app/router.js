@@ -3,6 +3,7 @@ var putils          = require('../prismic-utils');
 var config          = require('../config');
 var utils           = require('./utils.js');
 var clean           = require('./modules/clean');
+var queries         = require('./queries');
 var Prismic         = require('prismic-nodejs');
 
 function preview(api, req, res) {
@@ -10,77 +11,39 @@ function preview(api, req, res) {
 }
 
 function frontpage(api, req, res) {
-    var content = utils.defaultContent('home', req);
+    queries
+    .create(api)
+    .doctype('project', {
+        pageSize : 12,
+        page : 1,
+        orderings : '[my.project.published desc]',
+        fetch: [
+            'project.id',
+            'project.image',
+            'project.name',
+            'project.description',
+        ]
+    })
+    .doctype('frontpage')
+    .doctype('about')
+    .doctype('contact')
+    .doctype('services')
+    .doctype('menu')
+    .process()
 
-    var promises = [
-        // 0
-        api.query([
-            Prismic.Predicates.at('document.type', 'project')
-        ], {
-            pageSize : 12,
-            page : 1,
-            orderings : '[my.project.published desc]',
-            fetch: [
-                'project.id',
-                'project.image',
-                'project.name',
-                'project.description',
-            ]
-        }),
-
-        // 1
-        api.query([
-            Prismic.Predicates.at('document.type', 'frontpage')
-        ]),
-
-        // 2
-        api.query([
-            Prismic.Predicates.at('document.type', 'about')
-        ]),
-
-        // 3
-        api.query([
-            Prismic.Predicates.at('document.type', 'contact')
-        ]),
-
-        // 4
-        api.query([
-            Prismic.Predicates.at('document.type', 'services')
-        ]),
-
-        // 5
-        api.query([
-            Prismic.Predicates.at('document.type', 'menu')
-        ])
-    ];
-
-    Promise.all(promises)
     .then(function(contents) {
 
-        var projects = contents[0].results;
-        content.projects = [];
-
-        for (var i=0; i<projects.length; i++) {
-            var p = projects[i];
-            content.projects.push({
-                id:             p.id,
-                link:           config.siteUrl(req)
-                                + utils.documentLink('work', p),
-                image:          utils.getImage(p.getImage('project.image')),
-                name:           p.getText('project.name'),
-                description:    p.getText('project.description'),
-            });
-        }
-
-        var frontpage = contents[1].results[0];
+        var content = utils.defaultContent('home', req);
         content.head = {};
 
+        getProjects(content, contents[0].results, req);
+
+        var frontpage = contents[1].results[0];
+
         var coverimage = utils.getImage(frontpage.getImage('frontpage.coverimage'));
-        if (typeof coverimage === 'undefined') {
-            content.head.image = utils.getImage(projects[0].getImage('project.image'));
-        } else {
-            content.head.image = coverimage;
-        }
+        content.head.image = typeof coverimage === 'undefined'
+            ? utils.getImage(content.projects[0].image)
+            : coverimage;
 
         content.frontpage = {
             coverimage:     coverimage
@@ -89,29 +52,10 @@ function frontpage(api, req, res) {
         content.common = {};
 
         var about = contents[2].results[0];
-        content.common.about = {
-            headline:       about.getText('about.headline'),
-            companyname:    about.getText('about.companyname'),
-            tagline_text:   utils.getStructuredText(about, 'about.tagline', 'asText'),
-            tagline:        utils.getStructuredText(about, 'about.tagline', 'asHtml'),
-            content:        utils.getStructuredText(about, 'about.content', 'asHtml'),
-            image:          utils.getImage(about.get('about.image'))
-        };
-
-        var clients = about.getGroup('about.clients').toArray();
-        content.common.about.clients = [];
+        getAbout(content.common, about, req);
 
         var max_clients = frontpage.getNumber('frontpage.max-num-clients');
-        max_clients = clients.length < max_clients
-            ? clients.length
-            : max_clients;
-
-        for (var i=0; i<max_clients; i++) {
-            var client = clients[i];
-            content.common.about.clients.push({
-                image:      utils.getImage(client.getImage('image')),
-            });
-        }
+        getClients(content.common.about, about, max_clients, req);
 
         var contact = contents[3].results[0];
         content.common.contact = {
@@ -155,22 +99,12 @@ function frontpage(api, req, res) {
 function services(api, req, res) {
     var content = utils.defaultContent('services', req);
 
-    var q_services = api.query([
-        Prismic.Predicates.at('document.type', 'services')
-    ]);
-    var q_about = api.query([
-        Prismic.Predicates.at('document.type', 'about')
-    ]);
-
-    var q_menu = api.query([
-        Prismic.Predicates.at('document.type', 'menu')
-    ]);
-
-    Promise.all([
-        q_services,
-        q_about,
-        q_menu
-    ])
+    queries
+    .create(api)
+    .doctype('services')
+    .doctype('about')
+    .doctype('menu')
+    .process()
     .then(function(contents) {
         content.common = {};
 
@@ -217,23 +151,12 @@ function services(api, req, res) {
 function about(api, req, res) {
     var content = utils.defaultContent('about', req);
 
-    var q_about = api.query([
-        Prismic.Predicates.at('document.type', 'about')
-    ]);
-
-    var q_contact = api.query([
-        Prismic.Predicates.at('document.type', 'contact')
-    ]);
-
-    var q_menu = api.query([
-        Prismic.Predicates.at('document.type', 'menu')
-    ]);
-
-    Promise.all([
-        q_about,
-        q_contact,
-        q_menu
-    ])
+    queries
+    .create(api)
+    .doctype('about')
+    .doctype('contact')
+    .doctype('menu')
+    .process()
     .then(function(contents) {
         content.common = {};
 
@@ -328,22 +251,12 @@ function about(api, req, res) {
 function contact(api, req, res) {
     var content = utils.defaultContent('contact', req);
 
-    var q_about = api.query([
-        Prismic.Predicates.at('document.type', 'about')
-    ]);
-
-    var q_contact = api.query([
-        Prismic.Predicates.at('document.type', 'contact')
-    ]);
-    var q_menu = api.query([
-        Prismic.Predicates.at('document.type', 'menu')
-    ]);
-
-    Promise.all([
-        q_about,
-        q_contact,
-        q_menu
-    ])
+    queries
+    .create(api)
+    .doctype('about')
+    .doctype('contact')
+    .doctype('menu')
+    .process()
     .then(function(contents) {
         content.common = {};
 
@@ -382,25 +295,19 @@ function contact(api, req, res) {
 function works(api, req, res) {
     var content = utils.defaultContent('works', req);
 
-    var q_projects = api.query([
-        Prismic.Predicates.at('document.type', 'project')
-    ], {
+    queries
+    .create(api)
+    .doctype('project', {
         pageSize : 50,
         page : 1,
         orderings : '[my.project.published desc]'
-    });
-
-    var q_about = api.query([
-        Prismic.Predicates.at('document.type', 'about')
-    ], {
+    })
+    .doctype('about', {
         fetch: [
             'about.companyname'
         ]
-    });
-
-    var q_contact = api.query([
-        Prismic.Predicates.at('document.type', 'contact')
-    ], {
+    })
+    .doctype('contact', {
         fetch: [
             'contact.email',
             'contact.telephone',
@@ -408,35 +315,13 @@ function works(api, req, res) {
             'contact.instagram',
             'contact.linkedin'
         ]
-    });
-    var q_menu = api.query([
-        Prismic.Predicates.at('document.type', 'menu')
-    ]);
-
-    Promise.all([
-        q_projects,
-        q_about,
-        q_contact,
-        q_menu
-    ])
+    })
+    .doctype('menu')
+    .process()
     .then(function(contents) {
         content.common = {};
 
-        var projects = contents[0].results;
-        content.projects = [];
-
-        for (var i=0; i<projects.length; i++) {
-            var p = projects[i];
-            content.projects.push({
-                i:              i,
-                id:             p.id,
-                link:           config.siteUrl(req)
-                                + utils.documentLink('work', p),
-                image:          utils.getImage(p.getImage('project.image')),
-                name:           p.getText('project.name'),
-                description:    p.getText('project.description'),
-            });
-        }
+        getProjects(content, contents[0].results, req);
 
         var about = contents[1].results[0];
         content.common.about = {
@@ -477,29 +362,15 @@ function work(api, req, res) {
     var slug = clean(req.params.slug);
     var content = utils.defaultContent('work', req);
 
-    var q_project = api.query([
-        Prismic.Predicates.at('my.project.uid', slug)
-    ], {
+    queries
+    .create(api)
+    .predicate('my.project.uid', slug, {
         orderings : '[my.project.published desc]'
-    });
-
-    var q_about = api.query([
-        Prismic.Predicates.at('document.type', 'about')
-    ]);
-
-    var q_contact = api.query([
-        Prismic.Predicates.at('document.type', 'contact')
-    ]);
-    var q_menu = api.query([
-        Prismic.Predicates.at('document.type', 'menu')
-    ]);
-
-    Promise.all([
-        q_project,
-        q_about,
-        q_contact,
-        q_menu
-    ])
+    })
+    .doctype('about')
+    .doctype('contact')
+    .doctype('menu')
+    .process()
     .then(function(contents) {
         var projects = contents[0].results;
 
@@ -587,12 +458,13 @@ function getMenu(contents) {
     return menu;
 }
 
-function getProjects(contents, req) {
+function getProjects(contents, results, req) {
     var projects = [];
 
-    for (var i=0; i<contents.length; i++) {
-        var p = contents[i];
+    for (var i=0; i<results.length; i++) {
+        var p = results[i];
         projects.push({
+            i:              i,
             id:             p.id,
             link:           config.siteUrl(req)
                             + utils.documentLink('work', p),
@@ -602,7 +474,35 @@ function getProjects(contents, req) {
         });
     }
 
-    return projects;
+    contents.projects = projects;
+}
+
+function getAbout(contents, results, req) {
+    contents.about = {
+        headline:       results.getText('about.headline'),
+        companyname:    results.getText('about.companyname'),
+        tagline_text:   utils.getStructuredText(results, 'about.tagline', 'asText'),
+        tagline:        utils.getStructuredText(results, 'about.tagline', 'asHtml'),
+        content:        utils.getStructuredText(results, 'about.content', 'asHtml'),
+        image:          utils.getImage(results.get('about.image'))
+    };
+}
+
+function getClients(contents, about, max_clients, req) {
+    var clients = about.getGroup('about.clients').toArray();
+    contents.clients = [];
+
+    // var max_clients = frontpage.getNumber('frontpage.max-num-clients');
+    max_clients = clients.length < max_clients
+        ? clients.length
+        : max_clients;
+
+    for (var i=0; i<max_clients; i++) {
+        var client = clients[i];
+        contents.clients.push({
+            image: utils.getImage(client.getImage('image')),
+        });
+    }
 }
 
 function getHead(cover_image, project_image) {

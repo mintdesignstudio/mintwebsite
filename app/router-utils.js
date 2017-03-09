@@ -14,6 +14,16 @@ function getAPI(req, res) {
     });
 }
 
+function handleError(err, req, res) {
+    if (err.status === 404) {
+        res.status(404).send("404 not found");
+    } else {
+        res.status(500).send("Error 500: " + err.message);
+    }
+}
+
+module.exports.handleError = handleError;
+
 module.exports.routeHandler = function(route) {
     return function(req, res) {
         getAPI(req, res).then(function(api) {
@@ -23,14 +33,6 @@ module.exports.routeHandler = function(route) {
         });
     };
 };
-
-module.exports.handleError = function(err, req, res) {
-    if (err.status === 404) {
-        res.status(404).send("404 not found");
-    } else {
-        res.status(500).send("Error 500: " + err.message);
-    }
-}
 
 module.exports.render = function(res, layout, template, content) {
     var options = {
