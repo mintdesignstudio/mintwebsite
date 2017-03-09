@@ -4,7 +4,19 @@ var config          = require('../config');
 var utils           = require('./utils.js');
 var clean           = require('./modules/clean');
 var queries         = require('./queries');
+var chandlers       = require('./content-handlers');
 var Prismic         = require('prismic-nodejs');
+
+var routes = {
+    '/preview':         preview,
+    '/':                frontpage,
+    '/about':           about,
+    '/contact':         contact,
+    '/services':        services,
+    '/works':           works,
+    '/work/:slug/:id':  workOld,
+    '/work/:slug/':     work,
+};
 
 function preview(api, req, res) {
     return Prismic.preview(api, putils.linkResolver, req, res);
@@ -36,7 +48,7 @@ function frontpage(api, req, res) {
         var content = utils.defaultContent('home', req);
         content.head = {};
 
-        getProjects(content, contents[0].results, req);
+        content.projects = chandlers.getProjects(contents[0].results, req);
 
         var frontpage = contents[1].results[0];
 
@@ -52,10 +64,10 @@ function frontpage(api, req, res) {
         content.common = {};
 
         var about = contents[2].results[0];
-        getAbout(content.common, about, req);
+        content.common.about = chandlers.getAbout(about, req);
 
         var max_clients = frontpage.getNumber('frontpage.max-num-clients');
-        getClients(content.common.about, about, max_clients, req);
+        content.common.about.clients = chandlers.getClients(about, max_clients, req);
 
         var contact = contents[3].results[0];
         content.common.contact = {
@@ -68,7 +80,6 @@ function frontpage(api, req, res) {
             address:    utils.getStructuredText(contact, 'contact.address', 'asHtml'),
             location:   contact.getGeoPoint('contact.location')
         };
-
 
         if (contents[4].results.length > 0) {
             var services = contents[4].results[0];
@@ -86,7 +97,7 @@ function frontpage(api, req, res) {
             }
         }
 
-        content.menu = getMenu(contents[5].results[0]);
+        content.menu = chandlers.getMenu(contents[5].results[0]);
 
         ru.render(res, 'main', 'home', content);
     })
@@ -138,7 +149,7 @@ function services(api, req, res) {
             image:          utils.getImage(about.get('about.image'))
         };
 
-        content.menu = getMenu(contents[2].results[0]);
+        content.menu = chandlers.getMenu(contents[2].results[0]);
 
         ru.render(res, 'main', 'services', content);
     })
@@ -238,7 +249,7 @@ function about(api, req, res) {
             location:   contact.getGeoPoint('contact.location')
         };
 
-        content.menu = getMenu(contents[2].results[0]);
+        content.menu = chandlers.getMenu(contents[2].results[0]);
 
         ru.render(res, 'main', 'about', content);
     })
@@ -282,7 +293,7 @@ function contact(api, req, res) {
             location:   contact.getGeoPoint('contact.location')
         };
 
-        content.menu = getMenu(contents[2].results[0]);
+        content.menu = chandlers.getMenu(contents[2].results[0]);
 
         ru.render(res, 'main', 'contact', content);
     })
@@ -321,7 +332,7 @@ function works(api, req, res) {
     .then(function(contents) {
         content.common = {};
 
-        getProjects(content, contents[0].results, req);
+        content.projects = chandlers.getProjects(contents[0].results, req);
 
         var about = contents[1].results[0];
         content.common.about = {
@@ -337,7 +348,7 @@ function works(api, req, res) {
             linkedin:   utils.getText(contact, 'contact.linkedin'),
         };
 
-        content.menu = getMenu(contents[3].results[0]);
+        content.menu = chandlers.getMenu(contents[3].results[0]);
 
         ru.render(res, 'main', 'projects', content);
     })
@@ -431,7 +442,7 @@ function work(api, req, res) {
             linkedin:   utils.getText(contact, 'contact.linkedin'),
         };
 
-        content.menu = getMenu(contents[3].results[0]);
+        content.menu = chandlers.getMenu(contents[3].results[0]);
 
         ru.render(res, 'main', 'project', content);
     })
@@ -441,100 +452,10 @@ function work(api, req, res) {
     });
 }
 
-function getMenu(contents) {
-    var options = contents.getGroup('menu.options').toArray();
-    var menu = [];
-
-    for (var i=0; i<options.length; i++) {
-        var option = options[i];
-        menu.push({
-            link:   utils.ahrefLink(
-                        option.getLink('link').url(putils.linkResolver),
-                        utils.getText(option, 'label')
-                    ),
-        });
-    }
-
-    return menu;
-}
-
-function getProjects(contents, results, req) {
-    var projects = [];
-
-    for (var i=0; i<results.length; i++) {
-        var p = results[i];
-        projects.push({
-            i:              i,
-            id:             p.id,
-            link:           config.siteUrl(req)
-                            + utils.documentLink('work', p),
-            image:          utils.getImage(p.getImage('project.image')),
-            name:           p.getText('project.name'),
-            description:    p.getText('project.description'),
-        });
-    }
-
-    contents.projects = projects;
-}
-
-function getAbout(contents, results, req) {
-    contents.about = {
-        headline:       results.getText('about.headline'),
-        companyname:    results.getText('about.companyname'),
-        tagline_text:   utils.getStructuredText(results, 'about.tagline', 'asText'),
-        tagline:        utils.getStructuredText(results, 'about.tagline', 'asHtml'),
-        content:        utils.getStructuredText(results, 'about.content', 'asHtml'),
-        image:          utils.getImage(results.get('about.image'))
-    };
-}
-
-function getClients(contents, about, max_clients, req) {
-    var clients = about.getGroup('about.clients').toArray();
-    contents.clients = [];
-
-    // var max_clients = frontpage.getNumber('frontpage.max-num-clients');
-    max_clients = clients.length < max_clients
-        ? clients.length
-        : max_clients;
-
-    for (var i=0; i<max_clients; i++) {
-        var client = clients[i];
-        contents.clients.push({
-            image: utils.getImage(client.getImage('image')),
-        });
-    }
-}
-
-function getHead(cover_image, project_image) {
-    var head = {};
-    if (typeof cover_image === 'undefined') {
-        head.image = project_image;
-    } else {
-        head.image = cover_image;
-    }
-    return head;
-}
-
 module.exports.init = function(app) {
-    app.route('/preview').get(ru.routeHandler(preview));
-    app.route('/').get(ru.routeHandler(frontpage));
-    app.route('/about').get(ru.routeHandler(about));
-    app.route('/contact').get(ru.routeHandler(contact));
-    app.route('/services').get(ru.routeHandler(services));
-    app.route('/works').get(ru.routeHandler(works));
-    app.route('/work/:slug/:id').get(ru.routeHandler(workOld));
-    app.route('/work/:slug/').get(ru.routeHandler(work));
+    Object.keys(routes).forEach(function(route) {
+        app
+            .route(route)
+            .get(ru.routeHandler(routes[route]));
+    });
 };
-
-// var routes = {
-//     '/': frontpage,
-// };
-
-// app.use(function(req, res) {
-//     var handler = routes[req.pathname];
-//     if (typeof handler === 'undefined') {
-//         error();
-//     } else {
-//         ru.routehandler(handler, req, res);
-//     }
-// });
