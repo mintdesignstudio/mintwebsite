@@ -290,8 +290,7 @@ function contact(api, req, res) {
             instagram:  utils.getText(contact, 'contact.instagram'),
             linkedin:   utils.getText(contact, 'contact.linkedin'),
             address:    utils.getStructuredText(contact, 'contact.address', 'asHtml'),
-            map:        utils.getImage(contact.get('contact.map')),
-            location:   contact.getGeoPoint('contact.location')
+            map:        utils.getImage(contact.get('contact.map'))
         };
 
         content.menu = chandlers.getMenu(contents[2].results[0]);
