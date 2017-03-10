@@ -75,7 +75,7 @@ footer {
     display: block;
     margin: 0 auto;
     width: auto;
-    height: 2em;
+    height: 6em;
     padding: 0;
 }
 
@@ -441,7 +441,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 2.5em;
+        height: 6.5em;
     }
 
     .services.excerpts > div {
@@ -542,7 +542,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 3em;
+        height: 7em;
     }
 
     .services.excerpts > div img {
@@ -619,7 +619,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 7em;
+        height: 8em;
     }
 
 }
@@ -638,7 +638,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 8em;
+        height: 9em;
     }
 }
 
@@ -656,6 +656,6 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 9em;
+        height: 10em;
     }
 }
