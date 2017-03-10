@@ -38,6 +38,16 @@ module.exports.background = function(id, image) {
     );
 }
 
+module.exports.herobg = function(id, image, size) {
+    return new Handlebars.SafeString(
+        '<style type="text/css">' +
+        '#' + id + ' {'+
+            'background-image: url(' + image[size].url + ');'+
+        '}' +
+        '</style>'
+    );
+}
+
 module.exports.first = function(context, options) {
     return options.fn(context[0]);
 }

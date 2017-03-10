@@ -118,7 +118,7 @@ p {
     line-height: 1.4em;
 }
 
-.hero.about, .hero.contact {
+.hero.about {
     min-height: 20em;
 }
 

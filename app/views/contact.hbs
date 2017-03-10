@@ -1,7 +1,7 @@
 {{> menu}}
 
-<div class="contact hero" id="hero">
-    {{{background "hero" common.contact.image}}}
+<div class="contact hero overlay" id="hero">
+    {{{herobg "hero" common.contact.map "main"}}}
 </div>
 
 <div class="content contact">
@@ -9,37 +9,6 @@
     <div class="body">
         {{{common.contact.address}}}
     </div>
-
-    <div class="map" id="map"
-        data-lat="{{common.contact.location.latitude}}"
-        data-long="{{common.contact.location.longitude}}">
-    </div>
 </div>
 
 {{> footer}}
-
-<link rel="stylesheet" href="/public/css/leaflet.css" />
-<script src="/public/js/leaflet.js"></script>
-<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js?v1.3.0"></script>
-
-<script>
-var map, layer, marker;
-function waitForLeaflet() {
-    if (window.L && window.L.StamenTileLayer) {
-        layer = new L.StamenTileLayer('toner');
-        map = L.map('map').setView([data.lat, data.long], 17);
-        map.addLayer(layer);
-        marker = L.marker([data.lat, data.long]).addTo(map);
-        map.doubleClickZoom.disable();
-        map.dragging.disable();
-        map.touchZoom.disable();
-        map.scrollWheelZoom.disable();
-        map.keyboard.disable();
-    } else {
-        window.clearTimeout(timer);
-        timer = window.setTimeout(waitForLeaflet, 500);
-    }
-}
-var data = document.getElementById('map').dataset;
-var timer = window.setTimeout(waitForLeaflet, 500);
-</script>

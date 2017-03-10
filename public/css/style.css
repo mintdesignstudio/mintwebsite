@@ -1,3 +1,21 @@
+.hero.contact {
+    height: 30em;
+    background-position: 50% 100%;
+    background-size: cover;
+}
+
+.hero.overlay:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
+}
 
 .awards ul,
 .clients ul,
@@ -375,7 +393,7 @@ section.gallery img {
         line-height: 1.2em;
     }
 
-    .hero.about, .hero.contact {
+    .hero.about {
         min-height: 25em;
     }
 
@@ -396,6 +414,10 @@ section.gallery img {
 
     .services.excerpts > div {
         flex: 1 0 40%;
+    }
+
+    .hero.contact {
+        min-height: 30em;
     }
 }
 
@@ -451,6 +473,16 @@ section.gallery img {
     .services.excerpts > div img {
         height: 5em;
     }
+
+    .hero.contact {
+        min-height: 35em;
+    }
+
+    .hero.overlay:before {
+        background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
+        background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
+    }
 }
 
 @media screen and (min-width: 50em) {
@@ -466,8 +498,12 @@ section.gallery img {
         opacity: 0.5;
     }
 
-    .hero.about, .hero.contact {
+    .hero.about {
         min-height: 30em;
+    }
+
+    .hero.contact {
+        min-height: 40em;
     }
 
     .profile {
@@ -560,7 +596,7 @@ section.gallery img {
         line-height: 1.6em;
     }
 
-    .hero.about, .hero.contact {
+    .hero.about {
         min-height: 35em;
     }
 
