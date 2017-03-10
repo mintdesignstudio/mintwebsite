@@ -617,6 +617,11 @@ section.gallery img {
     .services.excerpts > div img {
         height: 7em;
     }
+
+    .clients li img {
+        height: 4em;
+    }
+
 }
 
 @media screen and (min-width: 110em) {
@@ -631,6 +636,10 @@ section.gallery img {
     .map {
         height: 50em;
     }
+
+    .clients li img {
+        height: 5em;
+    }
 }
 
 @media screen and (min-width: 170em) {
@@ -644,5 +653,9 @@ section.gallery img {
 
     .map {
         height: 60em;
+    }
+
+    .clients li img {
+        height: 6em;
     }
 }
