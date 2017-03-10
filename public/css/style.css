@@ -75,7 +75,7 @@ footer {
     display: block;
     margin: 0 auto;
     width: auto;
-    height: 4em;
+    height: 2em;
     padding: 0;
 }
 
@@ -441,7 +441,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 5em;
+        height: 2.5em;
     }
 
     .services.excerpts > div {
@@ -542,7 +542,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 5em;
+        height: 3em;
     }
 
     .services.excerpts > div img {
