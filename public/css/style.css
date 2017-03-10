@@ -4,7 +4,7 @@
     background-size: cover;
 }
 
-.hero.overlay:before {
+.hero.overlay::before {
     content: '';
     position: absolute;
     left: 0;
@@ -357,7 +357,7 @@ section.gallery img {
     overflow: auto;
 }
 
-.services .left .background:before {
+.services .left .background::before {
     content: '';
     position: absolute;
     left: 0;
@@ -370,7 +370,7 @@ section.gallery img {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
 
-.services .right .background:before {
+.services .right .background::before {
     content: '';
     position: absolute;
     left: 0;
@@ -478,7 +478,7 @@ section.gallery img {
         min-height: 35em;
     }
 
-    .hero.overlay:before {
+    .hero.overlay::before {
         background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
         background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
         background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
@@ -551,7 +551,7 @@ section.gallery img {
         padding-right: 5%;
     }
 
-    .services .left .background:before {
+    .services .left .background::before {
         content: '';
         position: absolute;
         left: 0;
@@ -564,7 +564,7 @@ section.gallery img {
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 );
     }
 
-    .services .right .background:before {
+    .services .right .background::before {
         content: '';
         position: absolute;
         left: 0;
