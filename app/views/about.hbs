@@ -55,13 +55,7 @@
         {{#each common.about.clients}}
             {{#if image.main.url}}
             <li>
-                <picture>
-                    <source srcset="{{image.medium.url}}" media="(min-width: 40em)">
-                    <img srcset="{{image.small.url}}" alt="{{alt}}">
-                </picture>
-                {{#if fullname}}
-                    <span>{{fullname}}</span>
-                {{/if}}
+                <img srcset="{{image.main.url}}" alt="{{alt}}">
             </li>
             {{/if}}
         {{/each}}
