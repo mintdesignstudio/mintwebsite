@@ -7,6 +7,8 @@ var inlineSource    = require('inline-source');
 var Imagemin        = require('imagemin');
 var Minimize        = require('minimize');
 var UglifyJS        = require('uglify-js');
+var cheerio         = require('cheerio');
+var sri             = require('node-sri');
 
 var svgo = Imagemin.svgo([
     {removeViewBox: true},
@@ -45,6 +47,7 @@ cleanCopyDir(dir.pub,       dir.prodpub, function() {
 
         minifyCss(dir.prod);
         uglify(dir.prodpub + 'js/');
+        sriHash(dir.prodappview + 'layouts/', '.hbs');
         inline(dir.prodappview + 'layouts/', '.hbs');
         imagemin(dir.prodpub + 'images/', '.svg', svgo);
         imagemin(dir.prodpub + 'images/', '.png', optipng);
@@ -70,6 +73,72 @@ function uglify(dir) {
     });
 
     console.log('');
+}
+
+function sriHash(dir, ext) {
+    console.log('Create SRI hash for external resources');
+
+    var hashes = {};
+    var modified = {};
+
+    var files = listFiles(dir, ext)
+        .map(function(file) {
+            console.log('    '+file.path);
+            return file.path;
+        });
+    var num = 0;
+
+    var done = function() {
+        Object.keys(modified).forEach(function(file) {
+            var $ = modified[file];
+            $('script').each(function(i, script) {
+                var src = $(this).attr('src');
+                var hash = hashes[src];
+
+                if (typeof hash === 'undefined') {
+                    return;
+                }
+
+                $(this).attr('integrity', hash);
+            });
+            fs.writeFileSync(file, $.html());
+        });
+    };
+
+    files.forEach(function(file) {
+        var content = fs.readFileSync(file, 'utf8');
+        var $ = cheerio.load(content);
+
+        modified[file] = $;
+
+        $('script').each(function(i, script) {
+            var co = $(this).attr('crossorigin');
+            if (typeof co === 'undefined') {
+                return;
+            }
+
+            var src = $(this).attr('src');
+            if (src[0] === '/' && src[1] !== '/') {
+                sri.hash({
+                    file: __dirname + src,
+                    algo: 'sha512'
+                }, function(err, hash) {
+                    if (err) {
+                        throw err;
+                    }
+                    hashes[src] = hash;
+                    ++num;
+                    if (num == files.length) {
+                        done();
+                    }
+                });
+            }
+        });
+    });
+}
+
+function hashFile(files, cb) {
+
 }
 
 function htmlmin(dir, ext) {
