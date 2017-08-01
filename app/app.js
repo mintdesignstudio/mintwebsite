@@ -61,6 +61,16 @@ module.exports.init = function() {
         }))
 
         .use(helmet())
+        .use(helmet.contentSecurityPolicy({
+            directives: {
+                defaultSrc: ["'self'"],
+                styleSrc: ["'self'"]
+                imgSrc: ["'self'", 'mintdesign.cdn.prismic.com']
+                objectSrc: []
+            },
+            browserSniff: false
+        }))
+
         .use(methodOverride())
         .use('/public', express.static(config.dir('public'), staticOptions));
 
