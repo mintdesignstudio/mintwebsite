@@ -30,7 +30,7 @@
     "express-robots": "0.1.6",
     "fs-extra": "2.0.0",
     "handlebars": "4.0.5",
-    "helmet": "^3.8.1",
+    "helmet": "3.8.1",
     "imagemin": "3.2.2",
     "inline-source": "1.1.2",
     "klaw-sync": "1.1.0",

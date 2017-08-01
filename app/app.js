@@ -43,15 +43,36 @@ module.exports.init = function() {
         // Security
         .use(helmet.contentSecurityPolicy({
             directives: {
-                defaultSrc: ["'self'", 'static.cdn.prismic.com', 'www.google-analytics.com'],
-                styleSrc: ["'self'"],
-                imgSrc: ["'self'", 'mintdesign.cdn.prismic.com'],
-                objectSrc: []
+                defaultSrc: [
+                    "'self'",
+                ],
+                styleSrc: [
+                    "'self'",
+                    "'unsafe-inline'"
+                ],
+                scriptSrc: [
+                    "'self'",
+                    'static.cdn.prismic.io',
+                    'www.google-analytics.com',
+                ],
+                fontSrc: [
+                    "'self'",
+                    'data:'
+                ],
+                imgSrc: [
+                    "'self'",
+                    'www.google-analytics.com',
+                    'mintdesign.cdn.prismic.io'
+                ],
+                objectSrc: [
+                    "'none'",
+                ]
             },
-            browserSniff: false
+            browserSniff: true,
+            loose: true,
         }))
         .use(helmet.dnsPrefetchControl())
-        .use(frameguard({ action: 'deny' }))
+        .use(helmet.frameguard({ action: 'deny' }))
         .disable('x-powered-by')
         .use(helmet.hsts({
             // 60 days
