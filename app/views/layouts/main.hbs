@@ -12,11 +12,11 @@
     {{#isWork page.name}}
         <meta property="og:url" content="{{project.link}}" />
         <meta property="og:description" content="{{project.og_description}}" />
-        <meta property="og:image" content="{{project.image.main}}" />
+        <meta property="og:image" content="{{project.image.main.url}}" />
     {{else}}
         <meta property="og:url" content="{{page.url}}" />
         <meta property="og:description" content="{{common.about.tagline_text}}" />
-        <meta property="og:image" content="{{common.about.image.main}}" />
+        <meta property="og:image" content="{{common.about.image.main.url}}" />
     {{/isWork}}
 
     <title>{{common.about.companyname}} : {{#capitalize}}{{page.name}}{{/capitalize}} {{#isWork page.name}}: {{project.name}}{{/isWork}}</title>
