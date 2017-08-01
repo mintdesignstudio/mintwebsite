@@ -75,8 +75,8 @@ module.exports.init = function() {
         .use(helmet.frameguard({ action: 'deny' }))
         .disable('x-powered-by')
         .use(helmet.hsts({
-            // 60 days
-            maxAge: 5184000
+            // 12 months 60 * 60 * 24 * 365
+            maxAge: 31536000
         }))
         .use(helmet.ieNoOpen())
         .use(helmet.noSniff())
