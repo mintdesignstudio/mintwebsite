@@ -76,14 +76,14 @@ function uglify(dir) {
     console.log('');
 }
 
-function sriHash(dir, ext) {
+function sriHash(dirname, ext) {
     console.log('Create SRI hash for external resources');
 
     var modified = {};
     var promises = [];
     var sources = [];
 
-    var files = listFiles(dir, ext)
+    var files = listFiles(dirname, ext)
         .map(function(file) {
             console.log('    '+file.path);
             return file.path;
@@ -105,7 +105,7 @@ function sriHash(dir, ext) {
             if (src[0] === '/' && src[1] !== '/') {
                 sources.push(src);
                 promises.push(sri.hash({
-                    file: __dirname + src,
+                    file: dir.prod.substring(0, dir.prod.length-1) + src,
                     algo: 'sha256'
                 }));
             }
