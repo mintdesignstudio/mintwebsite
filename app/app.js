@@ -40,6 +40,27 @@ module.exports.init = function() {
     var app = express()
         .set('port', config.port)
 
+        // Security
+        .use(helmet.contentSecurityPolicy({
+            directives: {
+                defaultSrc: ["'self'", 'static.cdn.prismic.com', 'www.google-analytics.com'],
+                styleSrc: ["'self'"],
+                imgSrc: ["'self'", 'mintdesign.cdn.prismic.com'],
+                objectSrc: []
+            },
+            browserSniff: false
+        }))
+        .use(helmet.dnsPrefetchControl())
+        .use(frameguard({ action: 'deny' }))
+        .disable('x-powered-by')
+        .use(helmet.hsts({
+            // 60 days
+            maxAge: 5184000
+        }))
+        .use(helmet.ieNoOpen())
+        .use(helmet.noSniff())
+        .use(helmet.xssFilter())
+
         .engine(hbs_ext,     hbs.engine)
         .set('view engine',  hbs_ext)
         .set('views',        config.dir('views'))
@@ -59,18 +80,6 @@ module.exports.init = function() {
         .use(cookieParser({
             secret: 'mintdesign123martheogchristian'
         }))
-
-        .use(helmet())
-        .use(helmet.contentSecurityPolicy({
-            directives: {
-                defaultSrc: ["'self'"],
-                styleSrc: ["'self'"],
-                imgSrc: ["'self'", 'mintdesign.cdn.prismic.com'],
-                objectSrc: []
-            },
-            browserSniff: false
-        }))
-
         .use(methodOverride())
         .use('/public', express.static(config.dir('public'), staticOptions));
 
