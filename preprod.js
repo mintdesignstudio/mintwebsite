@@ -9,6 +9,7 @@ var Minimize        = require('minimize');
 var UglifyJS        = require('uglify-js');
 var cheerio         = require('cheerio');
 var sri             = require('node-sri');
+var Promise         = require('promise');
 
 var svgo = Imagemin.svgo([
     {removeViewBox: true},
@@ -78,32 +79,15 @@ function uglify(dir) {
 function sriHash(dir, ext) {
     console.log('Create SRI hash for external resources');
 
-    var hashes = {};
     var modified = {};
+    var promises = [];
+    var sources = [];
 
     var files = listFiles(dir, ext)
         .map(function(file) {
             console.log('    '+file.path);
             return file.path;
         });
-    var num = 0;
-
-    var done = function() {
-        Object.keys(modified).forEach(function(file) {
-            var $ = modified[file];
-            $('script').each(function(i, script) {
-                var src = $(this).attr('src');
-                var hash = hashes[src];
-
-                if (typeof hash === 'undefined') {
-                    return;
-                }
-
-                $(this).attr('integrity', hash);
-            });
-            fs.writeFileSync(file, $.html());
-        });
-    };
 
     files.forEach(function(file) {
         var content = fs.readFileSync(file, 'utf8');
@@ -119,26 +103,36 @@ function sriHash(dir, ext) {
 
             var src = $(this).attr('src');
             if (src[0] === '/' && src[1] !== '/') {
-                sri.hash({
+                sources.push(src);
+                promises.push(sri.hash({
                     file: __dirname + src,
                     algo: 'sha512'
-                }, function(err, hash) {
-                    if (err) {
-                        throw err;
-                    }
-                    hashes[src] = hash;
-                    ++num;
-                    if (num == files.length) {
-                        done();
-                    }
-                });
+                }));
             }
         });
     });
-}
 
-function hashFile(files, cb) {
+    Promise.all(promises)
+        .then(function (res) {
 
+            Object.keys(modified).forEach(function(file) {
+                var $ = modified[file];
+                $('script').each(function(i, script) {
+                    var src = $(this).attr('src');
+                    var si = sources.indexOf(src);
+                    if (si < 0) {
+                        return;
+                    }
+                    var hash = res[si];
+
+                    $(this).attr('integrity', hash);
+                });
+
+                fs.writeFileSync(file, $.html());
+            });
+
+            console.log('');
+        });
 }
 
 function htmlmin(dir, ext) {
