@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "logs": "./node_modules/pm2/bin/pm2 logs 0",
     "dev": "./node_modules/pm2/bin/pm2 start pm2.config.js --watch",
     "dev-stop": "./node_modules/pm2/bin/pm2 stop pm2.config.js --watch",
     "postinstall": "node ./preprod.js"
