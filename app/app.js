@@ -64,8 +64,8 @@ module.exports.init = function() {
         .use(helmet.contentSecurityPolicy({
             directives: {
                 defaultSrc: ["'self'"],
-                styleSrc: ["'self'"]
-                imgSrc: ["'self'", 'mintdesign.cdn.prismic.com']
+                styleSrc: ["'self'"],
+                imgSrc: ["'self'", 'mintdesign.cdn.prismic.com'],
                 objectSrc: []
             },
             browserSniff: false
