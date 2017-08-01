@@ -106,7 +106,7 @@ function sriHash(dir, ext) {
                 sources.push(src);
                 promises.push(sri.hash({
                     file: __dirname + src,
-                    algo: 'sha512'
+                    algo: 'sha256'
                 }));
             }
         });
