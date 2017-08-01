@@ -3,6 +3,10 @@ Mint Design Studio website
 
 Mint's webside runs on [Heroku](http://heroku.com) with content stored in [Prismic.io](http://prismic.io) and website distributed via [Amazon CloudFront](http://aws.amazon.com/cloudfront/).
 
+#Requirements
+
+ * [https://www.npmjs.com/package/foreman](Foreman)
+
 #Install
 ```
 npm install
