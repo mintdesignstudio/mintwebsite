@@ -54,13 +54,13 @@ window.addEventListener('scroll', function(e) {
     changeOpacity(window.mint_menu);
 });
 
-document.addEventListener('DOMContentLoaded', function(event) {
-    window.mint_menu = document.getElementById('menu');
-    changeOpacity(window.mint_menu);
+// document.addEventListener('DOMContentLoaded', function(event) {
+//     window.mint_menu = document.getElementById('menu');
+//     changeOpacity(window.mint_menu);
 
-    var l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = '/public/css/style.css';
-    var h = document.getElementsByTagName('head')[0];
-    h.appendChild(l);
-});
+//     var l = document.createElement('link');
+//     l.rel = 'stylesheet';
+//     l.href = '/public/css/style.css';
+//     var h = document.getElementsByTagName('head')[0];
+//     h.appendChild(l);
+// });
