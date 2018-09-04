@@ -151,8 +151,11 @@ p {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
 
+.clients ul {
+    margin: 0;
+}
+
 .awards ul,
-.clients ul,
 .content .body {
     margin: 3em auto 3em 5%;
 }
@@ -180,10 +183,9 @@ p {
 .awards ul,
 .clients ul {
     list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
     justify-content: center;
+    grid-template-columns: auto auto auto auto;
 }
 
 .awards li {
@@ -250,49 +252,33 @@ section.works > a {
 }
 
 div.work {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 100%;
 }
 
 div.work .project {
-    display: flex;
-    flex: 1 0 100%;
     background-size: cover;
     background-position: center center;
 }
 
 div.work .project.current {
-    flex: 1 0 50%;
-    min-height: 30em;
-}
-
-div.work .project .overlay {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: flex-end;
-    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-    opacity: 0.8;
-    transition: opacity 0.5s;
-}
-
-div.work .project .overlay:hover {
-    opacity: 1;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
 }
 
 div.work .project a {
     color: white;
     font-size: 1.4em;
-    display: block;
+    display: flex;
     box-sizing: border-box;
     padding: 6em 1em 1em 1em;
     width: 100%;
-    opacity: 1;
+    opacity: 0.5;
     transition: opacity 0.5s;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 div.work .project a:hover {
@@ -304,6 +290,14 @@ div.work .project a span {
     font-size: 0.8rem;
     display: block;
     padding-top: 0.6em;
+    width: 100%;
+}
+
+div.work .project h1 {
+    font-size: 1.5em;
+    margin: 0;
+    display: block;
+    width: 100%;
 }
 
 footer .logo {
@@ -531,12 +525,14 @@ section.gallery img {
         min-height: 25em;
     }
 
-    div.work .project.current {
-        flex: 1 0 100%;
+    div.work {
+        display: grid;
+        grid-template-columns: 50% 50%;
     }
 
-    div.work .project {
-        flex: 1 0 50%;
+    div.work .project.current {
+        grid-column-start: 1;
+        grid-column-end: span 2;
     }
 
     .awards li {
@@ -620,12 +616,16 @@ section.gallery img {
 }
 
 @media screen and (min-width: 50em) {
-    div.work .project.current {
-        flex: 1 0 66.6667%;
+    div.work {
+        display: grid;
+        grid-template-columns: 33% 33% 34%;
     }
 
-    div.work .project {
-        flex: 1 0 33.3336%;
+    div.work .project.current {
+        grid-column-start: 1;
+        grid-column-end: span 2;
+        grid-row-start: 1;
+        grid-row-end: span 2;
     }
 
     div.work .project a {
@@ -734,12 +734,9 @@ section.gallery img {
         min-height: 35em;
     }
 
-    div.work .project.current {
-        flex: 1 0 50%;
-    }
-
-    div.work .project {
-        flex: 1 0 25%;
+    div.work {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
     }
 
     section.workdescription > div {
