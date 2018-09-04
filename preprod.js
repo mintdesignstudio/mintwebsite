@@ -2,12 +2,13 @@ var fs              = require('fs');
 var path            = require('path');
 var fse             = require('fs-extra');
 var klawSync        = require('klaw-sync');
-var morecss         = require('more-css');
 var Minimize        = require('minimize');
 var UglifyJS        = require('uglify-js');
 var cheerio         = require('cheerio');
 var sri             = require('node-sri');
 var Promise         = require('promise');
+
+const crass             = require('crass');
 const { inlineSource }  = require('inline-source');
 const imagemin          = require('imagemin');
 const imageminPngquant  = require('imagemin-pngquant');
@@ -214,8 +215,8 @@ function minifyCss(dir) {
 
     css_files.forEach(function(file) {
         var source = fs.readFileSync(file, 'utf8');
-        var minified = morecss.compress(source, true);
-        fs.writeFileSync(file, minified);
+        let minified = crass.parse(source).optimize();
+        fs.writeFileSync(file, minified.toString());
     });
     console.log('');
 }
