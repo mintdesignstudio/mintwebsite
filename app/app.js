@@ -54,6 +54,7 @@ module.exports.init = function() {
                     "'self'",
                     'static.cdn.prismic.io',
                     'www.google-analytics.com',
+                    'unsafe-inline',
                 ],
                 fontSrc: [
                     "'self'",
