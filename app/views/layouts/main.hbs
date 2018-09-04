@@ -30,7 +30,6 @@
     <script type="text/javascript" src="/public/js/picture.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/public/js/main.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/public/js/picturefill.min.js" async crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//static.cdn.prismic.io/prismic.min.js" async></script>
 
     <!--[if (lt IE 9) & (!IEMobile)]>
     <link rel='stylesheet' href='/public/css/lte-ie8.css'>
@@ -52,6 +51,11 @@
     {{{body}}}
 
 <script type="text/javascript" src="/public/js/ga.js" crossorigin="anonymous"></script>
-
+<script>
+    window.prismic = {
+        endpoint: 'https://mintdesign.prismic.io/api/v2'
+    };
+</script>
+<script type="text/javascript" src="//static.cdn.prismic.io/prismic.min.js"></script>
 </body>
 </html>
