@@ -261,9 +261,6 @@ div.work .project {
     background-position: center center;
 }
 
-div.work .project.current {
-}
-
 div.work .project a {
     color: white;
     font-size: 1.4em;
