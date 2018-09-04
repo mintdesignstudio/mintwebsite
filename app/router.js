@@ -358,12 +358,12 @@ function works(api, req, res) {
 }
 
 function work(api, req, res) {
-    var slug = clean(req.params.slug);
+    var uid = req.params.slug;
     var content = utils.defaultContent('work', req);
 
     queries
     .create(api, req)
-    .predicate('my.project.uid', slug, {
+    .predicate('my.project.uid', uid, {
         orderings : '[my.project.published desc]'
     })
     .doctype('about')
@@ -374,14 +374,13 @@ function work(api, req, res) {
         var projects = contents[0].results;
 
         if (projects.length === 0) {
+            console.log('no project found. Redirect to /works');
             return res.redirect(301, '/works');
         }
 
         var project = projects[0];
         var link = config.siteUrl(req) + utils.documentLink('work', project);
-
-        if (project.slug != slug &&
-            project.slugs.indexOf(slug) >= 0) {
+        if (project.uid != uid) {
             return res.redirect(301, link);
         }
 
@@ -401,7 +400,7 @@ function work(api, req, res) {
             description:    utils.getText(project, 'project.description'),
             og_description: og_desc,
             body:           utils.getStructuredText(project, 'project.body', 'asHtml'),
-            slug:           project.slug,
+            slug:           project.uid,
             slugs:          project.slugs,
         }
 
