@@ -100,7 +100,7 @@ async function merge(cfg) {
 
     let concated = await concat(files);
     // write to temp. sri needs a file
-    let tempFile = dir.temp + cfg.concatinatedFile;
+    let tempFile = '/tmp/' + cfg.concatinatedFile;
     console.log('  write temp file:', tempFile);
     await fs.writeFileSync(tempFile, concated);
     // hash content
