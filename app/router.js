@@ -2,7 +2,6 @@ var ru              = require('./router-utils');
 var putils          = require('../prismic-utils');
 var config          = require('../config');
 var utils           = require('./utils.js');
-var clean           = require('./modules/clean');
 var queries         = require('./queries');
 var chandlers       = require('./content-handlers');
 var Prismic         = require('prismic-nodejs');
