@@ -2,129 +2,133 @@ var fs              = require('fs');
 var path            = require('path');
 var fse             = require('fs-extra');
 var klawSync        = require('klaw-sync');
-var Minimize        = require('minimize');
-var UglifyJS        = require('uglify-js');
 var cheerio         = require('cheerio');
 var sri             = require('node-sri');
 var Promise         = require('promise');
 
+const minimize          = require('minimize');
+const uglifyJs          = require('uglify-js');
+const concat            = require('concat');
 const crass             = require('crass');
-const { inlineSource }  = require('inline-source');
 const imagemin          = require('imagemin');
 const imageminPngquant  = require('imagemin-pngquant');
 const imageminSvgo      = require('imagemin-svgo');
 
 var dir = {
+    temp:           __dirname + '/temp/',
     prod:           __dirname + '/production/',
     pub:            __dirname + '/public/',
-    prodpub:        __dirname + '/production/public/',
     appview:        __dirname + '/app/views/',
     appcss:         __dirname + '/app/views/css/',
     prodappview:    __dirname + '/production/app/views/',
-    prodappcss:     __dirname + '/production/app/views/css/'
+    prodappcss:     __dirname + '/production/app/views/css/',
+    prodpub:        __dirname + '/production/public/',
+    prodjs:         __dirname + '/production/public/js/',
+    prodcss:        __dirname + '/production/public/css/',
 };
 
 // -----------------------------------------------------------------------------
 
-cleanCopyDir(dir.pub, dir.prodpub, function() {
-    console.log('Copy '+dir.prodpub);
+async function preprod() {
+    console.log(':::: Preprod');
 
-    cleanCopyDir(dir.appview, dir.prodappview, function() {
-        console.log('Copy '+dir.prodappview);
+    await removeDir(dir.prodpub);
+    await removeDir(dir.prodappview);
+    await copyFiles(dir.pub,     dir.prodpub);
+    await copyFiles(dir.appview, dir.prodappview);
 
-        minifyCss(dir.prod);
-        uglify(dir.prodpub + 'js/');
-        sriHash(dir.prodappview + 'layouts/', '.hbs');
-        inlineAll();
-        svgmin();
-        pngmin();
-        htmlmin(dir.prodappview, '.hbs');
+    await merge({
+        query:            'link[data-merge="yes"]',
+        linkAttr:         'href',
+        concatinatedFile: 'concatedStyles.css',
+        target: hash => dir.prodcss + hash + '.css',
+        htmlElm: hash => '<link '+
+            'rel="stylesheet" '+
+            'type="text/css" '+
+            'integrity="' + hash + '" '+
+            'href="/public/css/'+hash+'.css">',
+        minify: fileContent => crass
+                .parse(fileContent)
+                .optimize()
+                .toString(),
     });
-});
 
+    await merge({
+        query:            'script[data-merge="yes"]',
+        linkAttr:         'src',
+        concatinatedFile: 'concatedScripts.js',
+        target: hash => dir.prodjs + hash + '.js',
+        htmlElm: hash => '<script '+
+            'type="text/javascript" '+
+            'integrity="' + hash + '" '+
+            'src="/public/js/'+hash+'.js" '+
+            'crossorigin="anonymous"></script>',
+        minify: fileContent => uglifyJs
+                .minify(fileContent, { toplevel: true })
+                .code,
+    });
+
+    await svgmin();
+    await pngmin();
+
+    await htmlmin();
+}
+
+preprod();
 
 // -----------------------------------------------------------------------------
 
-function uglify(dir) {
-    console.log('Uglify JS');
+async function merge(cfg) {
+    console.log('Merge');
+    let mainHbs = dir.prodappview + 'layouts/main.hbs';
+    console.log('  Read main template:', mainHbs);
+    let mainTemplate = await fs.readFileSync(mainHbs, 'utf8');
+    let files = [];
+    let $ = cheerio.load(mainTemplate);
+    let mergeables = $(cfg.query);
 
-    var files = listFiles(dir, '.js')
-        .map(function(file) {
-            console.log('    '+file.path);
-            return file.path;
-        });
-
-    files.forEach(function(file) {
-        var content = UglifyJS.minify(file);
-        fs.writeFileSync(file, content.code);
+    mergeables.each((i, elm) => {
+        let filePathRel = $(elm).attr(cfg.linkAttr);
+        let filePathPub = __dirname + filePathRel;
+        let filePathProd = __dirname + '/production' + filePathRel;
+        files.push(filePathProd);
+        console.log('  load file:', filePathPub);
+        let fileContent = fs.readFileSync(filePathPub, 'utf8');
+        let minified = cfg.minify(fileContent);
+        fs.writeFileSync(filePathProd, minified);
     });
 
-    console.log('');
-}
+    let concated = await concat(files);
+    // write to temp. sri needs a file
+    let tempFile = dir.temp + cfg.concatinatedFile;
+    console.log('  write temp file:', tempFile);
+    await fs.writeFileSync(tempFile, concated);
+    // hash content
+    let hash = await sri.hash(tempFile);
+    hash = hash.replace(/\//ig, '_');
+    console.log('  hash:', hash);
+    // copy file into production folder
+    let target = cfg.target(hash);
+    console.log('  copy:', tempFile, 'to:', target);
+    await fs.createReadStream(tempFile).pipe(fs.createWriteStream(target));
 
-function sriHash(dirname, ext) {
-    console.log('Create SRI hash for external resources');
-
-    var modified = {};
-    var promises = [];
-    var sources = [];
-
-    var files = listFiles(dirname, ext)
-        .map(function(file) {
-            console.log('    '+file.path);
-            return file.path;
-        });
-
-    files.forEach(function(file) {
-        var content = fs.readFileSync(file, 'utf8');
-        var $ = cheerio.load(content);
-
-        modified[file] = $;
-
-        $('script').each(function(i, script) {
-            var co = $(this).attr('crossorigin');
-            if (typeof co === 'undefined') {
-                return;
-            }
-
-            var src = $(this).attr('src');
-            if (src[0] === '/' && src[1] !== '/') {
-                sources.push(src);
-                promises.push(sri.hash({
-                    file: dir.prod.substring(0, dir.prod.length-1) + src,
-                    algo: 'sha256'
-                }));
-            }
-        });
+    mergeables.each((i, elm) => {
+        if (i < mergeables.length - 1) {
+            $(elm).remove();
+        } else {
+            $(elm).replaceWith(cfg.htmlElm(hash));
+        }
     });
 
-    Promise.all(promises)
-        .then(function (res) {
-
-            Object.keys(modified).forEach(function(file) {
-                var $ = modified[file];
-                $('script').each(function(i, script) {
-                    var src = $(this).attr('src');
-                    var si = sources.indexOf(src);
-                    if (si < 0) {
-                        return;
-                    }
-                    var hash = res[si];
-
-                    $(this).attr('integrity', hash);
-                });
-
-                fs.writeFileSync(file, $.html());
-            });
-
-            console.log('');
-        });
+    console.log('Write main template:', mainHbs);
+    await fs.writeFileSync(mainHbs, $.html());
+    return files;
 }
 
-function htmlmin(dir, ext) {
+async function htmlmin() {
     console.log('HTMLMin');
 
-    minimize = new Minimize({
+    let min = new minimize({
         empty: true,        // KEEP empty attributes
         cdata: true,        // KEEP CDATA from scripts
         comments: false,    // KEEP comments
@@ -135,122 +139,70 @@ function htmlmin(dir, ext) {
         loose: false        // KEEP one whitespace
     });
 
-    var files = listFiles(dir, ext)
-        .map(function(file) {
-            console.log('    '+file.path);
-            return file.path;
+    listFiles(dir.prodappview, '.hbs')
+        .map(file => file.path)
+        .forEach(file => {
+            let content = fs.readFileSync(file, 'utf8');
+            min.parse(content, (error, data) => {
+                fs.writeFileSync(file, data);
+            });
         });
-
-    files.forEach(function(file) {
-        var content = fs.readFileSync(file, 'utf8');
-        minimize.parse(content, function (error, data) {
-            fs.writeFileSync(file, data);
-        });
-    });
-
-    console.log('');
 }
 
 async function svgmin() {
     await imagemin([dir.prodpub + 'images/*.svg'],
-             dir.prodpub + 'images',
-             { use: [
-                imageminSvgo({
-                    plugins: [
-                        {removeViewBox: true},
-                        {removeEmptyAttrs: true},
-                        {removeEmptyContainers: true},
-                        {removeEmptyText: true},
-                        {removeHiddenElems: true},
-                        {removeMetadata: true},
-                        {removeRasterImages: true},
-                        {removeUselessStrokeAndFill: true},
-                        {cleanupAttrs: true},
-                        {removeComments: true},
-                        {removeDesc: true},
-                        {removeDoctype: true}
-                    ]
-                })
-            ]});
+                   dir.prodpub + 'images',
+                   { use: [
+                      imageminSvgo({
+                          plugins: [
+                              {removeViewBox: true},
+                              {removeEmptyAttrs: true},
+                              {removeEmptyContainers: true},
+                              {removeEmptyText: true},
+                              {removeHiddenElems: true},
+                              {removeMetadata: true},
+                              {removeRasterImages: true},
+                              {removeUselessStrokeAndFill: true},
+                              {cleanupAttrs: true},
+                              {removeComments: true},
+                              {removeDesc: true},
+                              {removeDoctype: true}
+                          ]
+                     })
+                  ]});
     console.log('SVGs optimized');
 }
 
 async function pngmin() {
     await imagemin([dir.prodpub + 'images/*.png'],
-         dir.prodpub + 'images/',
-         {use: [imageminPngquant({
-            quality: '80',
-         })]})
+                   dir.prodpub + 'images/',
+                   {use: [imageminPngquant({
+                        quality: '80',
+                    })]})
     console.log('PNGs optimized');
-}
-
-function inlineAll() {
-    let files = listFiles(dir.prodappview + 'layouts/', '.hbs')
-        .map((file) => {
-            return file.path;
-        });
-
-    files.forEach((file) => {
-        inline(file);
-    });
-    console.log('Inlined sources');
-}
-
-async function inline(file) {
-    let html = await inlineSource(file, {
-        compress: false,
-        swallowErrors: false,
-        rootpath: path.resolve('production/')
-    });
-    fs.writeFileSync(file, html);
-}
-
-function minifyCss(dir) {
-    console.log('Minify CSS');
-    var css_files = listFiles(dir, '.css')
-        .map(function(file) {
-            console.log('    '+file.path);
-            return file.path;
-        });
-
-    css_files.forEach(function(file) {
-        var source = fs.readFileSync(file, 'utf8');
-        let minified = crass.parse(source).optimize();
-        fs.writeFileSync(file, minified.toString());
-    });
-    console.log('');
 }
 
 function listFiles(dir, ext) {
     return klawSync(dir, {nodir: true}).filter(function(file) {
-        return path.extname(file.path) === ext;
+        let fileExt = path.extname(file.path);
+        return fileExt !== '' && (ext === '*.*' || fileExt === ext);
     });
 }
 
-function cleanCopyDir(from, to, cb) {
-    removeDir(to, function() {
-        copyDir(from, to, cb);
-    });
+async function removeDir(dir) {
+    try {
+        await fse.removeSync(dir);
+        console.log('Removed dir', dir);
+    } catch (err) {
+        console.error(err);
+    }
 }
 
-function removeDir(dir, cb) {
-    fse.remove(dir, function(err) {
-        if (err) {
-            return console.error('[ERROR REMOVE]', err);
-        }
-        if (typeof cb !== 'undefined') {
-            cb();
-        }
-    });
-}
-
-function copyDir(from_dir, to_dir, cb) {
-    fse.copy(from_dir, to_dir, function (err) {
-        if (err) {
-            return console.error('[ERROR COPY]', err);
-        }
-        if (typeof cb !== 'undefined') {
-            cb();
-        }
-    });
+async function copyFiles(from_dir, to_dir) {
+    try {
+        await fse.copySync(from_dir, to_dir);
+        console.log('Copied', from_dir, 'to', to_dir);
+    } catch (err) {
+        console.error(err);
+    }
 }

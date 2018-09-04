@@ -23,6 +23,7 @@
   "dependencies": {
     "cheerio": "1.0.0-rc.2",
     "compression": "^1.7.3",
+    "concat": "^1.0.3",
     "cookie-parser": "^1.4.3",
     "crass": "^0.12.3",
     "errorhandler": "1.5.0",
@@ -36,7 +37,6 @@
     "imagemin": "^6.0.0",
     "imagemin-pngquant": "^6.0.0",
     "imagemin-svgo": "^7.0.0",
-    "inline-source": "^6.1.8",
     "klaw-sync": "1.1.0",
     "logfmt": "^1.2.1",
     "method-override": "2.3.10",
@@ -48,7 +48,7 @@
     "readable-stream": "1.0.33",
     "serve-favicon": "^2.5.0",
     "serve-static": "^1.13.2",
-    "uglify-js": "2.6.0"
+    "uglify-js": "^3.4.9"
   },
   "engines": {
     "node": "10.9.0",
