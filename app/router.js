@@ -14,7 +14,6 @@ var routes = {
     '/contact':         contact,
     '/services':        services,
     '/works':           works,
-    '/work/:slug/:id':  workOld,
     '/work/:slug/':     work,
 };
 
@@ -356,17 +355,6 @@ function works(api, req, res) {
     .catch(function(err) {
         ru.handleError(err, req, res);
     });
-}
-
-function workOld(api, req, res) {
-    api
-        .getByID(req.params.id)
-        .then(function (doc) {
-            res.redirect(301, config.siteUrl(req) + 'work/' + doc.uid + '/');
-        })
-        .catch(function(err) {
-            ru.handleError(err, req, res);
-        });
 }
 
 function work(api, req, res) {
