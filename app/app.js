@@ -46,6 +46,9 @@ module.exports.init = function() {
                 defaultSrc: [
                     "'self'",
                 ],
+                connectSrc: [
+                    'mintdesign.prismic.io',
+                ],
                 styleSrc: [
                     "'self'",
                     "'unsafe-inline'"
