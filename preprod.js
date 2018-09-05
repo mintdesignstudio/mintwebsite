@@ -42,11 +42,13 @@ async function preprod() {
         linkAttr:         'href',
         concatinatedFile: 'concatedStyles.css',
         target: hash => dir.prodcss + hash + '.css',
-        htmlElm: hash => '<link '+
-            'rel="stylesheet" '+
-            'type="text/css" '+
-            'integrity="' + hash + '" '+
-            'href="/public/css/'+hash+'.css">',
+        htmlElm: (hash, hashFilename) => {
+            return '<link '+
+                   'rel="stylesheet" '+
+                   'type="text/css" '+
+                   'integrity="' + hash + '" '+
+                   'href="/public/css/'+hashFilename+'.css">';
+        },
         minify: fileContent => crass
                 .parse(fileContent)
                 .optimize()
@@ -58,11 +60,13 @@ async function preprod() {
         linkAttr:         'src',
         concatinatedFile: 'concatedScripts.js',
         target: hash => dir.prodjs + hash + '.js',
-        htmlElm: hash => '<script '+
-            'type="text/javascript" '+
-            'integrity="' + hash + '" '+
-            'src="/public/js/'+hash+'.js" '+
-            'crossorigin="anonymous"></script>',
+        htmlElm: (hash, hashFilename) => {
+            return '<script '+
+                   'type="text/javascript" '+
+                   'integrity="' + hash + '" '+
+                   'src="/public/js/'+hashFilename+'.js" '+
+                   'crossorigin="anonymous"></script>';
+        },
         minify: fileContent => uglifyJs
                 .minify(fileContent, { toplevel: true })
                 .code,
@@ -105,10 +109,11 @@ async function merge(cfg) {
     await fs.writeFileSync(tempFile, concated);
     // hash content
     let hash = await sri.hash(tempFile);
-    hash = hash.replace(/\//ig, '_');
+    let hashFilename = hash.replace(/\//ig, '_');
     console.log('  hash:', hash);
+    console.log('  hash filename:', hashFilename);
     // copy file into production folder
-    let target = cfg.target(hash);
+    let target = cfg.target(hashFilename);
     console.log('  copy:', tempFile, 'to:', target);
     await fs.createReadStream(tempFile).pipe(fs.createWriteStream(target));
 
@@ -116,7 +121,7 @@ async function merge(cfg) {
         if (i < mergeables.length - 1) {
             $(elm).remove();
         } else {
-            $(elm).replaceWith(cfg.htmlElm(hash));
+            $(elm).replaceWith(cfg.htmlElm(hash, hashFilename));
         }
     });
 
