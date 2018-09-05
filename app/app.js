@@ -44,6 +44,7 @@ module.exports.init = function() {
         .use(helmet.contentSecurityPolicy({
             directives: {
                 connectSrc: [
+                    "'self'",
                     'mintdesign.prismic.io',
                     'www.google-analytics.com',
                 ],
