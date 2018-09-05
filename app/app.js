@@ -92,15 +92,7 @@ module.exports.init = function() {
         .use(logs(config.verbose))
         .use(robots({ UserAgent: '*' }))
 
-        .use(compress(
-        // compress everything
-        // {
-        //     filter: function (req, res) {
-        //         return /json|text|javascript|css|svg/.test(res.getHeader('Content-Type'));
-        //     },
-        //     level: 9
-        // }
-        ))
+        .use(compress())
 
         .use(cookieParser({
             secret: 'mintdesign123martheogchristian'
