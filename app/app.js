@@ -1,5 +1,4 @@
 var express         = require('express'),
-    // exphbs          = require('express-handlebars')
     favicon         = require('serve-favicon'),
     busBoy          = require('express-busboy'),
     robots          = require('express-robots'),
@@ -11,8 +10,6 @@ var express         = require('express'),
     helmet          = require('helmet'),
     compress        = require('compression'),
     config          = require('../config.js'),
-    router          = require('./router'),
-    // hbHelpers       = require('./helpers/handlebars'),
     errors          = require('./errors'),
     logs            = require('./logs');
 
@@ -26,16 +23,6 @@ module.exports.init = function() {
         // maxAge: '1d',
         redirect: false
     };
-
-    // var hbs_ext = '.hbs';
-
-    // var hbs = exphbs.create({
-    //     extname:        hbs_ext,
-    //     defaultLayout:  'main',
-    //     helpers:        hbHelpers,
-    //     layoutsDir:     config.dir('layout'),
-    //     partialsDir:    config.dir('partials')
-    // });
 
     var errs = errors(config.verbose);
 
@@ -87,8 +74,6 @@ module.exports.init = function() {
         .use(helmet.noSniff())
         .use(helmet.xssFilter())
 
-        // .engine(hbs_ext,     hbs.engine)
-        // .set('view engine',  hbs_ext)
         .set('view engine', 'pug')
         .set('views',        config.dir('views'))
         .set('view cache',   config.production)
@@ -106,8 +91,6 @@ module.exports.init = function() {
         .use('/public', express.static(config.dir('public'), staticOptions));
 
     routes(app);
-    // remove
-    router.init(app);
 
     app
         .use(errs.notFound)
