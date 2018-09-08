@@ -53,6 +53,7 @@ module.exports.init = function() {
                 ],
                 imgSrc: [
                     "'self'",
+                    "data:",
                     'www.google-analytics.com',
                     'mintdesign.cdn.prismic.io'
                 ],

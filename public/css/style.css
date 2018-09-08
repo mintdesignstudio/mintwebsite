@@ -57,7 +57,6 @@ p {
 
 .menu a {
     box-sizing: border-box;
-    display: block;
     padding: 0.8em;
     color: white;
 }
@@ -71,7 +70,7 @@ p {
     color: #6ae0cb;
 }
 
-.menu a img {
+.menu .logo img {
     height: 1.8em;
 }
 
@@ -87,7 +86,7 @@ p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: none;
+    margin-left: 0;
     list-style: none;
 }
 
@@ -95,6 +94,21 @@ p {
     display: inline-block;
     flex: 1 0 25%;
     vertical-align: middle;
+}
+
+/* Prismic edit button */
+
+.wio-link {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wio-link img {
+    width: 16px;
+    height: 16px;
+    display: block;
 }
 
 /* HERO */

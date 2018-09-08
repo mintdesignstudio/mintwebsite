@@ -1,8 +1,6 @@
-div.menu#menu
-  a.logo(href="/")
-    img(src="/public/images/logo_white_name.svg", alt="Mint Design logo in white")
-  ul
-    each m in menu.data.options
-      li
-        a(href=prismicDOM.Link.url(m.link, ctx.linkResolver))
-          != m.label
+unless documentId
+  div.menu#menu
+    include ./menuContent.pug
+else
+  div.menu#menu(data-wio-id=documentId)
+    include ./menuContent.pug
