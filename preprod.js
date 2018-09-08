@@ -15,16 +15,18 @@ const imageminPngquant  = require('imagemin-pngquant');
 const imageminSvgo      = require('imagemin-svgo');
 
 var dir = {
-    temp:           __dirname + '/temp/',
-    prod:           __dirname + '/production/',
-    pub:            __dirname + '/public/',
-    appview:        __dirname + '/app/views/',
-    appcss:         __dirname + '/app/views/css/',
-    prodappview:    __dirname + '/production/app/views/',
-    prodappcss:     __dirname + '/production/app/views/css/',
-    prodpub:        __dirname + '/production/public/',
-    prodjs:         __dirname + '/production/public/js/',
-    prodcss:        __dirname + '/production/public/css/',
+    current:                __dirname + '/',
+    temp:                   __dirname + '/temp/',
+    prod:                   __dirname + '/production/',
+    pub:                    __dirname + '/public/',
+    appview:                __dirname + '/app/views/',
+    appcss:                 __dirname + '/app/views/css/',
+    prodappview:            __dirname + '/production/app/views/',
+    prodappviewpartials:    __dirname + '/production/app/views/partials/',
+    prodappcss:             __dirname + '/production/app/views/css/',
+    prodpub:                __dirname + '/production/public/',
+    prodjs:                 __dirname + '/production/public/js/',
+    prodcss:                __dirname + '/production/public/css/',
 };
 
 // -----------------------------------------------------------------------------
@@ -37,17 +39,13 @@ async function preprod() {
     await copyFiles(dir.pub,     dir.prodpub);
     await copyFiles(dir.appview, dir.prodappview);
 
-    await merge({
-        query:            'link[data-merge="yes"]',
-        linkAttr:         'href',
+    await newMerge({
+        partialFile: 'styles',
+        source: 'href="',
         concatinatedFile: 'concatedStyles.css',
-        target: hash => dir.prodcss + hash + '.css',
-        htmlElm: (hash, hashFilename) => {
-            return '<link '+
-                   'rel="stylesheet" '+
-                   'type="text/css" '+
-                   'integrity="' + hash + '" '+
-                   'href="/public/css/'+hashFilename+'.css">';
+        getTargetPath: hash => dir.prodcss + hash + '.css',
+        writePartial: hash => {
+            return 'link(rel="stylesheet", href="/public/css/' + hash + '.css")'
         },
         minify: fileContent => crass
                 .parse(fileContent)
@@ -55,32 +53,105 @@ async function preprod() {
                 .toString(),
     });
 
-    await merge({
-        query:            'script[data-merge="yes"]',
-        linkAttr:         'src',
-        concatinatedFile: 'concatedScripts.js',
-        target: hash => dir.prodjs + hash + '.js',
-        htmlElm: (hash, hashFilename) => {
-            return '<script '+
-                   'type="text/javascript" '+
-                   'integrity="' + hash + '" '+
-                   'src="/public/js/'+hashFilename+'.js" '+
-                   'crossorigin="anonymous"></script>';
-        },
-        minify: fileContent => uglifyJs
-                .minify(fileContent, { toplevel: true })
-                .code,
-    });
+    // await merge({
+    //     query:            'link[data-merge="yes"]',
+    //     linkAttr:         'href',
+    //     concatinatedFile: 'concatedStyles.css',
+    //     target: hash => dir.prodcss + hash + '.css',
+    //     htmlElm: (hash, hashFilename) => {
+    //         return '<link '+
+    //                'rel="stylesheet" '+
+    //                'type="text/css" '+
+    //                'integrity="' + hash + '" '+
+    //                'href="/public/css/'+hashFilename+'.css">';
+    //     },
+    //     minify: fileContent => crass
+    //             .parse(fileContent)
+    //             .optimize()
+    //             .toString(),
+    // });
 
-    await svgmin();
-    await pngmin();
+    // await merge({
+    //     query:            'script[data-merge="yes"]',
+    //     linkAttr:         'src',
+    //     concatinatedFile: 'concatedScripts.js',
+    //     target: hash => dir.prodjs + hash + '.js',
+    //     htmlElm: (hash, hashFilename) => {
+    //         return '<script '+
+    //                'type="text/javascript" '+
+    //                'integrity="' + hash + '" '+
+    //                'src="/public/js/'+hashFilename+'.js" '+
+    //                'crossorigin="anonymous"></script>';
+    //     },
+    //     minify: fileContent => uglifyJs
+    //             .minify(fileContent, { toplevel: true })
+    //             .code,
+    // });
 
-    await htmlmin();
+    // await svgmin();
+    // await pngmin();
+
+    // no longer needed as pug templates are already minified
+    // await htmlmin();
 }
 
 preprod();
 
 // -----------------------------------------------------------------------------
+
+async function newMerge(cfg) {
+    const partialPath = dir.prodappviewpartials + cfg.partialFile + '.pug';
+    const partialFile = await fs.readFileSync(partialPath, 'utf8');
+    const lines = partialFile.split('\n');
+
+    let files = [];
+
+    lines.forEach(line => {
+        if (line.length === 0) {
+            return;
+        }
+
+        const href = cfg.source;
+        const hrefStart = line.indexOf(href);
+        // cut out a substring from first char in the href path to the end
+        const fileHref = line.substr(hrefStart + href.length);
+        // split by " and get the first occurence to get everything up to the ending "
+        let filePathRel = fileHref.split('"')[0];
+
+        // remove / if there's one at the beginning of the path
+        if (filePathRel[0] === '/') {
+            filePathRel = filePathRel.substr(1);
+        }
+
+        const filePub = dir.current + filePathRel;
+        const fileProd = dir.prod + filePathRel;
+        files.push(fileProd);
+        console.log('  load file:', filePub);
+        let fileContent = fs.readFileSync(filePub, 'utf8');
+        let minified = cfg.minify(fileContent);
+        console.log('  write minified to:', fileProd);
+        fs.writeFileSync(fileProd, minified);
+    });
+
+    let concated = await concat(files);
+    // write to temp. sri needs a file
+    let tempFile = '/tmp/' + cfg.concatinatedFile;
+    console.log('  write concatinated file to:', tempFile);
+    await fs.writeFileSync(tempFile, concated);
+    // hash content
+    let hash = await sri.hash(tempFile);
+    let hashFilename = hash.replace(/\//ig, '_');
+    console.log('  hash:', hash);
+    console.log('  hash filename:', hashFilename);
+    // copy file into production folder
+    let target = cfg.getTargetPath(hashFilename);
+    console.log('  copy:', tempFile, 'to:', target);
+    await fs.createReadStream(tempFile).pipe(fs.createWriteStream(target));
+
+    await fs.writeFileSync(partialPath,
+                           cfg.writePartial(hashFilename));
+    return files;
+}
 
 async function merge(cfg) {
     console.log('Merge');
