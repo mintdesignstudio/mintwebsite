@@ -2,25 +2,12 @@ var app     = require('./app/app');
 var config  = require('./config');
 var logger  = require('logfmt');
 
-var instance = app.init();
-
-process.on('SIGTERM', function() {
-    logger.log({
-        type: 'info',
-        msg:  'shutting down'
-    });
-    instance.close(function() {
-        logger.log({ type: 'info', msg: 'exiting' });
-        process.exit();
-    });
-});
-
 logger.log({
     type: 'info',
     msg:  'starting server'
 });
 
-instance.listen(config.port, function() {
+let instance = app.init().listen(config.port, function() {
     if (typeof process.env.API_ENDPOINT === 'undefined') {
         logger.log({
             type: 'error',
@@ -50,5 +37,16 @@ instance.listen(config.port, function() {
         type: 'info',
         msg: 'listening',
         port: config.port
+    });
+});
+
+process.on('SIGTERM', function() {
+    logger.log({
+        type: 'info',
+        msg:  'shutting down'
+    });
+    instance.close(function() {
+        logger.log({ type: 'info', msg: 'exiting' });
+        process.exit();
     });
 });
