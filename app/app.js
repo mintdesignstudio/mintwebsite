@@ -83,7 +83,9 @@ module.exports.init = function() {
         .use(logs(config.verbose))
         .use(robots({ UserAgent: '*' }))
 
-        .use(compress())
+        .use(compress({
+            level: 9
+        }))
 
         .enable('etag')
 
