@@ -30,7 +30,7 @@ module.exports = function(req, res, next) {
         let content = {
             page: {
                 name: 'frontpage',
-                url: res.locals.utils.getPageUrl(req),
+                url: 'https://mintdesign.no/',
             },
             works: works,
         };

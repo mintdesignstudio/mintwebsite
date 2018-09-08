@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
         let content = {
             page: {
                 name: 'contact',
-                url: res.locals.utils.getPageUrl(req),
+                url: 'https://mintdesign.no/services/',
             },
             services: response
         };

@@ -8,7 +8,7 @@ module.exports = function(req, res, next) {
         let content = {
             page: {
                 name: 'work',
-                url: res.locals.utils.getPageUrl(req),
+                url: 'https://mintdesign.no/work/'+req.params.uid,
             },
             work: response,
         };

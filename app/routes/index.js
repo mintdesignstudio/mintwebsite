@@ -17,7 +17,7 @@ const sitemap      = require('./sitemap');
 
 module.exports = function(app) {
 
-    if (!config.production) {
+    if (config.production) {
         // redirect to https and non-www
         app.get('*', function(req,res,next) {
             let host = req.header('host');
@@ -26,21 +26,15 @@ module.exports = function(app) {
             logger.info('x-forwarder-proto: ' + req.headers['x-forwarded-proto']);
             logger.info('match www: ' + host.match(/^www\..*/i));
 
-            // console.log('host:', host);
-            // console.log('x-forwarder-proto:', req.headers['x-forwarded-proto']);
-            // console.log('match www:', host.match(/^www\..*/i));
-
             if (req.headers['x-forwarded-proto'] === 'https' &&
                 !host.match(/^www\..*/i)) {
 
                 logger.info('no redirect necessary');
-                // console.log('no redirect necessary');
                 next();
                 return;
             }
 
             logger.info('redirect to: https://' + host.substr(4) + req.url);
-            // console.log('redirect to', 'https://' + host.substr(4) + req.url);
             res.redirect(301, 'https://' + host.substr(4) + req.url);
         });
     }
@@ -96,13 +90,13 @@ module.exports = function(app) {
         });
     });
 
-// // Add getCanonicalUrl function in locals
-// app.use(function (req, res, next) {
-//   res.locals.getCanonicalUrl = function (document) {
-//     return 'http://' + req.headers.host + linkResolver(document);
-//   };
-//   next();
-// });
+    // Add getCanonicalUrl function in locals
+    app.use(function (req, res, next) {
+        res.locals.getCanonicalUrl = (doc) => {
+            return 'https://' + req.headers.host + res.locals.ctx.linkResolver(doc);
+        };
+        next();
+    });
 
     // Get the about and contact pages with every route
     app.route('*').get((req, res, next) => {

@@ -18,16 +18,8 @@ function hashName(name) {
         .replace(/\s/gi, '');
 }
 
-function getPageUrl(req) {
-    if (config.development) {
-        return req.protocol + '://' + req.hostname + req.originalUrl;
-    }
-    return 'https://' + req.hostname + req.originalUrl;
-}
-
 module.exports = {
     getPageTitle:          getPageTitle,
     capitalizeFirstLetter: capitalizeFirstLetter,
     hashName:              hashName,
-    getPageUrl:            getPageUrl,
 };
