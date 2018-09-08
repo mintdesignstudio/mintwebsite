@@ -31,6 +31,7 @@
     "express": "^4.16.3",
     "express-busboy": "5.0.0",
     "express-robots": "0.1.6",
+    "express-static-gzip": "^1.1.2",
     "fs-extra": "2.0.0",
     "helmet": "^3.13.0",
     "heroku-logger": "^0.3.1",

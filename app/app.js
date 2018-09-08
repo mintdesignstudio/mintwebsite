@@ -13,7 +13,8 @@ var express         = require('express'),
     errors          = require('./errors'),
     logs            = require('./logs');
 
-const routes = require('./routes');
+const expressStaticGzip = require('express-static-gzip');
+const routes            = require('./routes');
 
 module.exports.init = function() {
     var staticOptions = {
@@ -93,7 +94,10 @@ module.exports.init = function() {
             secret: 'mintdesign123martheogchristian'
         }))
         .use(methodOverride())
-        .use('/public', express.static(config.dir('public'), staticOptions));
+        .use('/public', expressStaticGzip(config.dir('public'), {
+            index: false
+        }));
+        // .use('/public', express.static(config.dir('public'), staticOptions));
 
     routes(app);
 
