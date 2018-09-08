@@ -131,54 +131,6 @@ async function merge(cfg) {
     return files;
 }
 
-async function merge(cfg) {
-    console.log('Merge');
-    let mainHbs = dir.prodappview + 'layouts/main.hbs';
-    console.log('  Read main template:', mainHbs);
-    let mainTemplate = await fs.readFileSync(mainHbs, 'utf8');
-    let files = [];
-    let $ = cheerio.load(mainTemplate);
-    let mergeables = $(cfg.query);
-
-    mergeables.each((i, elm) => {
-        let filePathRel = $(elm).attr(cfg.linkAttr);
-        let filePathPub = __dirname + filePathRel;
-        let filePathProd = __dirname + '/production' + filePathRel;
-        files.push(filePathProd);
-        console.log('  load file:', filePathPub);
-        let fileContent = fs.readFileSync(filePathPub, 'utf8');
-        let minified = cfg.minify(fileContent);
-        fs.writeFileSync(filePathProd, minified);
-    });
-
-    let concated = await concat(files);
-    // write to temp. sri needs a file
-    let tempFile = '/tmp/' + cfg.concatinatedFile;
-    console.log('  write temp file:', tempFile);
-    await fs.writeFileSync(tempFile, concated);
-    // hash content
-    let hash = await sri.hash(tempFile);
-    let hashFilename = hash.replace(/\//ig, '_');
-    console.log('  hash:', hash);
-    console.log('  hash filename:', hashFilename);
-    // copy file into production folder
-    let target = cfg.target(hashFilename);
-    console.log('  copy:', tempFile, 'to:', target);
-    await fs.createReadStream(tempFile).pipe(fs.createWriteStream(target));
-
-    mergeables.each((i, elm) => {
-        if (i < mergeables.length - 1) {
-            $(elm).remove();
-        } else {
-            $(elm).replaceWith(cfg.htmlElm(hash, hashFilename));
-        }
-    });
-
-    console.log('Write main template:', mainHbs);
-    await fs.writeFileSync(mainHbs, $.html());
-    return files;
-}
-
 async function htmlmin() {
     console.log('HTMLMin');
 
