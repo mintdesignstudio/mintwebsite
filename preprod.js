@@ -39,10 +39,10 @@ async function preprod() {
     await copyFiles(dir.pub,     dir.prodpub);
     await copyFiles(dir.appview, dir.prodappview);
 
-    await newMerge({
+    await merge({
         partialFile: 'styles',
         source: 'href="',
-        concatinatedFile: 'concatedStyles.css',
+        concatinatedFile: 'concatinatedStyles.css',
         getTargetPath: hash => dir.prodcss + hash + '.css',
         writePartial: hash => {
             return 'link(rel="stylesheet", href="/public/css/' + hash + '.css")'
@@ -53,43 +53,21 @@ async function preprod() {
                 .toString(),
     });
 
-    // await merge({
-    //     query:            'link[data-merge="yes"]',
-    //     linkAttr:         'href',
-    //     concatinatedFile: 'concatedStyles.css',
-    //     target: hash => dir.prodcss + hash + '.css',
-    //     htmlElm: (hash, hashFilename) => {
-    //         return '<link '+
-    //                'rel="stylesheet" '+
-    //                'type="text/css" '+
-    //                'integrity="' + hash + '" '+
-    //                'href="/public/css/'+hashFilename+'.css">';
-    //     },
-    //     minify: fileContent => crass
-    //             .parse(fileContent)
-    //             .optimize()
-    //             .toString(),
-    // });
+    await merge({
+        partialFile: 'scripts',
+        source: 'src="',
+        concatinatedFile: 'concatinatedScripts.js',
+        getTargetPath: hash => dir.prodjs + hash + '.js',
+        writePartial: hash => {
+            return 'script(crossorigin="anonymous", src="/public/js/' + hash + '.js")'
+        },
+        minify: fileContent => uglifyJs
+                .minify(fileContent, { toplevel: true })
+                .code,
+    });
 
-    // await merge({
-    //     query:            'script[data-merge="yes"]',
-    //     linkAttr:         'src',
-    //     concatinatedFile: 'concatedScripts.js',
-    //     target: hash => dir.prodjs + hash + '.js',
-    //     htmlElm: (hash, hashFilename) => {
-    //         return '<script '+
-    //                'type="text/javascript" '+
-    //                'integrity="' + hash + '" '+
-    //                'src="/public/js/'+hashFilename+'.js" '+
-    //                'crossorigin="anonymous"></script>';
-    //     },
-    //     minify: fileContent => uglifyJs
-    //             .minify(fileContent, { toplevel: true })
-    //             .code,
-    // });
-
-    // await svgmin();
-    // await pngmin();
+    await svgmin();
+    await pngmin();
 
     // no longer needed as pug templates are already minified
     // await htmlmin();
@@ -99,7 +77,7 @@ preprod();
 
 // -----------------------------------------------------------------------------
 
-async function newMerge(cfg) {
+async function merge(cfg) {
     const partialPath = dir.prodappviewpartials + cfg.partialFile + '.pug';
     const partialFile = await fs.readFileSync(partialPath, 'utf8');
     const lines = partialFile.split('\n');
