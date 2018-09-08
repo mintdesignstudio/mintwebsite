@@ -127,6 +127,7 @@ async function merge(cfg) {
     await fs.createReadStream(tempFile).pipe(fs.createWriteStream(target));
 
     console.log('  write new content to partial:', partialPath);
+    console.log('  new content:', cfg.writePartial(hashFilename));
     await fs.writeFileSync(partialPath,
                            cfg.writePartial(hashFilename));
     return files;
