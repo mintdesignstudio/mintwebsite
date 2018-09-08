@@ -7,7 +7,8 @@ logger.log({
     msg:  'starting server'
 });
 
-let instance = app.init().listen(config.port, function() {
+const server = app.init();
+server.listen(config.port, function() {
     if (typeof process.env.API_ENDPOINT === 'undefined') {
         logger.log({
             type: 'error',
@@ -45,7 +46,7 @@ process.on('SIGTERM', function() {
         type: 'info',
         msg:  'shutting down'
     });
-    instance.close(function() {
+    server.close(function() {
         logger.log({ type: 'info', msg: 'exiting' });
         process.exit();
     });

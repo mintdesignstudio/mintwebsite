@@ -105,5 +105,5 @@ module.exports.init = function() {
         app.set('showStackError', true);
     }
 
-    return app;
+    return http.createServer(app);
 };
