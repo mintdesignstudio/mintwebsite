@@ -84,6 +84,8 @@ module.exports.init = function() {
 
         .use(compress())
 
+        .enable('etag')
+
         .use(cookieParser({
             secret: 'mintdesign123martheogchristian'
         }))
