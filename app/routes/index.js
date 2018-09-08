@@ -1,6 +1,6 @@
 const Prismic      = require('prismic-javascript');
 const prismicDOM   = require('prismic-dom');
-const logger       = require('logfmt');
+const logger       = require('heroku-logger');
 
 const linkResolver = require('../link-resolver');
 const utils        = require('../utils');
@@ -22,18 +22,9 @@ module.exports = function(app) {
         app.get('*', function(req,res,next) {
             let host = req.header('host');
 
-logger.log({
-    type: 'info',
-    msg:  'host: ' + host
-});
-logger.log({
-    type: 'info',
-    msg:  'x-forwarder-proto: ' + req.headers['x-forwarded-proto']
-});
-logger.log({
-    type: 'info',
-    msg:  'match www: ' + host.match(/^www\..*/i)
-});
+logger.info('host: ' + host);
+logger.info('x-forwarder-proto: ' + req.headers['x-forwarded-proto']);
+logger.info('match www: ' + host.match(/^www\..*/i));
 
             console.log('host:', host);
             console.log('x-forwarder-proto:', req.headers['x-forwarded-proto']);
@@ -42,19 +33,13 @@ logger.log({
             if (req.headers['x-forwarded-proto'] === 'https' &&
                 !host.match(/^www\..*/i)) {
 
-logger.log({
-    type: 'info',
-    msg:  'no redirect necessary'
-});
+logger.info('no redirect necessary');
                 console.log('no redirect necessary');
                 next();
                 return;
             }
 
-logger.log({
-    type: 'info',
-    msg:  'redirect to: https://' + host.substr(4) + req.url
-});
+logger.log('redirect to: https://' + host.substr(4) + req.url);
             console.log('redirect to', 'https://' + host.substr(4) + req.url);
             res.redirect(301, 'https://' + host.substr(4) + req.url);
         });
