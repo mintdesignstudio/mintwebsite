@@ -21,12 +21,18 @@ module.exports = function(app) {
         app.get('*', function(req,res,next) {
             let host = req.header('host');
 
+            console.log('host:', host);
+            console.log('x-forwarder-proto:', req.headers['x-forwarded-proto']);
+            console.log('match www:', host.match(/^www\..*/i));
+
             if (req.headers['x-forwarded-proto'] === 'https' &&
                 !host.match(/^www\..*/i)) {
+                console.log('no redirect necessary');
                 next();
                 return;
             }
 
+            console.log('redirect to', 'https://' + host.substr(4) + req.url);
             res.redirect(301, 'https://' + host.substr(4) + req.url);
         });
     }
