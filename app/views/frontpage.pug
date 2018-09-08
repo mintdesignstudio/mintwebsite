@@ -8,7 +8,7 @@ block body
     include ./partials/responsiveBgImage
 
     div
-      img.logo(src="/public/images/logo_symbol_white.svg")
+      img.logo(src="/public/images/logo_symbol_white.svg", alt="Mint Design logo in white")
       != prismicDOM.RichText.asHtml(about.data.tagline)
 
   if services
@@ -17,7 +17,7 @@ block body
         div
           a(href=ctx.linkResolver(service, 'services'))
             if service.icon
-              img(src=service.icon.url)
+              img(src=service.icon.url, alt=service.icon.alt)
             != prismicDOM.RichText.asHtml(service.title)
           != prismicDOM.RichText.asHtml(service.excerpt)
 
