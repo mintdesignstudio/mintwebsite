@@ -39,7 +39,7 @@ module.exports = function(app) {
                 return;
             }
 
-            logger.log('redirect to: https://' + host.substr(4) + req.url);
+            logger.info('redirect to: https://' + host.substr(4) + req.url);
             // console.log('redirect to', 'https://' + host.substr(4) + req.url);
             res.redirect(301, 'https://' + host.substr(4) + req.url);
         });
