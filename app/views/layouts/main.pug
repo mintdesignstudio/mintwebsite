@@ -28,8 +28,7 @@ html
     link(rel="apple-touch-icon", href="/public/images/apple-touch-icon.png")
     link(rel="apple-touch-icon-precomposed", href="/public/images/apple-touch-icon-precomposed.png")
 
-    link(data-merge="yes", rel="stylesheet", href="/public/css/reset.css")
-    link(data-merge="yes", rel='stylesheet', href='/public/css/style.css')
+    include ../partials/styles.pug
 
   body
 
@@ -39,10 +38,7 @@ html
 
     include ../partials/footer.pug
 
-    script(data-merge="yes", crossorigin="anonymous", src="/public/js/picture.js")
-    script(data-merge="yes", crossorigin="anonymous", src="/public/js/main.js")
-    script(data-merge="yes", crossorigin="anonymous", src="/public/js/picturefill.min.js")
-    script(data-merge="yes", crossorigin="anonymous", src="/public/js/ga.js")
+    include ../partials/scripts.pug
 
     // Required for Previews and Experiments
     script
