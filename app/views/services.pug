@@ -5,13 +5,15 @@ block body
   section.content.services
     != prismicDOM.RichText.asHtml(services.data.title)
 
-    each service in services.data.services
+    - for (var i = 0; i < services.data.services.length; i++)
+      - var side = i % 2 === 0 ? 'left' : 'right'
+      - var service = services.data.services[i]
       a.anchor(name=service.uid)
-        div(class="service "+service.side)
-          div.background#{'#'+service.uid}
+        div(class="service "+side)
+          div(class="background", id=service.uid)
             - var imgObj = service.photo
             - var imgId = service.uid
             include ./partials/responsiveBgImage
           div.content
-            != prismicDOM.RichText.asHtml(services.data.title)
-            != prismicDOM.RichText.asHtml(services.data.body)
+            != prismicDOM.RichText.asHtml(service.title)
+            != prismicDOM.RichText.asHtml(service.body)

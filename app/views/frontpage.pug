@@ -13,13 +13,13 @@ block body
 
   if services
     section.services.excerpts
-      each service in services
+      each service in services.data.services
         div
-          a(href=ctx.linkResolver(service.link))
+          a(href=ctx.linkResolver(service, 'services'))
             if service.icon
               img(src=service.icon.url)
-            != prismicDOM.RichText.asText(service.title)
-          != prismicDOM.RichText.asText(service.excerpt)
+            != prismicDOM.RichText.asHtml(service.title)
+          != prismicDOM.RichText.asHtml(service.excerpt)
 
   section.works
     h2 Works

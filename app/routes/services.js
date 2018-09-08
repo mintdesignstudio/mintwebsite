@@ -4,6 +4,7 @@ module.exports = function(req, res, next) {
 
     req.prismic.api.query(Prismic.Predicates.any('document.type', [
         'services',
+        'contact',
         'about'
     ]), {
         ref: res.locals.prismicRef
@@ -17,9 +18,10 @@ module.exports = function(req, res, next) {
         };
         response.results.forEach(doc => content[doc.uid] = doc);
 
-        res.render('contact', content);
+        res.render('services', content);
     })
     .catch(err => {
+        console.log('services error:', err.message);
         next(`Error: ${err.message}`);
     });
 }

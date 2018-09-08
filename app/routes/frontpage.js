@@ -4,32 +4,30 @@ const Promise = require('promise');
 module.exports = function(req, res, next) {
 
     Promise.all([
-        req.prismic.api.query(Prismic.Predicates.at('document.type', 'project'),
-            {
-                pageSize : 8, // reduce to 8?
-                page : 1,
-                orderings : '[my.project.published desc]',
-                fetch: [
-                    'project.uid',
-                    'project.image',
-                    'project.name',
-                    'project.description',
-                ],
-                ref: res.locals.prismicRef
-            }),
-        req.prismic.api.query(Prismic.Predicates.any('document.type',
-            [
-                'frontpage',
-                'about',
-                'contact',
-                'services'
-            ]), {
-                ref: res.locals.prismicRef
-            }),
+        req.prismic.api.query(Prismic.Predicates.at('document.type', 'project'), {
+            pageSize : 8,
+            page : 1,
+            orderings : '[my.project.published desc]',
+            fetch: [
+                'project.uid',
+                'project.image',
+                'project.name',
+                'project.description',
+            ],
+            ref: res.locals.prismicRef
+        }),
+        req.prismic.api.query(Prismic.Predicates.any('document.type', [
+            'frontpage',
+            'about',
+            'contact',
+            'services'
+        ]), {
+            ref: res.locals.prismicRef
+        }),
     ])
     .then(response => {
 
-        let works = response[0].results;
+        const works = response[0].results;
 
         let content = {
             page: {
@@ -48,6 +46,7 @@ module.exports = function(req, res, next) {
         res.render('frontpage', content);
     })
     .catch(err => {
+        console.log('Frontpage error:', err.message);
         next(`Error: ${err.message}`);
     });
 }

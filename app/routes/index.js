@@ -72,15 +72,6 @@ module.exports = function(app) {
         }).then((api) => {
             req.prismic = { api };
 
-            // For Prismic preview.
-            // Figure out the correct ref to use
-            const cookies = new Cookies(req, res);
-            const previewRef = cookies.get(Prismic.previewCookie);
-            const masterRef = req.prismic.api.refs.find(ref => {
-                return ref.isMasterRef === true;
-            });
-            res.locals.prismicRef = previewRef || masterRef.ref;
-
             next();
         }).catch((error) => {
             next(error.message);
@@ -93,6 +84,9 @@ module.exports = function(app) {
         .then(menu => {
             res.locals.menu = menu;
             next();
+        }).catch((error) => {
+            console.log('could not get menu:',error.message);
+            next(error.message);
         });
     });
 
