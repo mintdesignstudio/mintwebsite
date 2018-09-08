@@ -18,8 +18,6 @@ module.exports = function(req, res, next) {
         }),
         req.prismic.api.query(Prismic.Predicates.any('document.type', [
             'frontpage',
-            'about',
-            'contact',
             'services'
         ]), {
             ref: res.locals.prismicRef

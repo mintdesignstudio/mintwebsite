@@ -1,19 +1,8 @@
 const Prismic = require('prismic-javascript');
-const Promise = require('promise');
 
 module.exports = function(req, res, next) {
 
-    const api = req.prismic.api;
-
-    Promise.all([
-        api.getByUID('project', req.params.uid),
-        api.query(Prismic.Predicates.at('document.type', 'about'), {
-            ref: res.locals.prismicRef
-        }),
-        api.query(Prismic.Predicates.at('document.type', 'contact'), {
-            ref: res.locals.prismicRef
-        }),
-    ])
+    req.prismic.api.getByUID('project', req.params.uid)
     .then(response => {
 
         let content = {
@@ -21,9 +10,7 @@ module.exports = function(req, res, next) {
                 name: 'work',
                 url: res.locals.utils.getPageUrl(req),
             },
-            work:    response[0],
-            about:   response[1].results[0],
-            contact: response[2].results[0],
+            work: response,
         };
 
         content.work.data.gallery = content.work.data.gallery.map(entry => {

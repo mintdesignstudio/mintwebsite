@@ -1,6 +1,5 @@
 const Prismic      = require('prismic-javascript');
 const prismicDOM   = require('prismic-dom');
-const Cookies      = require('cookies');
 
 const linkResolver = require('../link-resolver');
 const utils        = require('../utils');
@@ -78,14 +77,28 @@ module.exports = function(app) {
         });
     });
 
-    // Get the menu with every route
+// // Add getCanonicalUrl function in locals
+// app.use(function (req, res, next) {
+//   res.locals.getCanonicalUrl = function (document) {
+//     return 'http://' + req.headers.host + linkResolver(document);
+//   };
+//   next();
+// });
+
+    // Get the about and contact pages with every route
     app.route('*').get((req, res, next) => {
-        req.prismic.api.getSingle('menu')
-        .then(menu => {
-            res.locals.menu = menu;
+        req.prismic.api.query(Prismic.Predicates.any('document.type', [
+            'about',
+            'contact',
+            'menu'
+        ]), {
+            ref: res.locals.prismicRef
+        })
+        .then(response => {
+            response.results.forEach(doc => res.locals[doc.uid] = doc);
             next();
         }).catch((error) => {
-            console.log('could not get menu:',error.message);
+            console.log('could not get menu, about or contact:',error.message);
             next(error.message);
         });
     });

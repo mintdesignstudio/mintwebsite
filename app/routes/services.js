@@ -2,11 +2,7 @@ const Prismic = require('prismic-javascript');
 
 module.exports = function(req, res, next) {
 
-    req.prismic.api.query(Prismic.Predicates.any('document.type', [
-        'services',
-        'contact',
-        'about'
-    ]), {
+    req.prismic.api.query(Prismic.Predicates.at('document.type', 'services'), {
         ref: res.locals.prismicRef
     })
     .then(response => {
@@ -14,9 +10,9 @@ module.exports = function(req, res, next) {
             page: {
                 name: 'contact',
                 url: res.locals.utils.getPageUrl(req),
-            }
+            },
+            services: response
         };
-        response.results.forEach(doc => content[doc.uid] = doc);
 
         res.render('services', content);
     })
