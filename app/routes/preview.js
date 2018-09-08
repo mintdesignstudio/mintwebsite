@@ -7,6 +7,7 @@ module.exports = function(req, res, next) {
 
     if (!token) {
         res.send(400, 'Missing token for querystring');
+        return;
     }
 
     req.prismic.api.previewSession(token, res.locals.ctx.linkResolver, '/')
