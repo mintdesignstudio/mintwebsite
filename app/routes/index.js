@@ -17,12 +17,17 @@ const sitemap      = require('./sitemap');
 module.exports = function(app) {
 
     if (config.production) {
-        app.get('*',function(req,res,next) {
-            if (req.headers['x-forwarded-proto'] !== 'https') {
-                res.redirect(301, 'https://' + req.headers.host + req.url);
-            } else {
+        // redirect to https and non-www
+        app.get('*', function(req,res,next) {
+            let host = req.header('host');
+
+            if (req.headers['x-forwarded-proto'] === 'https' &&
+                !host.match(/^www\..*/i)) {
                 next();
+                return;
             }
+
+            res.redirect(301, 'https://' + host.substr(4) + req.url);
         });
     }
 
