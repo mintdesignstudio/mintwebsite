@@ -1,0 +1,16 @@
+extends ./layouts/main.pug
+
+block body
+
+  section.workdescription
+    h1 #{work.data.name}
+    div
+      != prismicDOM.RichText.asHtml(work.data.body)
+
+  section.gallery
+    each image in work.data.gallery
+      picture
+        source(srcset=image.url, media="(min-width: 100em)")
+        source(srcset=image.Large.url, media="(min-width: 70em) and (max-width: 100em)")
+        source(srcset=image.Medium.url, media="(min-width: 40em) and (max-width: 70em)")
+        img(srcset=image.Small.url, alt=image.alt)

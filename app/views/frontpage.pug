@@ -1,0 +1,41 @@
+extends ./layouts/main.pug
+
+block body
+
+  div.hero#hero
+    - var imgObj = heroimage
+    - var imgId = 'hero'
+    include ./partials/responsiveBgImage
+
+    div
+      img.logo(src="/public/images/logo_symbol_white.svg")
+      != prismicDOM.RichText.asHtml(about.data.tagline)
+
+  if services
+    section.services.excerpts
+      each service in services
+        div
+          a(href=ctx.linkResolver(service.link))
+            if service.icon
+              img(src=service.icon.url)
+            != prismicDOM.RichText.asText(service.title)
+          != prismicDOM.RichText.asText(service.excerpt)
+
+  section.works
+    h2 Works
+    div.work
+      each work in works
+        div.project(id=work.uid)
+          - var imgObj = work.data.image
+          - var imgId = work.uid
+          include ./partials/responsiveBgImage
+          div.overlay
+            a(href=ctx.linkResolver(work))
+              | #{work.data.name}
+              span #{work.data.description}
+    a(href="/works") Full work list
+
+  div.content.home
+    - var clients = about.data.clients
+    - var align = 'center'
+    include ./partials/clients

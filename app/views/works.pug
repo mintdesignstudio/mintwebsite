@@ -1,0 +1,17 @@
+extends ./layouts/main.pug
+
+block body
+
+  div.work
+    - for (var i = 0; i < works.length; i++)
+      - var className = i == 0 ? "project current" : "project"
+      - var work = works[i]
+      div(class=className, id=work.uid)
+        - var imgObj = work.data.image
+        - var imgId = work.uid
+        include ./partials/responsiveBgImage
+
+        a(href=ctx.linkResolver(work))
+          h1 #{work.data.name}
+          span #{work.data.description}
+

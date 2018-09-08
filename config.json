@@ -1,6 +1,6 @@
 {
     "url": {
-        "base":         "http://www.mintdesign.no"
+        "base":         "https://mintdesign.no"
     },
     "dir": {
         "public":       "/public",

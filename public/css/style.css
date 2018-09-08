@@ -180,12 +180,17 @@ p {
     padding-bottom: 0.5em;
 }
 
-.awards ul,
+.awards ul {
+    display: grid;
+    grid-template-columns: auto;
+}
+
 .clients ul {
     list-style: none;
     display: grid;
-    justify-content: center;
-    grid-template-columns: auto auto auto auto;
+    justify-content: stretch;
+    grid-template-columns: auto auto;
+    align-items: center;
 }
 
 .awards li {
@@ -222,15 +227,12 @@ footer {
 
 .clients li {
     box-sizing: border-box;
-    margin: 1em 2em;
+    text-align: center;
 }
 
 .clients li img {
-    display: block;
-    margin: 0 auto;
-    width: auto;
     height: 6em;
-    padding: 0;
+    display: inline-block;
 }
 
 .map {
@@ -259,23 +261,27 @@ div.work {
 div.work .project {
     background-size: cover;
     background-position: center center;
+    display: grid;
+}
+
+div.work .project.current {
+    grid-column-start: 1;
+    grid-column-end: span 2;
 }
 
 div.work .project a {
-    color: white;
-    font-size: 1.4em;
-    display: flex;
-    box-sizing: border-box;
-    padding: 6em 1em 1em 1em;
-    width: 100%;
-    opacity: 0.5;
-    transition: opacity 0.5s;
     background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
     background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-    height: 100%;
+    box-sizing: border-box;
+    color: #fff;
+    display: flex;
     flex-direction: column;
+    font-size: 1.4em;
     justify-content: flex-end;
+    opacity: .5;
+    padding: 6em 1em 1em;
+    transition: opacity .5s;
 }
 
 div.work .project a:hover {
@@ -527,11 +533,6 @@ section.gallery img {
         grid-template-columns: 50% 50%;
     }
 
-    div.work .project.current {
-        grid-column-start: 1;
-        grid-column-end: span 2;
-    }
-
     .awards li {
         flex: 1 0 50%;
         display: block;
@@ -590,7 +591,7 @@ section.gallery img {
     }
 
     .clients li img {
-        height: 6.5em;
+        /* height: 6.5em; */
     }
 
     .services.excerpts > div {
@@ -609,6 +610,14 @@ section.gallery img {
         background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
         background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
         background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 100%);
+    }
+
+    .clients ul {
+        grid-template-columns: auto auto auto;
+    }
+
+    .awards ul {
+        grid-template-columns: auto auto;
     }
 }
 
@@ -786,6 +795,13 @@ section.gallery img {
         height: 8em;
     }
 
+    .clients ul {
+        grid-template-columns: auto auto auto auto;
+    }
+
+    .awards ul {
+        grid-template-columns: auto auto auto;
+    }
 }
 
 @media screen and (min-width: 110em) {
@@ -803,6 +819,10 @@ section.gallery img {
 
     .clients li img {
         height: 9em;
+    }
+
+    .awards ul {
+        grid-template-columns: auto auto auto auto;
     }
 }
 

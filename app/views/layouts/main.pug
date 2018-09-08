@@ -1,0 +1,50 @@
+doctype html(lang='en')
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(http-equiv="cache-control", content="max-age=21600")
+
+    unless work
+      - var image = about.data.image.url
+      - var metaDescription = prismicDOM.RichText.asText([about.data.tagline[0]])
+    else
+      - var image = work.data.image.url
+      - var metaDescription = prismicDOM.RichText.asText(work.data.body)
+
+    meta(property="og:title", content=utils.getPageTitle(about, page, work))
+    meta(property="og:url" content=page.url)
+    meta(property="og:description" content=metaDescription)
+    meta(property="og:image" content=image)
+
+    meta(name="description", content=metaDescription)
+    link(rel="canonical", href=page.url)
+
+    title
+      != utils.getPageTitle(about, page, work)
+
+    link(rel="icon", sizes="180x180", href="/public/images/apple-touch-icon.png")
+    link(rel="apple-touch-icon", href="/public/images/apple-touch-icon.png")
+    link(rel="apple-touch-icon-precomposed", href="/public/images/apple-touch-icon-precomposed.png")
+
+    link(data-merge="yes", rel="stylesheet", href="/public/css/reset.css")
+    link(data-merge="yes", rel='stylesheet', href='/public/css/style.css')
+
+  body
+
+    include ../partials/menu.pug
+
+    block body
+
+    include ../partials/footer.pug
+
+    script(data-merge="yes", crossorigin="anonymous", src="/public/js/picture.js")
+    script(data-merge="yes", crossorigin="anonymous", src="/public/js/main.js")
+    script(data-merge="yes", crossorigin="anonymous", src="/public/js/picturefill.min.js")
+    script(data-merge="yes", crossorigin="anonymous", src="/public/js/ga.js")
+
+    // Required for Previews and Experiments
+    script
+      = ctx?"window.prismic = { endpoint: '" + ctx.endpoint + "' };":""
+    script(src="//static.cdn.prismic.io/prismic.min.js")

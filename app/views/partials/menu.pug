@@ -1,0 +1,8 @@
+div.menu#menu
+  a.logo(href="/")
+    img(src="/public/images/logo_white_name.svg")
+  ul
+    each m in menu.data.options
+      li
+        a(href=prismicDOM.Link.url(m.link, ctx.linkResolver))
+          != m.label

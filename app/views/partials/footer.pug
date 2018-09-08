@@ -1,0 +1,19 @@
+footer
+  img.logo(src="/public/images/logo_symbol_white.svg")
+  ul.contact
+    li #{about.data.companyname}
+    li #{contact.data.telephone}
+    li
+      - var email = contact.data.email
+      include ./email
+  ul.social
+    li
+      a(href=contact.data.facebook)
+        img(src="/public/images/icon-fb.svg")
+    li
+      a(href=contact.data.instagram)
+        img(src="/public/images/icon-insta.svg")
+    li
+      a(href=contact.data.linkedin)
+        img(src="/public/images/icon-li.svg")
+

@@ -1,0 +1,10 @@
+if clients
+  unless align
+    - var align = ''
+  div(class="clients "+align)
+    h1 Clients
+    ul
+      each client in clients
+        if client.image
+          li
+            img(src=client.image.url, alt=client.fullname)

@@ -1,6 +1,7 @@
 var Handlebars = require('handlebars');
 var config = require('../../config');
 
+// DONE
 module.exports.img = function(image, size) {
     if (typeof image === 'undefined') {
         return '';
@@ -13,6 +14,7 @@ module.exports.img = function(image, size) {
     );
 }
 
+// DONE
 module.exports.background = function(id, image) {
     return new Handlebars.SafeString(
         '<style type="text/css">' +
@@ -38,6 +40,7 @@ module.exports.background = function(id, image) {
     );
 }
 
+// DONE
 module.exports.herobg = function(id, image, size) {
     return new Handlebars.SafeString(
         '<style type="text/css">' +
@@ -52,6 +55,7 @@ module.exports.first = function(context, options) {
     return options.fn(context[0]);
 }
 
+// DONE
 module.exports.capitalize = function(options) {
     var str = options.fn(this);
     return str.charAt(0).toUpperCase() + str.slice(1);

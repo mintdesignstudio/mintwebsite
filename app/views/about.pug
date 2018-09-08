@@ -1,0 +1,52 @@
+extends ./layouts/main.pug
+
+block body
+
+  div.about.hero#hero
+    - var imgObj = about.data.image
+    - var imgId = 'hero'
+    include ./partials/responsiveBgImage
+
+  div.content.about
+    h1 #{about.data.headline}
+    div.body
+      != prismicDOM.RichText.asHtml(about.data.content)
+
+    - var employees = about.data.employees
+    if employees
+      div.employees
+        each employee in employees
+          div.profile
+            - var eid = utils.hashName(employee.fullname)
+            div.photo(id=eid)
+              - var imgObj = employee.image
+              - var imgId = eid
+              include ./partials/responsiveBgImage
+            div.details
+              h2 #{employee.fullname}
+              span #{employee.title}
+              ul
+                li #{employee.telephone}
+                li
+                  - var email = employee.email
+                  include ./partials/email
+
+    - var awards = about.data.awards
+    if awards
+      div.awards
+        h1 Awards
+        ul
+          each award in awards
+            li
+              - var link = prismicDOM.Link.url(award.link, ctx.linkResolver)
+              if link
+                a(href=link)
+                  b #{award.title}
+              else
+                b #{award.title}
+              div
+                span #{award.year}
+                | #{award.giver}
+
+    - var clients = about.data.clients
+    include ./partials/clients

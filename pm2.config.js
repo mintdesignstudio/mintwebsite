@@ -13,7 +13,7 @@ module.exports = {
         "PORT"          : "5000",
         "NODE_ENV"      : "development",
         "VERBOSE"       : "true",
-        "API_ENDPOINT"  : "https://mintdesign.cdn.prismic.io/api",
+        "API_ENDPOINT"  : "https://mintdesign.cdn.prismic.io/api/v2",
         "ACCESS_TOKEN"  : "MC5WSGRtdUNrQUFDVUFaVHdO.We-_vT7vv73vv70N77-9eljvv73vv71977-977-9eghk77-9CO-_ve-_vQJ_77-9P--_ve-_vRrvv73vv73vv70H",
         "CLIENT_ID"     : "VHdmuCkAACgAZTwM",
         "CLIENT_SECRET" : "4ec8edc162cf4b560ba12765cafbb090",

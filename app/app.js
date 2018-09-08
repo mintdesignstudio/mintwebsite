@@ -1,5 +1,5 @@
 var express         = require('express'),
-    exphbs          = require('express-handlebars')
+    // exphbs          = require('express-handlebars')
     favicon         = require('serve-favicon'),
     busBoy          = require('express-busboy'),
     robots          = require('express-robots'),
@@ -12,9 +12,11 @@ var express         = require('express'),
     compress        = require('compression'),
     config          = require('../config.js'),
     router          = require('./router'),
-    hbHelpers       = require('./helpers/handlebars'),
+    // hbHelpers       = require('./helpers/handlebars'),
     errors          = require('./errors'),
     logs            = require('./logs');
+
+const routes = require('./routes');
 
 module.exports.init = function() {
     var staticOptions = {
@@ -25,15 +27,15 @@ module.exports.init = function() {
         redirect: false
     };
 
-    var hbs_ext = '.hbs';
+    // var hbs_ext = '.hbs';
 
-    var hbs = exphbs.create({
-        extname:        hbs_ext,
-        defaultLayout:  'main',
-        helpers:        hbHelpers,
-        layoutsDir:     config.dir('layout'),
-        partialsDir:    config.dir('partials')
-    });
+    // var hbs = exphbs.create({
+    //     extname:        hbs_ext,
+    //     defaultLayout:  'main',
+    //     helpers:        hbHelpers,
+    //     layoutsDir:     config.dir('layout'),
+    //     partialsDir:    config.dir('partials')
+    // });
 
     var errs = errors(config.verbose);
 
@@ -85,8 +87,9 @@ module.exports.init = function() {
         .use(helmet.noSniff())
         .use(helmet.xssFilter())
 
-        .engine(hbs_ext,     hbs.engine)
-        .set('view engine',  hbs_ext)
+        // .engine(hbs_ext,     hbs.engine)
+        // .set('view engine',  hbs_ext)
+        .set('view engine', 'pug')
         .set('views',        config.dir('views'))
         .set('view cache',   config.production)
 
@@ -102,42 +105,8 @@ module.exports.init = function() {
         .use(methodOverride())
         .use('/public', express.static(config.dir('public'), staticOptions));
 
-    if (config.production) {
-        app.get('*',function(req,res,next) {
-            if (req.headers['x-forwarded-proto'] !== 'https') {
-                res.redirect(301, 'https://' + req.headers.host + req.url);
-            } else {
-                next();
-            }
-        });
-    }
-
-    app.get('/.well-known/acme-challenge/:acmeToken', function(req, res, next) {
-        var acmeToken = req.params.acmeToken;
-        var acmeKey;
-
-        if (process.env.ACME_KEY && process.env.ACME_TOKEN) {
-            if (acmeToken === process.env.ACME_TOKEN) {
-                acmeKey = process.env.ACME_KEY;
-            }
-        }
-
-        for (var key in process.env) {
-            if (key.startsWith('ACME_TOKEN_')) {
-                var num = key.split('ACME_TOKEN_')[1];
-                if (acmeToken === process.env['ACME_TOKEN_' + num]) {
-                    acmeKey = process.env['ACME_KEY_' + num];
-                }
-            }
-        }
-
-        if (acmeKey) {
-            res.send(acmeKey);
-        } else {
-            res.status(404).send();
-        }
-    });
-
+    routes(app);
+    // remove
     router.init(app);
 
     app

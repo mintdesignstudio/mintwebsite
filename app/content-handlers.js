@@ -51,6 +51,7 @@ handlers.getProjects = function(results, req) {
     return projects;
 }
 
+// DONE
 handlers.getMenu = function(contents) {
     var options = contents.getGroup('menu.options').toArray();
     var menu = [];

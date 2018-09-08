@@ -1,0 +1,13 @@
+extends ./layouts/main.pug
+
+block body
+
+  div.contact.hero.overlay#hero
+    - var imgObj = contact.data.map
+    - var imgId = 'hero'
+    include ./partials/backgroundSvg
+
+  div.content.contact
+    h1 Contact
+    div.body
+      != prismicDOM.RichText.asHtml(contact.data.address)

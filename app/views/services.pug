@@ -1,0 +1,17 @@
+extends ./layouts/main.pug
+
+block body
+
+  section.content.services
+    != prismicDOM.RichText.asHtml(services.data.title)
+
+    each service in services.data.services
+      a.anchor(name=service.uid)
+        div(class="service "+service.side)
+          div.background#{'#'+service.uid}
+            - var imgObj = service.photo
+            - var imgId = service.uid
+            include ./partials/responsiveBgImage
+          div.content
+            != prismicDOM.RichText.asHtml(services.data.title)
+            != prismicDOM.RichText.asHtml(services.data.body)
