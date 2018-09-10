@@ -19,5 +19,5 @@ block body
             - var imgId = service.uid
             include ./partials/responsiveBgImage
           div.content
-            != prismicDOM.RichText.asHtml(service.data.title)
-            != prismicDOM.RichText.asHtml(service.data.body)
+            != prismicDOM.RichText.asHtml(service.title)
+            != prismicDOM.RichText.asHtml(service.body)

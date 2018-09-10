@@ -11,7 +11,7 @@ module.exports = function(req, res, next) {
                 name: 'contact',
                 url: 'https://mintdesign.no/services/',
             },
-            services: response
+            services: response.results[0]
         };
 
         res.render('services', content);
