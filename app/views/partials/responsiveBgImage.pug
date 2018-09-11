@@ -1,21 +1,5 @@
-//- this looks like shit, but it's minified
-style(type="text/css")
-  #{'#'+imgId+'{'+
-    'background-image:url('+imgObj.Small.url+');'+
-    '}'+
-    '@media screen and (min-width:40em) and (max-width:60em){'+
-      '#'+imgId+'{'+
-        'background-image:url('+imgObj.Medium.url+');'+
-      '}'+
-    '}'+
-    '@media screen and (min-width:60em) and (max-width:80em){'+
-      '#'+imgId+'{'+
-        'background-image:url('+imgObj.Large.url+');'+
-      '}'+
-    '}'+
-    '@media screen and (min-width:80em){'+
-      '#'+imgId+'{'+
-        'background-image:url('+imgObj.url+');'+
-      '}'+
-    '}'
-  }
+style(type="text/css").
+  ##{imgId}{background-image:url(#{imgObj.Small.url});}
+  @media screen and (min-width:40em) and (max-width:60em){##{imgId}{background-image:url(#{imgObj.Medium.url});}}
+  @media screen and (min-width:60em) and (max-width:80em){##{imgId}{background-image:url(#{imgObj.Large.url});}}
+  @media screen and (min-width:80em){##{imgId}{background-image:url(#{imgObj.url});}}
