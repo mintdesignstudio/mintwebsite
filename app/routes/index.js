@@ -90,7 +90,7 @@ module.exports = function(app) {
             req,
         }).then((api) => {
             req.prismic = { api };
-
+            console.log('Got Prismic API with ref: '+res.locals.prismicRef);
             next();
         }).catch((error) => {
             next(error.message);
