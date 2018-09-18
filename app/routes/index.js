@@ -31,16 +31,18 @@ module.exports = function(app) {
             logger.info('x-forwarder-proto: ' + req.headers['x-forwarded-proto']);
             logger.info('match www: ' + host.match(/^www\..*/i));
 
-            if (req.headers['x-forwarded-proto'] === 'https' &&
-                !host.match(/^www\..*/i)) {
+            let hasWWW = host.match(/^www\..*/i) !== null;
 
+            if (req.headers['x-forwarded-proto'] === 'https' && !hasWWW) {
                 logger.info('no redirect necessary');
                 next();
                 return;
             }
 
-            logger.info('redirect to: https://' + host.substr(4) + req.url);
-            res.redirect(301, 'https://' + host.substr(4) + req.url);
+            let domain = hasWWW ? host.substr(4) : host;
+
+            logger.info('redirect to: https://' + domain + req.url);
+            res.redirect(301, 'https://' + domain + req.url);
         });
     }
 
