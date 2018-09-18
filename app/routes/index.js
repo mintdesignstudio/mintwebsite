@@ -22,6 +22,11 @@ module.exports = function(app) {
         app.get('*', function(req,res,next) {
             let host = req.header('host');
 
+            if (host.substr(0, 9) === 'localhost') {
+                next();
+                return;
+            }
+
             logger.info('host: ' + host);
             logger.info('x-forwarder-proto: ' + req.headers['x-forwarded-proto']);
             logger.info('match www: ' + host.match(/^www\..*/i));
