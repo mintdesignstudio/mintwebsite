@@ -3,6 +3,8 @@ body {
     font-weight: 300;
     color: white;
     background-color: #000;
+    margin-top: 6.6em;
+    position: relative;
 }
 
 /* TEXT */
@@ -44,23 +46,26 @@ p {
 .menu {
     display: flex;
     flex-direction: column;
+    justify-items: stretch;
     position: fixed;
     width: 100%;
     z-index: 1000;
     background-color: rgba(0,0,0,0.75);
     top: 0;
-}
-
-.menu > a {
-    width: 100%;
-    text-align: center;
+    height: 6.6em;
 }
 
 .menu a {
     box-sizing: border-box;
-    padding: 0.8em;
     color: white;
-    margin: 0.8em 0;
+}
+
+.menu li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1 100%;
 }
 
 .menu li:last-child a {
@@ -72,31 +77,25 @@ p {
     color: #6ae0cb;
 }
 
+.menu .logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 50%;
+}
 .menu .logo img {
     height: 1.8em;
-}
-
-.menu ul:before {
-    content: '';
-    display: inline-block;
-    height: 3.4em; /* padding of .menu a + height of .menu img */
-    vertical-align: middle;
+    margin-left: 1.4em;
 }
 
 .menu ul {
-    text-align: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-left: 0;
     list-style: none;
+    flex-basis: 50%;
 }
 
-.menu ul li {
-    display: inline-block;
-    flex: 1 0 25%;
-    vertical-align: middle;
-}
+.menu ul li {display: flex;flex-direction: column;flex: 1 100%;}
 
 /* Prismic edit button */
 
@@ -105,12 +104,15 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: absolute;
+    width: 48px;
+    height: 48px;
 }
 
 .wio-link img {
     width: 16px;
     height: 16px;
-    display: block;
+    align-self: center;
 }
 
 /* HERO */
@@ -257,9 +259,13 @@ footer {
     margin: 0 5%;
 }
 
-section.works h2,
-section.services h2 {
+section.works h2 {
     text-align: center;
+    margin-top: 2em;
+}
+
+section.services h2 {
+    text-align: left;
     margin-top: 2em;
 }
 
@@ -278,9 +284,17 @@ section.works > a {
     bottom: 0;
 }
 
+.contact.overlay {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+}
+
 div.work {
-    display: grid;
-    grid-template-columns: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 div.work .project {
@@ -307,7 +321,7 @@ div.work .project a {
     font-size: 245%;
     justify-content: flex-end;
     opacity: .5;
-    padding: 6%;
+    padding: .6em;
     transition: opacity .5s;
     position: absolute;
     width: 100%;
@@ -320,14 +334,14 @@ div.work .project a:hover {
 }
 
 div.work .project a span {
-    font-size: 46%;
+    font-size: 0.5em;
     display: block;
     padding-top: 0.6em;
     width: 100%;
 }
 
 div.work .project h1 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin: 0;
     display: block;
     width: 100%;
@@ -417,7 +431,7 @@ section.gallery img {
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: center 30%;
     display: block;
 }
 
@@ -445,7 +459,6 @@ section.gallery img {
     color: white;
     text-decoration: none;
     display: block;
-    padding-top: 8.5em;
 }
 
 .services .service {
@@ -455,7 +468,7 @@ section.gallery img {
 .services .content {
     width: 100%;
     box-sizing: border-box;
-    padding: 3em 5% 0 5%;
+    padding: 8em 5% 1em 5%;
     position: relative;
 }
 
@@ -476,7 +489,7 @@ section.gallery img {
 .services .right .background {
     width: 100%;
     left: 0;
-    background-position: 0% 50%;
+    background-position: 50% 50%;
 }
 
 .services .service.left {
@@ -495,9 +508,9 @@ section.gallery img {
     right: 0;
     top: 0;
     bottom: 0;
-    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 60%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 20%,rgba(0,0,0,0) 60%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 20%,rgba(0,0,0,0) 60%,rgba(0,0,0,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
 
@@ -508,9 +521,9 @@ section.gallery img {
     right: 0;
     top: 0;
     bottom: 0;
-    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%, rgba(0,0,0,0) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 100%,rgba(0,0,0,0) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 60%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 20%,rgba(0,0,0,0) 60%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 20%,rgba(0,0,0,0) 60%,rgba(0,0,0,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
 
@@ -541,6 +554,10 @@ section.gallery img {
 }
 
 @media screen and (min-width: 40em) {
+    body {
+        margin-top: 3.6em;
+    }
+    
     .hero .logo {
         width: 12em;
     }
@@ -550,26 +567,30 @@ section.gallery img {
     }
 
     .menu {
-        display: flex;
         flex-direction: row;
+        height: 3.6em;
     }
 
-    .menu > a {
-        width: auto;
-        text-align: left;
-        margin: 0;
+    .menu .logo {
+        flex-basis: auto;
+    }
+    
+    .wio-link {
+        flex-basis: 3em;
+    }
+    
+    .menu a {
+        height: 100%;
+        position: relative;
     }
 
     .menu ul {
-        text-align: left;
-        display: block;
         margin-left: auto;
+        flex-basis: auto;
     }
 
-    .menu ul li {
-        display: inline-block;
-        flex: none;
-        vertical-align: middle;
+    .menu li a {
+    padding: 0em 1em;
     }
 
     div.work h2 {
@@ -580,10 +601,6 @@ section.gallery img {
     .profile {
         flex-direction: column;
         flex: 1 0 50%;
-    }
-
-    .clients li img {
-        /* height: 6.5em; */
     }
 
     .hero.contact {
@@ -603,11 +620,17 @@ section.gallery img {
     .awards ul {
         grid-template-columns: auto auto;
     }
+
+    .services .content {
+        width: 85%;
+        padding-bottom: 3em;
+    }
 }
 
 @media screen and (min-width: 50em) {
 
     div.work {
+        display: grid;
         grid-template-columns: 50% 50%;
     }
 
@@ -620,6 +643,7 @@ section.gallery img {
 
     div.work .project a {
         opacity: 0.5;
+        padding: 0.8em 0.6em;
     }
 
     .hero.about {
@@ -657,13 +681,19 @@ section.gallery img {
     }
 
     .services .content {
-        width: 50%;
-        padding-bottom: 3em;
+        width: 60%;
+        padding-top: 6em;
+        padding-bottom: 6em;
     }
 
-    .services .left .background,
+    .services .left .background {
+        background-position: 0% 50%;
+        width: 60%;
+    }
+
     .services .right .background {
         width: 60%;
+        background-position: 100% 50%;
     }
 
     .services .service.left .content {
@@ -753,7 +783,7 @@ section.gallery img {
     }
 
     .services .content {
-        padding-top: 6em;
+        width: 50%;
         padding-bottom: 6em;
     }
 
@@ -778,6 +808,10 @@ section.gallery img {
 
     div.work .project a {
          font-size: 200%;
+    }
+
+    .services .content {
+        width: 45%;
     }
 
 }
@@ -806,6 +840,18 @@ section.gallery img {
     .clients ul {
         grid-template-columns: 20% 20% 20% 20% 20%;
     }
+
+    .services .content {
+        width: 60%;
+    }
+
+    .services .service.left .content {
+        padding-left: 20%;
+    }
+
+    .services .service.right .content {
+        padding-right: 20%;
+    }
 }
 
 @media screen and (min-width: 120em) {
@@ -823,5 +869,9 @@ section.gallery img {
 
     .clients li img {
         height: 10em;
+    }
+
+    .services .content {
+        width: 50%;
     }
 }
