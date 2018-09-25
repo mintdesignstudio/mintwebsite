@@ -68,10 +68,6 @@ p {
     flex: 1 100%;
 }
 
-.menu li:last-child a {
-    padding-right: 2em;
-}
-
 .menu a:hover {
     text-decoration: none;
     color: #6ae0cb;
@@ -557,7 +553,7 @@ section.gallery img {
     body {
         margin-top: 3.6em;
     }
-    
+
     .hero .logo {
         width: 12em;
     }
@@ -574,11 +570,11 @@ section.gallery img {
     .menu .logo {
         flex-basis: auto;
     }
-    
+
     .wio-link {
         flex-basis: 3em;
     }
-    
+
     .menu a {
         height: 100%;
         position: relative;
@@ -590,7 +586,11 @@ section.gallery img {
     }
 
     .menu li a {
-    padding: 0em 1em;
+        padding: 0em 1em;
+    }
+
+    .menu li:last-child a {
+        padding-right: 2em;
     }
 
     div.work h2 {
