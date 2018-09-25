@@ -78,10 +78,11 @@ p {
     flex-direction: column;
     justify-content: center;
     flex-basis: 50%;
+    align-items: center;
 }
+
 .menu .logo img {
     height: 1.8em;
-    margin-left: 1.4em;
 }
 
 .menu ul {
@@ -569,6 +570,10 @@ section.gallery img {
 
     .menu .logo {
         flex-basis: auto;
+    }
+
+    .menu .logo img {
+        margin-left: 1.4em;
     }
 
     .wio-link {
