@@ -34,6 +34,17 @@ html(lang="en")
 
   body
 
+    script(type="application/ld+json").
+      {
+        "@context" : "http://schema.org",
+        "@type" : "LocalBusiness",
+        "name" : "#{about.data.companyname}",
+        "image" : "https://mintdesign.no/public/images/logo_black_name.svg",
+        "telephone" : "#{contact.data.telephone}",
+        "email" : "#{contact.data.email}",
+        "url" : "https://mintdesign.no/"
+      }
+
     block vars
 
     include ../partials/menu.pug
