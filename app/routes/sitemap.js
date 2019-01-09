@@ -28,7 +28,7 @@ module.exports = function(req, res, next) {
     .then((documents) => {
         let body = '';
         documents.forEach((doc) => {
-            body += `${req.protocol}://${req.headers.host}${res.locals.ctx.linkResolver(doc)}\r\n`;
+            body += `https://${req.headers.host}${res.locals.ctx.linkResolver(doc)}\r\n`;
         });
         res.send(body);
     })
