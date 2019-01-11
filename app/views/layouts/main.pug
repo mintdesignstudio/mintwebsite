@@ -32,7 +32,7 @@ html(lang="en")
 
     include ../partials/styles.pug
 
-  body
+  body(id=page.name)
 
     script(type="application/ld+json").
       {
@@ -47,6 +47,7 @@ html(lang="en")
 
     block vars
 
+    include ../partials/responsiveBgImage
     include ../partials/menu.pug
 
     block body
@@ -58,4 +59,4 @@ html(lang="en")
     // Required for Previews and Experiments
     script
       = ctx?"window.prismic = { endpoint: '" + ctx.endpoint + "' };":""
-    script(src="//static.cdn.prismic.io/prismic.min.js")
+    script(src="//static.cdn.prismic.io/prismic.min.js", defer)

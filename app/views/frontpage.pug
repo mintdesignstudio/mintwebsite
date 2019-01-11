@@ -2,10 +2,11 @@ extends ./layouts/main.pug
 
 block body
 
-  div.hero#hero
-    - var imgObj = heroimage
-    - var imgId = 'hero'
-    include ./partials/responsiveBgImage
+  div.hero#hero(data-small=heroimage.Small.url,
+                data-medium=heroimage.Medium.url,
+                data-large=heroimage.Large.url,
+                data-xlarge=heroimage.url)
+    +responsiveBgImage('hero', heroimage)
 
     div
       img.logo(src="/public/images/logo_symbol_white.svg", alt="Mint Design logo in white")
@@ -15,10 +16,12 @@ block body
     h2 Works
     div.work
       each work in works
-        div.project(id=work.uid)
-          - var imgObj = work.data.image
-          - var imgId = work.uid
-          include ./partials/responsiveBgImage
+        div.project(id=work.uid,
+                    data-small=work.data.image.Small.url,
+                    data-medium=work.data.image.Medium.url,
+                    data-large=work.data.image.Large.url,
+                    data-xlarge=work.data.image.url)
+          +responsiveBgImage(work.uid, work.data.image)
           div.overlay
             a(href=ctx.linkResolver(work))
               | #{work.data.name}

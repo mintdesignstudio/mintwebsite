@@ -6,10 +6,13 @@ block body
     - for (var i = 0; i < works.length; i++)
       - var className = i == 0 ? "project current" : "project"
       - var work = works[i]
-      div(class=className, id=work.uid)
-        - var imgObj = work.data.image
-        - var imgId = work.uid
-        include ./partials/responsiveBgImage
+      div(class=className,
+          id=work.uid,
+          data-small=work.data.image.Small.url,
+          data-medium=work.data.image.Medium.url,
+          data-large=work.data.image.Large.url,
+          data-xlarge=work.data.image.url)
+        +responsiveBgImage(work.uid, work.data.image)
 
         a(href=ctx.linkResolver(work))
           h1 #{work.data.name}

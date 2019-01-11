@@ -7,9 +7,8 @@ block vars
 block body
 
   div.contact.hero.overlay#hero
-    - var imgObj = contact.data.map
-    - var imgId = 'hero'
-    include ./partials/backgroundSvg
+    style(type="text/css").
+      #hero{background-image:url(#{contact.data.map.url});}
 
   div.content.contact
     h1 Contact

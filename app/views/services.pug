@@ -13,11 +13,13 @@ block body
       - var side = i % 2 === 0 ? 'left' : 'right'
       - var service = services.data.services[i]
       a.anchor(name=service.uid)
-        div(class="service "+side)
-          div(class="background", id=service.uid)
-            - var imgObj = service.photo
-            - var imgId = service.uid
-            include ./partials/responsiveBgImage
+        div.service(class=side)
+          div.background(id=service.uid,
+                         data-small=service.photo.Small.url,
+                         data-medium=service.photo.Medium.url,
+                         data-large=service.photo.Large.url,
+                         data-xlarge=service.photo.url)
+            +responsiveBgImage(service.uid, service.photo)
           div.content
             != prismicDOM.RichText.asHtml(service.title)
             != prismicDOM.RichText.asHtml(service.body)

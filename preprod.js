@@ -7,7 +7,7 @@ var sri             = require('node-sri');
 var Promise         = require('promise');
 
 const minimize          = require('minimize');
-const uglifyJs          = require('uglify-js');
+const uglifyJs          = require('uglify-es');
 const concat            = require('concat');
 const crass             = require('crass');
 const imagemin          = require('imagemin');
