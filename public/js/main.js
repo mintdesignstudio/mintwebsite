@@ -66,7 +66,7 @@
     function createResponsiveBgStyles(id, img) {
         let style = document.createElement('style');
         let css =
-            //"@media screen and (max-width:40em){#"+id+"{background-image:url('"+img.small+"');}}"+
+            "@media screen and (max-width:40em){#"+id+"{background-image:url('"+img.small+"');}}"+
             "@media screen and (min-width:40em) and (max-width:60em){#"+id+"{background-image:url('"+img.medium+"');}}"+
             "@media screen and (min-width:60em) and (max-width:80em){#"+id+"{background-image:url('"+img.large+"');}}"+
             "@media screen and (min-width:80em){#"+id+"{background-image:url('"+img.xlarge+"');}}";
@@ -76,10 +76,10 @@
 
     function loadHighresImage(el) {
         el.addEventListener('load', onHighresImageLoaded);
-        el.parentElement.insertBefore(createPictureSource(el.dataset.xlarge, '(min-width: 100em)'), el);
-        el.parentElement.insertBefore(createPictureSource(el.dataset.large,  '(min-width: 80em) and (max-width: 100em)'), el);
-        el.parentElement.insertBefore(createPictureSource(el.dataset.medium, '(min-width: 60em) and (max-width: 80em)'), el);
-        el.parentElement.insertBefore(createPictureSource(el.dataset.small,  '(min-width: 40em) and (max-width: 60em)'), el);
+        el.parentElement.insertBefore(createPictureSource(el.dataset.xlarge, '(min-width: 80em)'), el);
+        el.parentElement.insertBefore(createPictureSource(el.dataset.large,  '(min-width: 60em) and (max-width: 80em)'), el);
+        el.parentElement.insertBefore(createPictureSource(el.dataset.medium, '(min-width: 40em) and (max-width: 60em)'), el);
+        el.parentElement.insertBefore(createPictureSource(el.dataset.small,  '(max-width: 40em)'), el);
     }
 
     function isElementVisible(el) {
