@@ -6,17 +6,8 @@ html(lang="en")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(http-equiv="cache-control", content="max-age=21600")
 
-    unless work
-      - var image = about.data.image.url
-      - var metaDescription = prismicDOM.RichText.asText([about.data.tagline[0]])
-    else
-      - var image = work.data.image.url
-      - var metaDescription = prismicDOM.RichText.asText(work.data.body)
-
-    meta(property="og:title", content=utils.getPageTitle(about, page, work))
-    meta(property="og:url" content=page.url)
-    meta(property="og:description" content=metaDescription)
-    meta(property="og:image" content=image)
+    include ../partials/socialCards
+    block social
 
     meta(name="google-site-verification", content="dn3VSuJ14keeA_q8bhAuGtqbzJQJgku2jmpkueF9I1s")
 
@@ -36,13 +27,13 @@ html(lang="en")
 
     script(type="application/ld+json").
       {
-        "@context" : "http://schema.org",
-        "@type" : "LocalBusiness",
-        "name" : "#{about.data.companyname}",
-        "image" : "https://mintdesign.no/public/images/logo_black_name.svg",
+        "@context"  : "http://schema.org",
+        "@type"     : "LocalBusiness",
+        "name"      : "#{about.data.companyname}",
+        "image"     : "https://mintdesign.no/public/images/logo_black_name.svg",
         "telephone" : "#{contact.data.telephone}",
-        "email" : "#{contact.data.email}",
-        "url" : "https://mintdesign.no/"
+        "email"     : "#{contact.data.email}",
+        "url"       : "https://mintdesign.no/"
       }
 
     block vars

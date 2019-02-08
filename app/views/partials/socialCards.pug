@@ -1,0 +1,25 @@
+mixin generalSocialCard(slice)
+  meta(property="og:title", content=prismicDOM.RichText.asText(slice.primary.title))
+  meta(property="og:type", content="article")
+  meta(property="og:url", content=page.url)
+  meta(property="og:image", content=slice.primary.image.url)
+  meta(property="og:description", content=prismicDOM.RichText.asText(slice.primary.description))
+  meta(property="og:site_name", content=about.data.companyname)
+
+mixin twitterSocialCard(slice)
+  meta(name="twitter:card", content="summary")
+  meta(name="twitter:site", content=prismicDOM.RichText.asText(slice.primary.twitter_handle))
+  meta(name="twitter:title", content=prismicDOM.RichText.asText(slice.primary.title))
+  meta(name="twitter:description", content=prismicDOM.RichText.asText(slice.primary.description))
+  if slice.primary.card_type == 'Standard Summary Card'
+    meta(name="twitter:image", content=slice.primary.image.url)
+  if slice.primary.card_type == 'Summary Card with Large Image'
+    meta(name="twitter:image", content=slice.primary.image.large_image.url)
+
+mixin socialCards(content)
+  for slice in content
+   case slice.slice_type
+     when 'general_card'
+       +generalSocialCard(slice)
+     when 'twitter_card'
+       +twitterSocialCard(slice)

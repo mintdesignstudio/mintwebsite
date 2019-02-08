@@ -1,5 +1,9 @@
 extends ./layouts/main.pug
 
+block social
+
+  +socialCards(about.data.social)
+
 block vars
 
   - var documentId = about.id
