@@ -21,10 +21,16 @@ module.exports = function(req, res, next) {
                 name: 'works',
                 url: 'https://mintdesign.no/works/',
             },
-            works: response.results
+            projects: response.results
         };
 
-        res.render('works', content);
+        req.prismic.api.query(Prismic.Predicates.at('document.type', 'works'), {
+            ref: res.locals.prismicRef
+        })
+        .then(response => {
+            res.locals.works = response.results[0];
+            res.render('works', content);
+        })
     })
     .catch(err => {
         next(`Error: ${err.message}`);

@@ -16,8 +16,11 @@ mixin twitterSocialCard(slice)
   if slice.primary.card_type == 'Summary Card with Large Image'
     meta(name="twitter:image", content=slice.primary.image.large_image.url)
 
-mixin socialCards(content)
-  for slice in content
+mixin metaTags(content)
+  if content.meta_description
+    meta(name="description", content=content.meta_description)
+
+  for slice in content.social
    case slice.slice_type
      when 'general_card'
        +generalSocialCard(slice)
