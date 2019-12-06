@@ -56,7 +56,8 @@ module.exports.init = function() {
                     "'self'",
                     "data:",
                     'www.google-analytics.com',
-                    'mintdesign.cdn.prismic.io'
+                    'mintdesign.cdn.prismic.io',
+                    'images.prismic.io'
                 ],
                 objectSrc: [
                     "'none'",
