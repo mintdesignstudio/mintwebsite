@@ -33,6 +33,9 @@ module.exports.init = function() {
         // Security
         .use(helmet.contentSecurityPolicy({
             directives: {
+                defaultSrc: [
+                    "'self'",
+                ],
                 connectSrc: [
                     "'self'",
                     'mintdesign.prismic.io',
