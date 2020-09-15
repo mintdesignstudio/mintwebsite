@@ -60,6 +60,7 @@ module.exports.init = function() {
                     "data:",
                     'www.google-analytics.com',
                     'mintdesign.cdn.prismic.io',
+                    'prismic-io.s3.amazonaws.com',
                     'images.prismic.io'
                 ],
                 objectSrc: [
