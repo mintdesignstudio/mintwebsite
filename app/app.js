@@ -35,6 +35,7 @@ module.exports.init = function() {
             directives: {
                 defaultSrc: [
                     "'self'",
+                    'mintdesign.prismic.io'
                 ],
                 connectSrc: [
                     "'self'",
