@@ -49,6 +49,7 @@ module.exports.init = function() {
                 scriptSrc: [
                     "'self'",
                     'static.cdn.prismic.io',
+                    'prismic.io',
                     'www.google-analytics.com',
                     "'unsafe-inline'",
                 ],
@@ -68,8 +69,6 @@ module.exports.init = function() {
                     "'none'",
                 ]
             },
-            browserSniff: true,
-            loose: true,
         }))
         .use(helmet.dnsPrefetchControl())
         .use(helmet.frameguard({ action: 'deny' }))

@@ -35,12 +35,13 @@ module.exports = function(app) {
         // add template helpers
         res.locals.utils = utils;
 
-        Prismic.api(config.apiEndpoint, {
+        Prismic.getApi(config.apiEndpoint, {
             accessToken: config.accessToken,
             req,
         }).then((api) => {
             req.prismic = { api };
-            console.log('Got Prismic API with ref: '+res.locals.prismicRef);
+            logger.info('req.url: ' + req.url);
+            logger.info('prismic api: ' + req.prismic.api);
             next();
         }).catch((error) => {
             next(error.message);
@@ -61,9 +62,7 @@ module.exports = function(app) {
             'about',
             'contact',
             'menu'
-        ]), {
-            ref: res.locals.prismicRef
-        })
+        ]))
         .then(response => {
             response.results.forEach(doc => res.locals[doc.uid] = doc);
             next();
@@ -81,4 +80,29 @@ module.exports = function(app) {
     app.get('/services',        services);
     app.get('/preview',         preview);
     app.get('/sitemap.txt',     sitemap);
+
+    app.use(function(req, res, next) {
+        console.log('404');
+
+        res.status(404);
+
+        // respond with html page
+        if (req.accepts('html')) {
+            res.render('404', {
+                page: {
+                    name: '404',
+                    url: req.url,
+                }});
+            return;
+        }
+
+        // respond with json
+        if (req.accepts('json')) {
+            res.send({ error: 'Not found' });
+            return;
+        }
+
+        // default to plain-text. send()
+        res.type('txt').send('Not found');
+    });
 }

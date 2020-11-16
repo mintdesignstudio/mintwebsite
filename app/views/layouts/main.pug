@@ -47,8 +47,4 @@ html(lang="en")
     include ../partials/scripts.pug
 
     // Required for Previews and Experiments
-    //- script
-    //-   = ctx?"window.prismic = { endpoint: '" + ctx.endpoint + "' };":""
-    //- script(src="//static.cdn.prismic.io/prismic.min.js?new=true", defer)
-
-    script(src="//static.cdn.prismic.io/prismic.js?repo=mintdesign&new=true", async, defer)
+    script(src="//static.cdn.prismic.io/prismic.js?new=true&repo=mintdesign", async, defer)

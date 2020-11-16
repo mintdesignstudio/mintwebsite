@@ -18,6 +18,8 @@ module.exports = function(app) {
 
             let hasWWW = host.match(/^www\..*/i) !== null;
 
+            logger.info('has www: ' + hasWWW);
+
             if (req.headers['x-forwarded-proto'] === 'https' && !hasWWW) {
                 logger.info('no redirect necessary');
                 next();

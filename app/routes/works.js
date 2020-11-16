@@ -12,7 +12,6 @@ module.exports = function(req, res, next) {
             'project.name',
             'project.description',
         ],
-        ref: res.locals.prismicRef
     })
     .then(response => {
 
@@ -24,9 +23,7 @@ module.exports = function(req, res, next) {
             projects: response.results
         };
 
-        req.prismic.api.query(Prismic.Predicates.at('document.type', 'works'), {
-            ref: res.locals.prismicRef
-        })
+        req.prismic.api.query(Prismic.Predicates.at('document.type', 'works'))
         .then(response => {
             res.locals.works = response.results[0];
             res.render('works', content);

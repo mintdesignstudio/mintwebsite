@@ -14,14 +14,11 @@ module.exports = function(req, res, next) {
                 'project.name',
                 'project.description',
             ],
-            ref: res.locals.prismicRef
         }),
         req.prismic.api.query(Prismic.Predicates.any('document.type', [
             'frontpage',
             'services'
-        ]), {
-            ref: res.locals.prismicRef
-        }),
+        ])),
     ])
     .then(response => {
 

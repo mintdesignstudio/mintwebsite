@@ -1,36 +1,28 @@
 const Cookies = require('cookies');
 const Prismic = require('prismic-javascript');
+const logger  = require('heroku-logger');
 
-module.exports = function(req, res, next) {
+module.exports = async (req, res, next) => {
 
-    const token = req.query.token;
+    const { token, documentId } = req.query;
 
     if (!token) {
         res.send(400, 'Missing token for querystring');
         return;
     }
 
-    req.prismic.api.previewSession(token, res.locals.ctx.linkResolver, '/')
-    .then((url) => {
-        const cookies = new Cookies(req, res);
-        cookies.set(Prismic.previewCookie, token, {
-            maxAge: 30 * 60 * 1000,
-            path: '/',
-            httpOnly: false
-        });
-
-        // For Prismic preview.
-        // Figure out the correct ref to use
-        const previewRef = cookies.get(Prismic.previewCookie);
-        const masterRef = req.prismic.api.refs.find(ref => {
-            return ref.isMasterRef === true;
-        });
-        res.locals.prismicRef = previewRef || masterRef.ref;
-
-        res.redirect(302, url);
-    })
-    .catch((error) => {
-        console.log('preview error:', error.message);
-        next(error.message);
+    const redirectUrl = await req.prismic.api
+        .getPreviewResolver(token, documentId)
+        .resolve(res.locals.ctx.linkResolver, '/');
+    
+    const cookies = new Cookies(req, res);
+    cookies.set(Prismic.previewCookie, token, {
+        maxAge: 30 * 60 * 1000,
+        path: '/',
+        httpOnly: false
     });
+
+    console.log('Preview redirects to url: '+redirectUrl);
+
+    res.redirect(302, redirectUrl);
 }
