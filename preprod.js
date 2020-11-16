@@ -9,7 +9,7 @@ var Promise         = require('promise');
 const minimize          = require('minimize');
 const uglifyJs          = require('uglify-es');
 const concat            = require('concat');
-const crass             = require('crass');
+const csso              = require('csso');
 const imagemin          = require('imagemin');
 const imageminPngquant  = require('imagemin-pngquant');
 const imageminSvgo      = require('imagemin-svgo');
@@ -47,10 +47,9 @@ async function preprod() {
         writePartial: hash => {
             return 'link(rel="stylesheet", href="/public/css/' + hash + '.css")'
         },
-        minify: fileContent => crass
-                .parse(fileContent)
-                .optimize()
-                .toString(),
+        minify: fileContent => csso
+                .minify(fileContent)
+                .css,
     });
 
     await merge({
