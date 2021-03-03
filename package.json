@@ -47,7 +47,7 @@
     "prismic-dom": "^2.2.3",
     "prismic-javascript": "3.0.2",
     "promise": "6.0.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "readable-stream": "1.0.33",
     "serve-favicon": "^2.5.0",
     "serve-static": "^1.14.1",
